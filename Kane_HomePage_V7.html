@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KANE — Korean Artists Network in Europe</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0a;--card:#141414;--card-hover:#1c1c1c;--accent:#c9a96e;--text:#f0f0f0;--text-secondary:#888;--border:#2a2a2a}
+body{background:#0a0a0a url('bg1.jpg') center center / cover no-repeat fixed;color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.8;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+.bg-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background:rgba(0,0,0,0.65)}
+
+.lang-switch{position:fixed;top:20px;right:20px;z-index:1001;display:flex;gap:6px}
+.lang-btn{background:rgba(20,20,20,.85);border:1px solid var(--border);color:var(--text-secondary);padding:6px 14px;cursor:pointer;font-size:13px;transition:all .3s;border-radius:4px}
+.lang-btn.active{color:var(--accent);border-color:var(--accent)}
+.lang-btn:hover{color:var(--accent)}
+nav{position:fixed;top:0;left:0;width:100%;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;z-index:1000;background:rgba(10,10,10,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(42,42,42,.5)}
+.logo{font-size:20px;font-weight:700;letter-spacing:5px;color:var(--accent);cursor:pointer}
+.nav-links{display:flex;gap:28px}
+.nav-links a{color:var(--text-secondary);font-size:14px;letter-spacing:1px;transition:color .3s;cursor:pointer;position:relative;padding-bottom:4px}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:1px;background:var(--accent)}
+.menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:24px;cursor:pointer}
+.page{display:none;position:relative;z-index:1}
+.page.active{display:block}
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 20px}
+.hero h1{font-size:clamp(48px,10vw,120px);font-weight:200;letter-spacing:12px;text-transform:uppercase;line-height:1.1}
+.hero h1 span{color:var(--accent)}
+.hero-subtitle{margin-top:24px;font-size:18px;color:var(--text-secondary);letter-spacing:3px;max-width:700px;line-height:1.8}
+.hero-line{width:1px;height:80px;background:linear-gradient(to bottom,transparent,var(--accent));margin-top:40px;animation:growLine 2s ease infinite}
+@keyframes growLine{0%,100%{opacity:.3;height:60px}50%{opacity:1;height:100px}}
+.scroll-indicator{margin-top:16px;color:var(--text-secondary);font-size:12px;letter-spacing:2px}
+.section{max-width:1100px;margin:0 auto;padding:120px 40px}
+.section-label{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.section-title{font-size:clamp(28px,4vw,48px);font-weight:300;line-height:1.3;margin-bottom:40px}
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:40px}
+.mission-card{padding:40px;border:1px solid var(--border);border-radius:12px;background:rgba(20,20,20,.7);backdrop-filter:blur(10px);transition:all .4s ease}
+.mission-card:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow:0 20px 60px rgba(201,169,110,.1)}
+.mission-card h3{font-size:24px;font-weight:600;color:var(--accent);margin-bottom:20px;letter-spacing:2px}
+.mission-card p{color:var(--text-secondary);font-size:16px;line-height:2}
+.stats-bar{display:flex;justify-content:center;gap:60px;padding:80px 40px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1}
+.stat-item{text-align:center}
+.stat-number{font-size:clamp(36px,5vw,56px);font-weight:200;color:var(--accent);letter-spacing:2px;display:block}
+.stat-label{font-size:13px;color:var(--text-secondary);letter-spacing:2px;margin-top:8px;text-transform:uppercase}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:40px}
+.value-item{text-align:center;padding:40px 24px;border:1px solid var(--border);border-radius:12px;background:rgba(20,20,20,.7);backdrop-filter:blur(10px);transition:all .4s ease}
+.value-item:hover{border-color:var(--accent);transform:translateY(-8px);box-shadow:0 20px 60px rgba(201,169,110,.1)}
+.value-icon{font-size:48px;margin-bottom:20px;display:block}
+.value-item h4{font-size:18px;font-weight:600;color:var(--accent);margin-bottom:12px}
+.value-item p{color:var(--text-secondary);font-size:14px;line-height:1.8}
+.activities-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;margin-top:40px}
+.activity-card{padding:36px;border:1px solid var(--border);border-radius:12px;background:rgba(20,20,20,.7);backdrop-filter:blur(10px);transition:all .4s ease;position:relative;overflow:hidden}
+.activity-card:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow:0 20px 60px rgba(201,169,110,.1)}
+.activity-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent);opacity:0;transition:opacity .3s}
+.activity-card:hover::before{opacity:1}
+.activity-icon{font-size:36px;margin-bottom:16px;display:block}
+.activity-card h4{font-size:20px;font-weight:600;margin-bottom:12px;transition:color .3s}
+.activity-card:hover h4{color:var(--accent)}
+.activity-card p{color:var(--text-secondary);font-size:14px;line-height:1.8}
+.timeline{position:relative;margin-top:40px;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),var(--border),var(--accent))}
+.timeline-item{position:relative;margin-bottom:50px;padding-left:30px}
+.timeline-item::before{content:'';position:absolute;left:-30px;top:8px;width:10px;height:10px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);transition:all .3s}
+.timeline-item:hover::before{background:var(--accent);box-shadow:0 0 20px rgba(201,169,110,.4)}
+.timeline-year{font-size:14px;color:var(--accent);letter-spacing:3px;font-weight:600;margin-bottom:8px}
+.timeline-content h4{font-size:20px;font-weight:500;margin-bottom:8px}
+.timeline-content p{color:var(--text-secondary);font-size:15px;line-height:1.8}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:30px;margin-top:40px}
+.team-card{background:rgba(20,20,20,.7);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .4s ease}
+.team-card:hover{border-color:var(--accent);transform:translateY(-8px);box-shadow:0 20px 60px rgba(201,169,110,.15)}
+.team-photo{width:100%;height:280px;overflow:hidden}
+.team-photo .photo-bg{width:100%;height:100%;transition:transform .5s ease,filter .5s ease}
+.team-card:hover .photo-bg{transform:scale(1.1);filter:brightness(1.2)}
+.team-info{padding:24px}
+.team-name{font-size:20px;font-weight:600;margin-bottom:4px;transition:color .3s}
+.team-card:hover .team-name{color:var(--accent)}
+.team-role{font-size:13px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.team-bio{font-size:14px;color:var(--text-secondary);line-height:1.7}
+.cta-section{text-align:center;padding:120px 40px;position:relative;z-index:1}
+.cta-section h2{font-size:clamp(28px,4vw,48px);font-weight:300;margin-bottom:20px}
+.cta-section h2 span{color:var(--accent)}
+.cta-section p{color:var(--text-secondary);font-size:18px;margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto}
+.cta-btn{display:inline-block;padding:16px 48px;border:1px solid var(--accent);color:var(--accent);font-size:16px;letter-spacing:3px;text-transform:uppercase;border-radius:50px;transition:all .4s ease;cursor:pointer}
+.cta-btn:hover{background:var(--accent);color:#000;box-shadow:0 10px 40px rgba(201,169,110,.3);transform:translateY(-3px)}
+.filter-section{padding:40px 40px 20px;position:sticky;top:70px;z-index:99;background:rgba(10,10,10,.92);backdrop-filter:blur(10px)}
+.filter-bar{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.filter-btn{background:transparent;border:1px solid var(--border);color:var(--text-secondary);padding:10px 24px;cursor:pointer;font-size:14px;transition:all .3s;border-radius:30px;letter-spacing:1px}
+.filter-btn.active,.filter-btn:hover{color:var(--accent);border-color:var(--accent)}
+.magazine-grid{padding:40px;display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:30px;max-width:1400px;margin:0 auto}
+.card{background:rgba(20,20,20,.7);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;position:relative;transition:transform .4s ease,box-shadow .4s ease,border-color .4s ease,background .4s ease}
+.card:hover{transform:translateY(-14px) scale(1.03);border-color:var(--accent);box-shadow:0 30px 80px rgba(201,169,110,.2),0 0 40px rgba(201,169,110,.08);background:rgba(28,28,28,.8)}
+.card-image{width:100%;height:240px;position:relative;overflow:hidden}
+.card-image .gradient-bg{width:100%;height:100%;transition:transform .5s ease,filter .5s ease}
+.card:hover .gradient-bg{transform:scale(1.2);filter:brightness(1.4) saturate(1.3)}
+.card-image::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to top,rgba(10,10,10,.7),transparent 60%);opacity:0;transition:opacity .4s ease}
+.card:hover .card-image::after{opacity:1}
+.card-readmore{position:absolute;bottom:20px;right:20px;background:var(--accent);color:#000;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;opacity:0;transform:translateY(15px) scale(.8);transition:opacity .4s ease,transform .4s ease;z-index:2}
+.card:hover .card-readmore{opacity:1;transform:translateY(0) scale(1)}
+.card-content{padding:28px;transition:background .4s ease}
+.card:hover .card-content{background:rgba(201,169,110,.03)}
+.card-category{display:inline-block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid rgba(201,169,110,.4);padding:4px 14px;border-radius:20px;margin-bottom:16px;transition:all .3s ease}
+.card:hover .card-category{background:var(--accent);color:#000;border-color:var(--accent)}
+.card-title{font-size:22px;font-weight:600;margin-bottom:12px;line-height:1.3;transition:color .3s ease}
+.card:hover .card-title{color:var(--accent)}
+.card-meta{display:flex;justify-content:space-between;align-items:center;color:var(--text-secondary);font-size:13px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.card-author{font-weight:500}
+.card-publication{font-style:italic;color:var(--accent);opacity:.7}
+.card::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(201,169,110,.06),transparent);transition:left .6s ease;z-index:3;pointer-events:none}
+.card:hover::before{left:150%}
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:2000;display:none;overflow-y:auto;opacity:0;transition:opacity .4s}
+.modal-overlay.active{display:block;opacity:1}
+.modal-close{position:fixed;top:30px;right:30px;background:rgba(20,20,20,.8);border:1px solid var(--border);color:var(--text);width:50px;height:50px;font-size:24px;cursor:pointer;z-index:2001;border-radius:50%;transition:all .3s;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{border-color:var(--accent);color:var(--accent);transform:rotate(90deg)}
+.modal-content{max-width:800px;margin:80px auto;padding:60px 40px;animation:modalSlide .5s ease}
+@keyframes modalSlide{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.modal-hero{width:100%;height:300px;border-radius:12px;margin-bottom:40px}
+.modal-category{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.modal-title{font-size:clamp(28px,4vw,44px);font-weight:300;line-height:1.3;margin-bottom:30px}
+.modal-info{display:flex;gap:30px;color:var(--text-secondary);font-size:14px;margin-bottom:40px;padding-bottom:30px;border-bottom:1px solid var(--border)}
+.modal-body{font-size:17px;line-height:2;color:#ccc}
+.modal-body p{margin-bottom:24px}
+footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;position:relative;z-index:1;background:rgba(10,10,10,.8);backdrop-filter:blur(10px)}
+.footer-logo{font-size:24px;font-weight:700;letter-spacing:6px;color:var(--accent);margin-bottom:16px}
+.footer-desc{color:var(--text-secondary);font-size:14px;max-width:500px;margin:0 auto 30px}
+.footer-links{display:flex;justify-content:center;gap:24px;margin-bottom:30px}
+.footer-links a{color:var(--text-secondary);font-size:13px;letter-spacing:1px;transition:color .3s}
+.footer-links a:hover{color:var(--accent)}
+.footer-legal{color:#555;font-size:12px}
+@media(max-width:768px){
+  nav{padding:15px 20px}
+  .nav-links{position:fixed;top:60px;left:0;width:100%;background:rgba(10,10,10,.98);flex-direction:column;align-items:center;padding:20px 0;gap:20px;display:none;border-bottom:1px solid var(--border)}
+  .nav-links.open{display:flex}
+  .menu-toggle{display:block}
+  .hero h1{letter-spacing:6px}
+  .section{padding:80px 20px}
+  .mission-grid,.activities-grid{grid-template-columns:1fr;gap:30px}
+  .values-grid{grid-template-columns:1fr;gap:20px}
+  .team-grid{grid-template-columns:1fr}
+  .stats-bar{flex-wrap:wrap;gap:30px;padding:60px 20px}
+  .magazine-grid{padding:20px;grid-template-columns:1fr;gap:20px}
+  .card-image{height:200px}
+  .filter-section{padding:20px}
+  .filter-bar{gap:8px}
+  .filter-btn{padding:8px 16px;font-size:12px}
+  .modal-content{padding:40px 20px;margin:60px auto}
+  .modal-info{flex-direction:column;gap:10px}
+  .modal-hero{height:180px}
+  .lang-switch{top:15px;right:60px}
+  .lang-btn{padding:4px 10px;font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-overlay"></div>
+
+<div class="lang-switch">
+  <button class="lang-btn active" onclick="switchLang('ko')">KR</button>
+  <button class="lang-btn" onclick="switchLang('de')">DE</button>
+  <button class="lang-btn" onclick="switchLang('en')">EN</button>
+</div>
+
+<nav>
+  <div class="logo" onclick="showPage('about')">KANE</div>
+  <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
+  <div class="nav-links" id="navLinks">
+    <a onclick="showPage('about')" class="active" data-nav="about" data-lang-ko="소개" data-lang-de="&#220;ber uns" data-lang-en="About">소개</a>
+    <a href="Kane_Magazine_V1.html" data-nav="magazine" data-lang-ko="매거진" data-lang-de="Magazin" data-lang-en="Magazine">매거진</a>
+    <a href="Kane_Theater_V1.html" data-nav="theater" data-lang-ko="제작극장" data-lang-de="Theater" data-lang-en="Theater">제작극장</a>
+    <a onclick="showPage('contact')" data-nav="contact" data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</a>
+  </div>
+</nav>
+
+<div class="page active" id="page-about">
+  <section class="hero">
+    <h1><span>KANE</span></h1>
+    <p class="hero-subtitle" data-lang-ko="Korean Artists Network in Europe &#8212; 독일에서 활동하는 한국인 예술가들의 연대를 위한 비영리단체" data-lang-de="Korean Artists Network in Europe &#8212; Gemeinn&#252;tziger Verein f&#252;r die Solidarit&#228;t koreanischer K&#252;nstler in Deutschland" data-lang-en="Korean Artists Network in Europe &#8212; A non-profit for solidarity among Korean artists in Germany">Korean Artists Network in Europe &#8212; 독일에서 활동하는 한국인 예술가들의 연대를 위한 비영리단체</p>
+    <div class="hero-line"></div>
+    <div class="scroll-indicator"><span data-lang-ko="스크롤" data-lang-de="Scrollen" data-lang-en="Scroll">스크롤</span> &#8595;</div>
+  </section>
+
+  <section class="section">
+    <span class="section-label">Mission &amp; Vision</span>
+    <h2 class="section-title" data-lang-ko="우리가 존재하는 이유" data-lang-de="Warum wir existieren" data-lang-en="Why We Exist">우리가 존재하는 이유</h2>
+    <div class="mission-grid">
+      <div class="mission-card">
+        <h3 data-lang-ko="미션" data-lang-de="Mission" data-lang-en="Mission">미션</h3>
+        <p data-lang-ko="독일에서 활동하는 한국인 예술가들이 서로의 존재를 확인하고, 협력과 교류를 통해 예술적 성장을 이루어가는 연대의 공간을 만듭니다." data-lang-de="Wir schaffen einen solidarischen Raum, in dem koreanische K&#252;nstler in Deutschland sich gegenseitig best&#228;rken und durch Zusammenarbeit k&#252;nstlerisch wachsen." data-lang-en="We create a space of solidarity where Korean artists in Germany can affirm each other and achieve artistic growth through collaboration.">독일에서 활동하는 한국인 예술가들이 서로의 존재를 확인하고, 협력과 교류를 통해 예술적 성장을 이루어가는 연대의 공간을 만듭니다.</p>
+      </div>
+      <div class="mission-card">
+        <h3 data-lang-ko="비전" data-lang-de="Vision" data-lang-en="Vision">비전</h3>
+        <p data-lang-ko="경계를 넘어 연결되는 예술. KANE은 국적과 장르의 경계를 넘어, 독일과 유럽 무대에서 한국 예술가들의 목소리가 울려퍼지는 세상을 꿈꿉니다." data-lang-de="Kunst, die &#252;ber Grenzen verbindet. KANE tr&#228;umt von einer Welt, in der koreanische K&#252;nstler auf europ&#228;ischen B&#252;hnen widerhallen." data-lang-en="Art that connects beyond borders. KANE dreams of a world where Korean artists' voices resound on European stages.">경계를 넘어 연결되는 예술. KANE은 국적과 장르의 경계를 넘어, 독일과 유럽 무대에서 한국 예술가들의 목소리가 울려퍼지는 세상을 꿈꿉니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stat-item"><span class="stat-number">2024</span><span class="stat-label" data-lang-ko="설립연도" data-lang-de="Gr&#252;ndungsjahr" data-lang-en="Founded">설립연도</span></div>
+    <div class="stat-item"><span class="stat-number">30+</span><span class="stat-label" data-lang-ko="소속 예술가" data-lang-de="Mitgliedsk&#252;nstler" data-lang-en="Member Artists">소속 예술가</span></div>
+    <div class="stat-item"><span class="stat-number">5</span><span class="stat-label" data-lang-ko="활동 도시" data-lang-de="Aktive St&#228;dte" data-lang-en="Active Cities">활동 도시</span></div>
+    <div class="stat-item"><span class="stat-number">12+</span><span class="stat-label" data-lang-ko="프로젝트" data-lang-de="Projekte" data-lang-en="Projects">프로젝트</span></div>
+  </div>
+
+  <section class="section">
+    <span class="section-label" data-lang-ko="핵심 가치" data-lang-de="Kernwerte" data-lang-en="Core Values">핵심 가치</span>
+    <h2 class="section-title" data-lang-ko="KANE이 믿는 것들" data-lang-de="Woran KANE glaubt" data-lang-en="What KANE Believes In">KANE이 믿는 것들</h2>
+    <div class="values-grid">
+      <div class="value-item"><span class="value-icon">&#129309;</span><h4 data-lang-ko="연대" data-lang-de="Solidarit&#228;t" data-lang-en="Solidarity">연대</h4><p data-lang-ko="서로의 작업을 지지하고, 어려움을 나누며, 성장을 축하합니다." data-lang-de="Wir unterst&#252;tzen die Arbeit der anderen und feiern Wachstum." data-lang-en="We support each other's work and celebrate growth.">서로의 작업을 지지하고, 어려움을 나누며, 성장을 축하합니다.</p></div>
+      <div class="value-item"><span class="value-icon">&#127758;</span><h4 data-lang-ko="다양성" data-lang-de="Vielfalt" data-lang-en="Diversity">다양성</h4><p data-lang-ko="시각예술, 공연, 음악, 문학 등 모든 분야의 예술가가 함께합니다." data-lang-de="K&#252;nstler aller Bereiche kommen zusammen." data-lang-en="Artists from all fields come together.">시각예술, 공연, 음악, 문학 등 모든 분야의 예술가가 함께합니다.</p></div>
+      <div class="value-item"><span class="value-icon">&#128279;</span><h4 data-lang-ko="연결" data-lang-de="Verbindung" data-lang-en="Connection">연결</h4><p data-lang-ko="한국과 독일, 두 문화를 잇는 다리로서 새로운 예술적 언어를 만듭니다." data-lang-de="Als Br&#252;cke zwischen zwei Kulturen schaffen wir eine neue k&#252;nstlerische Sprache." data-lang-en="As a bridge between two cultures, we create a new artistic language.">한국과 독일, 두 문화를 잇는 다리로서 새로운 예술적 언어를 만듭니다.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="section-label" data-lang-ko="주요 활동" data-lang-de="Aktivit&#228;ten" data-lang-en="Activities">주요 활동</span>
+    <h2 class="section-title" data-lang-ko="KANE이 하는 일" data-lang-de="Was KANE tut" data-lang-en="What KANE Does">KANE이 하는 일</h2>
+    <div class="activities-grid">
+      <div class="activity-card" onclick="window.location.href='Kane_Theater_V1.html'" style="cursor:pointer"><span class="activity-icon">&#127917;</span><h4 data-lang-ko="제작극장 운영" data-lang-de="Theaterbetrieb" data-lang-en="Theater Operations">제작극장 운영</h4><p data-lang-ko="한국인 예술가들의 실험과 창작을 위한 전용 공간을 운영합니다." data-lang-de="Wir betreiben einen eigenen Raum f&#252;r Experimente und kreatives Schaffen." data-lang-en="We operate a dedicated space for experimentation and creation.">한국인 예술가들의 실험과 창작을 위한 전용 공간을 운영합니다.</p></div>
+      <div class="activity-card" onclick="window.location.href='Kane_Magazine_V1.html'" style="cursor:pointer"><span class="activity-icon">&#128240;</span><h4 data-lang-ko="매거진 발행" data-lang-de="Magazin" data-lang-en="Magazine">매거진 발행</h4><p data-lang-ko="미술비평, 공연리뷰, 에세이, 인터뷰 등 회원들의 기고글을 발행합니다." data-lang-de="Wir ver&#246;ffentlichen Beitr&#228;ge unserer Mitglieder als Online-Magazin." data-lang-en="We publish members' contributions as an online magazine.">미술비평, 공연리뷰, 에세이, 인터뷰 등 회원들의 기고글을 발행합니다.</p></div>
+      <div class="activity-card"><span class="activity-icon">&#129309;</span><h4 data-lang-ko="네트워킹" data-lang-de="Networking" data-lang-en="Networking">네트워킹</h4><p data-lang-ko="정기 모임, 스튜디오 방문, 공동 프로젝트를 통해 교류합니다." data-lang-de="Durch Treffen, Studiobesuche und Projekte f&#246;rdern wir den Austausch." data-lang-en="Through meetups, studio visits, and projects, we facilitate exchange.">정기 모임, 스튜디오 방문, 공동 프로젝트를 통해 교류합니다.</p></div>
+      <div class="activity-card"><span class="activity-icon">&#127891;</span><h4 data-lang-ko="교육 &amp; 멘토링" data-lang-de="Bildung &amp; Mentoring" data-lang-en="Education &amp; Mentoring">교육 &amp; 멘토링</h4><p data-lang-ko="비자, 펀딩, 전시 지원 등 현지 정착에 도움이 되는 멘토링을 운영합니다." data-lang-de="Wir betreiben Mentoring zu Themen wie Visa, F&#246;rderung und Ausstellungen." data-lang-en="We run mentoring on visa, funding, exhibitions, and settlement.">비자, 펀딩, 전시 지원 등 현지 정착에 도움이 되는 멘토링을 운영합니다.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="section-label" data-lang-ko="연혁" data-lang-de="Chronik" data-lang-en="History">연혁</span>
+    <h2 class="section-title" data-lang-ko="KANE의 발자취" data-lang-de="KANEs Weg" data-lang-en="KANE's Journey">KANE의 발자취</h2>
+    <div class="timeline">
+      <div class="timeline-item"><span class="timeline-year">2024</span><div class="timeline-content"><h4 data-lang-ko="KANE 설립" data-lang-de="Gr&#252;ndung von KANE" data-lang-en="KANE Founded">KANE 설립</h4><p data-lang-ko="독일 거주 한국인 예술가 10명이 모여 비영리단체 KANE을 설립." data-lang-de="10 koreanische K&#252;nstler in Deutschland gr&#252;nden KANE." data-lang-en="10 Korean artists in Germany establish KANE.">독일 거주 한국인 예술가 10명이 모여 비영리단체 KANE을 설립.</p></div></div>
+      <div class="timeline-item"><span class="timeline-year">2025</span><div class="timeline-content"><h4 data-lang-ko="첫 공동 전시 &amp; 매거진 창간" data-lang-de="Erste Ausstellung &amp; Magazin" data-lang-en="First Exhibition &amp; Magazine">첫 공동 전시 &amp; 매거진 창간</h4><p data-lang-ko="첫 공동 전시 'Zwischen' 개최. 온라인 매거진 창간." data-lang-de="Erste Ausstellung 'Zwischen'. Start des Online-Magazins." data-lang-en="First exhibition 'Zwischen'. Online magazine launch.">첫 공동 전시 'Zwischen' 개최. 온라인 매거진 창간.</p></div></div>
+      <div class="timeline-item"><span class="timeline-year">2026</span><div class="timeline-content"><h4 data-lang-ko="제작극장 오픈" data-lang-de="Er&#246;ffnung des Theaters" data-lang-en="Theater Opens">제작극장 오픈</h4><p data-lang-ko="KANE 제작극장 정식 오픈. 회원 30명 돌파." data-lang-de="Er&#246;ffnung des KANE-Theaters. &#220;ber 30 Mitglieder." data-lang-en="KANE Theater opens. Over 30 members.">KANE 제작극장 정식 오픈. 회원 30명 돌파.</p></div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="section-label" data-lang-ko="운영진" data-lang-de="Team" data-lang-en="Team">운영진</span>
+    <h2 class="section-title" data-lang-ko="KANE을 이끄는 사람들" data-lang-de="Die Menschen hinter KANE" data-lang-en="The People Behind KANE">KANE을 이끄는 사람들</h2>
+    <div class="team-grid">
+      <div class="team-card"><div class="team-photo"><div class="photo-bg" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)"></div></div><div class="team-info"><div class="team-role" data-lang-ko="대표" data-lang-de="Vorsitzende/r" data-lang-en="Director">대표</div><div class="team-name" data-lang-ko="홍길동" data-lang-de="Gildong Hong" data-lang-en="Gildong Hong">홍길동</div><p class="team-bio" data-lang-ko="연출가. 베를린 거주." data-lang-de="Regisseur/in. Berlin." data-lang-en="Director. Berlin.">연출가. 베를린 거주.</p></div></div>
+      <div class="team-card"><div class="team-photo"><div class="photo-bg" style="background:linear-gradient(135deg,#2d1b42,#1a1a2e,#16213e)"></div></div><div class="team-info"><div class="team-role" data-lang-ko="부대표" data-lang-de="Stellv. Vorsitzende/r" data-lang-en="Vice Director">부대표</div><div class="team-name" data-lang-ko="김예술" data-lang-de="Yesul Kim" data-lang-en="Yesul Kim">김예술</div><p class="team-bio" data-lang-ko="시각예술가. 뮌헨 거주." data-lang-de="Bildende K&#252;nstlerin. M&#252;nchen." data-lang-en="Visual artist. Munich.">시각예술가. 뮌헨 거주.</p></div></div>
+      <div class="team-card"><div class="team-photo"><div class="photo-bg" style="background:linear-gradient(135deg,#1b2d2a,#1a2e1a,#213e16)"></div></div><div class="team-info"><div class="team-role" data-lang-ko="사무국장" data-lang-de="Gesch&#228;ftsf&#252;hrer/in" data-lang-en="Secretary General">사무국장</div><div class="team-name" data-lang-ko="박문화" data-lang-de="Munhwa Park" data-lang-en="Munhwa Park">박문화</div><p class="team-bio" data-lang-ko="문화기획자. 함부르크 거주." data-lang-de="Kulturmanager/in. Hamburg." data-lang-en="Cultural manager. Hamburg.">문화기획자. 함부르크 거주.</p></div></div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2><span>KANE</span><span data-lang-ko="과 함께하세요" data-lang-de=" beitreten" data-lang-en=" &#8212; Join Us">과 함께하세요</span></h2>
+    <p data-lang-ko="독일에서 활동하는 한국인 예술가라면 누구나 환영합니다." data-lang-de="Alle koreanischen K&#252;nstler in Deutschland sind willkommen." data-lang-en="All Korean artists in Germany are welcome.">독일에서 활동하는 한국인 예술가라면 누구나 환영합니다.</p>
+    <a class="cta-btn" onclick="showPage('contact')" data-lang-ko="회원 가입 신청" data-lang-de="Mitglied werden" data-lang-en="Become a Member">회원 가입 신청</a>
+  </section>
+</div>
+
+<div class="page" id="page-magazine">
+  <section class="hero">
+    <h1><span>KANE</span><br>Magazine</h1>
+    <p class="hero-subtitle" data-lang-ko="독일 한국인 예술가들의 목소리" data-lang-de="Stimmen koreanischer K&#252;nstler in Deutschland" data-lang-en="Voices of Korean Artists in Germany">독일 한국인 예술가들의 목소리</p>
+    <div class="hero-line"></div>
+    <div class="scroll-indicator"><span data-lang-ko="스크롤" data-lang-de="Scrollen" data-lang-en="Scroll">스크롤</span> &#8595;</div>
+  </section>
+  <section class="filter-section">
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all" data-lang-ko="전체" data-lang-de="Alle" data-lang-en="All">전체</button>
+      <button class="filter-btn" data-filter="criticism" data-lang-ko="미술비평" data-lang-de="Kunstkritik" data-lang-en="Art Criticism">미술비평</button>
+      <button class="filter-btn" data-filter="review" data-lang-ko="공연리뷰" data-lang-de="Auff&#252;hrungskritik" data-lang-en="Performance Review">공연리뷰</button>
+      <button class="filter-btn" data-filter="essay" data-lang-ko="에세이" data-lang-de="Essay" data-lang-en="Essay">에세이</button>
+      <button class="filter-btn" data-filter="interview" data-lang-ko="인터뷰" data-lang-de="Interview" data-lang-en="Interview">인터뷰</button>
+    </div>
+  </section>
+  <section class="magazine-grid" id="grid"></section>
+</div>
+
+<div class="page" id="page-theater">
+  <section class="hero">
+    <h1><span>KANE</span><br><span data-lang-ko="제작극장" data-lang-de="Theater" data-lang-en="Theater">제작극장</span></h1>
+    <p class="hero-subtitle" data-lang-ko="Coming Soon &#8212; 제작극장 페이지 준비 중" data-lang-de="Coming Soon &#8212; Theaterseite in Vorbereitung" data-lang-en="Coming Soon &#8212; Theater page in preparation">Coming Soon &#8212; 제작극장 페이지 준비 중</p>
+  </section>
+</div>
+
+<div class="page" id="page-contact">
+  <section class="hero">
+    <h1><span data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</span></h1>
+    <p class="hero-subtitle" data-lang-ko="Coming Soon &#8212; 문의 페이지 준비 중" data-lang-de="Coming Soon &#8212; Kontaktseite in Vorbereitung" data-lang-en="Coming Soon &#8212; Contact page in preparation">Coming Soon &#8212; 문의 페이지 준비 중</p>
+  </section>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <button class="modal-close" onclick="closeModal()">&#215;</button>
+  <div class="modal-content">
+    <div class="modal-hero" id="modal-hero"></div>
+    <div class="modal-category" id="modal-category"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-info"><span id="modal-author"></span><span id="modal-publication"></span><span id="modal-date"></span></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo" style="cursor:pointer" onclick="showPage('about')">KANE</div>
+  <p class="footer-desc" data-lang-ko="독일에서 활동하는 한국인 예술가들의 연대를 위한 비영리단체" data-lang-de="Gemeinn&#252;tziger Verein f&#252;r die Solidarit&#228;t koreanischer K&#252;nstler in Deutschland" data-lang-en="Non-profit for solidarity among Korean artists in Germany">독일에서 활동하는 한국인 예술가들의 연대를 위한 비영리단체</p>
+  <div class="footer-links"><a href="#">Instagram</a><a href="#">Facebook</a><a onclick="showPage('contact')" style="cursor:pointer" data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</a></div>
+  <p class="footer-legal">&#169; 2026 KANE e.V. All rights reserved. | <a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
+</footer>
+
+<script>
+var gradients=[
+  'linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)',
+  'linear-gradient(135deg,#2d1b42,#1a1a2e,#16213e)',
+  'linear-gradient(135deg,#1b2d2a,#1a2e1a,#213e16)',
+  'linear-gradient(135deg,#2e1a1a,#3e1621,#601a0f)',
+  'linear-gradient(135deg,#1a2e2e,#162e3e,#0f4560)',
+  'linear-gradient(135deg,#2e2e1a,#3e3216,#60450f)'
+];
+var articles=[
+  {id:1,category:"criticism",gradient:gradients[0],title:{ko:"\uBCA0\uB97C\uB9B0 \uBE44\uC5D4\uB0A0\uB808\uC5D0\uC11C \uB9CC\uB09C \uB514\uC544\uC2A4\uD3EC\uB77C\uC758 \uC2DC\uC120",de:"Der Blick der Diaspora auf der Berlin Biennale",en:"Diaspora Perspectives at the Berlin Biennale"},author:{ko:"\uAE40\uC11C\uC5F0",de:"Seoyeon Kim",en:"Seoyeon Kim"},publication:{ko:"\uC544\uD2B8\uC778\uCEEC\uCC98",de:"Art in Culture",en:"Art in Culture"},date:"2026.05",body:{ko:"<p>\uC81C12\uD68C \uBCA0\uB97C\uB9B0 \uBE44\uC5D4\uB0A0\uB808\uB294 \uB514\uC544\uC2A4\uD3EC\uB77C \uC608\uC220\uAC00\uB4E4\uC758 \uBAA9\uC18C\uB9AC\uB97C \uC804\uBA74\uC5D0 \uB0B4\uC138\uC6E0\uB2E4.</p>",de:"<p>Die 12. Berlin Biennale stellte die Stimmen der Diaspora-K\u00FCnstler in den Vordergrund.</p>",en:"<p>The 12th Berlin Biennale brought diaspora artists' voices to the forefront.</p>"}},
+  {id:2,category:"review",gradient:gradients[1],title:{ko:"\uD568\uBD80\uB974\uD06C \uD0C8\uB9AC\uC544 \uADF9\uC7A5, \uC0C8\uB85C\uC6B4 \uD55C\uB3C5 \uD611\uC5C5\uC758 \uC11C\uB9C9",de:"Thalia Theater Hamburg",en:"Thalia Theater Hamburg"},author:{ko:"\uC774\uC900\uD601",de:"Junhyeok Lee",en:"Junhyeok Lee"},publication:{ko:"\uACF5\uC5F0\uACFC \uB9AC\uBDF0",de:"Performance & Review",en:"Performance & Review"},date:"2026.04",body:{ko:"<p>\uD568\uBD80\uB974\uD06C \uD0C8\uB9AC\uC544 \uADF9\uC7A5\uC5D0\uC11C \uD3BC\uCCD0\uC9C4 \uD55C\uB3C5 \uD611\uC5C5 \uACF5\uC5F0.</p>",de:"<p>Die koreanisch-deutsche Koproduktion.</p>",en:"<p>The Korean-German collaboration.</p>"}},
+  {id:3,category:"essay",gradient:gradients[2],title:{ko:"\uACBD\uACC4\uC5D0 \uC120 \uC608\uC220\uAC00",de:"K\u00FCnstler an der Grenze",en:"Artists on the Border"},author:{ko:"\uBC15\uC9C0\uC740",de:"Jieun Park",en:"Jieun Park"},publication:{ko:"\uBB38\uD559\uB3D9\uB124",de:"Munhak Dongne",en:"Munhak Dongne"},date:"2026.03",body:{ko:"<p>\uB3C5\uC77C\uC5D0 \uC628 \uC9C0 8\uB144\uC774 \uC9C0\uB0AC\uB2E4.</p>",de:"<p>Acht Jahre in Deutschland.</p>",en:"<p>Eight years in Germany.</p>"}},
+  {id:4,category:"interview",gradient:gradients[3],title:{ko:"\uC778\uD130\uBDF0: \uBB34\uB300\uBBF8\uC220\uAC00 \uCD5C\uC724\uC11C",de:"Interview: Yunseo Choi",en:"Interview: Yunseo Choi"},author:{ko:"\uC815\uD558\uB298",de:"Haneul Jeong",en:"Haneul Jeong"},publication:{ko:"\uC2A4\uD14C\uC774\uC9C0 \uB9E4\uAC70\uC9C4",de:"Stage Magazin",en:"Stage Magazine"},date:"2026.02",body:{ko:"<p><strong>Q:</strong> \uB3C5\uC77C \uBB34\uB300\uBBF8\uC220\uC758 \uB9E4\uB825\uC740?</p>",de:"<p><strong>Q:</strong> Was macht deutsches B\u00FChnenbild attraktiv?</p>",en:"<p><strong>Q:</strong> What makes German stage design attractive?</p>"}},
+  {id:5,category:"criticism",gradient:gradients[4],title:{ko:"\uCE74\uC140 \uB3C4\uD050\uBA58\uD0C0\uC640 \uC544\uC2DC\uC544 \uD604\uB300\uBBF8\uC220",de:"Documenta und asiatische Kunst",en:"Documenta and Asian Art"},author:{ko:"\uD55C\uB3C4\uC724",de:"Doyun Han",en:"Doyun Han"},publication:{ko:"\uC6D4\uAC04\uBBF8\uC220",de:"Monatliche Kunst",en:"Monthly Art"},date:"2026.01",body:{ko:"<p>\uCE74\uC140 \uB3C4\uD050\uBA58\uD0C0.</p>",de:"<p>Die Documenta.</p>",en:"<p>Documenta.</p>"}},
+  {id:6,category:"essay",gradient:gradients[5],title:{ko:"\uC5B8\uC5B4 \uB108\uBA38\uC758 \uC608\uC220",de:"Kunst jenseits der Sprache",en:"Art Beyond Language"},author:{ko:"\uC724\uC11C\uC544",de:"Seoa Yun",en:"Seoa Yun"},publication:{ko:"\uC5D0\uC138\uC774\uC2A4\uD2B8",de:"Der Essayist",en:"The Essayist"},date:"2025.12",body:{ko:"<p>\uB3C5\uC77C\uC5B4\uB97C \uBABB\uD558\uB358 \uC2DC\uC808.</p>",de:"<p>Als ich kein Deutsch sprach.</p>",en:"<p>When I couldn't speak German.</p>"}}
+];
+
+var currentLang='ko';
+
+function showPage(name){
+  var pages=document.querySelectorAll('.page');
+  for(var i=0;i<pages.length;i++){pages[i].classList.remove('active');}
+  document.getElementById('page-'+name).classList.add('active');
+  var navs=document.querySelectorAll('[data-nav]');
+  for(var j=0;j<navs.length;j++){
+    if(navs[j].getAttribute('data-nav')===name){navs[j].classList.add('active');}
+    else{navs[j].classList.remove('active');}
+  }
+  window.scrollTo(0,0);
+  var nl=document.getElementById('navLinks');
+  if(nl)nl.classList.remove('open');
+  if(name==='magazine'){renderCards('all');}
+}
+function toggleMenu(){document.getElementById('navLinks').classList.toggle('open');}
+function switchLang(lang){
+  currentLang=lang;
+  var map={ko:'KR',de:'DE',en:'EN'};
+  var btns=document.querySelectorAll('.lang-btn');
+  for(var i=0;i<btns.length;i++){
+    if(btns[i].textContent.trim()===map[lang]){btns[i].classList.add('active');}
+    else{btns[i].classList.remove('active');}
+  }
+  var els=document.querySelectorAll('[data-lang-'+lang+']');
+  for(var j=0;j<els.length;j++){
+    var val=els[j].getAttribute('data-lang-'+lang);
+    if(val.indexOf('<')!==-1){els[j].innerHTML=val;}
+    else{els[j].textContent=val;}
+  }
+  var af=document.querySelector('.filter-btn.active');
+  if(af){renderCards(af.dataset.filter);}
+}
+function getCategoryLabel(cat){
+  var labels={criticism:{ko:'\uBBF8\uC220\uBE44\uD3C9',de:'Kunstkritik',en:'Art Criticism'},review:{ko:'\uACF5\uC5F0\uB9AC\uBDF0',de:'Rezension',en:'Performance Review'},essay:{ko:'\uC5D0\uC138\uC774',de:'Essay',en:'Essay'},interview:{ko:'\uC778\uD130\uBDF0',de:'Interview',en:'Interview'}};
+  return labels[cat][currentLang];
+}
+function renderCards(filter){
+  var grid=document.getElementById('grid');
+  if(!grid)return;
+  var filtered=filter==='all'?articles:articles.filter(function(a){return a.category===filter;});
+  var html='';
+  for(var i=0;i<filtered.length;i++){
+    var a=filtered[i];
+    html+='<div class="card" data-id="'+a.id+'">';
+    html+='<div class="card-image"><div class="gradient-bg" style="background:'+a.gradient+'"></div>';
+    html+='<div class="card-readmore">\u2192</div></div>';
+    html+='<div class="card-content"><span class="card-category">'+getCategoryLabel(a.category)+'</span>';
+    html+='<h3 class="card-title">'+a.title[currentLang]+'</h3>';
+    html+='<div class="card-meta"><span class="card-author">'+a.author[currentLang]+'</span>';
+    html+='<span class="card-publication">'+a.publication[currentLang]+'</span>';
+    html+='<span>'+a.date+'</span></div></div></div>';
+  }
+  grid.innerHTML=html;
+  var cards=grid.querySelectorAll('.card');
+  for(var j=0;j<cards.length;j++){
+    cards[j].addEventListener('click',function(){openModal(parseInt(this.getAttribute('data-id')));});
+  }
+}
+var filterBtns=document.querySelectorAll('.filter-btn');
+for(var fi=0;fi<filterBtns.length;fi++){
+  filterBtns[fi].addEventListener('click',function(){
+    var all=document.querySelectorAll('.filter-btn');
+    for(var k=0;k<all.length;k++){all[k].classList.remove('active');}
+    this.classList.add('active');
+    renderCards(this.dataset.filter);
+  });
+}
+function openModal(id){
+  var a=null;
+  for(var i=0;i<articles.length;i++){if(articles[i].id===id){a=articles[i];break;}}
+  if(!a)return;
+  document.getElementById('modal-hero').style.background=a.gradient;
+  document.getElementById('modal-category').textContent=getCategoryLabel(a.category);
+  document.getElementById('modal-title').textContent=a.title[currentLang];
+  document.getElementById('modal-author').textContent=a.author[currentLang];
+  document.getElementById('modal-publication').textContent=a.publication[currentLang];
+  document.getElementById('modal-date').textContent=a.date;
+  document.getElementById('modal-body').innerHTML=a.body[currentLang];
+  var modal=document.getElementById('modal');
+  modal.style.display='block';
+  setTimeout(function(){modal.classList.add('active');},10);
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  var modal=document.getElementById('modal');
+  modal.classList.remove('active');
+  setTimeout(function(){modal.style.display='none';},400);
+  document.body.style.overflow='auto';
+}
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===e.currentTarget)closeModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+renderCards('all');
+</script>
+</body>
+</html>
