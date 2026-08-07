@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KANE — Korean Artists Network in Europe e.V.</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0a;--card:#141414;--card-hover:#1c1c1c;--accent:#c9a96e;--text:#f0f0f0;--text-secondary:#888;--border:#2a2a2a}
+body{background:#0a0a0a url('bg1.jpg') center center / cover no-repeat fixed;color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.8;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.bg-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background:rgba(0,0,0,0.7)}
+.lang-switch{position:fixed;top:20px;right:20px;z-index:1001;display:flex;gap:6px}
+.lang-btn{background:rgba(20,20,20,.85);border:1px solid var(--border);color:var(--text-secondary);padding:6px 14px;cursor:pointer;font-size:13px;transition:all .3s;border-radius:4px}
+.lang-btn.active{color:var(--accent);border-color:var(--accent)}
+.lang-btn:hover{color:var(--accent)}
+nav{position:fixed;top:0;left:0;width:100%;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;z-index:1000;background:rgba(10,10,10,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(42,42,42,.5)}
+.logo{font-size:20px;font-weight:700;letter-spacing:5px;color:var(--accent);cursor:pointer;display:flex;align-items:center;gap:10px}
+.logo img{height:40px}
+.nav-links{display:flex;gap:28px}
+.nav-links a{color:var(--text-secondary);font-size:14px;letter-spacing:1px;transition:color .3s;cursor:pointer;position:relative;padding-bottom:4px}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:1px;background:var(--accent)}
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 20px;position:relative;z-index:1}
+.hero h1{font-size:clamp(48px,10vw,120px);font-weight:200;letter-spacing:12px;text-transform:uppercase;line-height:1.1}
+.hero h1 span{color:var(--accent)}
+.hero-subtitle{margin-top:24px;font-size:18px;color:var(--text-secondary);letter-spacing:3px;max-width:700px;line-height:1.8}
+.hero-line{width:1px;height:80px;background:linear-gradient(to bottom,transparent,var(--accent));margin-top:40px;animation:growLine 2s ease infinite}
+@keyframes growLine{0%,100%{opacity:.3;height:60px}50%{opacity:1;height:100px}}
+.scroll-indicator{margin-top:16px;color:var(--text-secondary);font-size:12px;letter-spacing:2px}
+.section{max-width:1100px;margin:0 auto;padding:120px 40px;position:relative;z-index:1}
+.section-label{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.section-title{font-size:clamp(28px,4vw,48px);font-weight:300;line-height:1.3;margin-bottom:40px}
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:40px}
+.mission-card{padding:40px;border:1px solid var(--border);border-radius:12px;background:rgba(20,20,20,.6);backdrop-filter:blur(5px);transition:all .4s ease}
+.mission-card:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow:0 20px 60px rgba(201,169,110,.1)}
+.mission-card h3{font-size:24px;font-weight:600;color:var(--accent);margin-bottom:20px;letter-spacing:2px}
+.mission-card p{color:var(--text-secondary);font-size:16px;line-height:2}
+.stats-bar{display:flex;justify-content:center;gap:60px;padding:80px 40px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1}
+.stat-item{text-align:center}
+.stat-number{font-size:clamp(36px,5vw,56px);font-weight:200;color:var(--accent);letter-spacing:2px;display:block}
+.stat-label{font-size:13px;color:var(--text-secondary);letter-spacing:2px;margin-top:8px;text-transform:uppercase}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:40px}
+.value-item{text-align:center;padding:40px 24px;border:1px solid var(--border);border-radius:12px;background:rgba(20,20,20,.6);backdrop-filter:blur(5px);transition:all .4s ease}
+.value-item:hover{border-color:var(--accent);transform:translateY(-8px);box-shadow:0 20px 60px rgba(201,169,110,.1)}
+.value-icon{font-size:48px;margin-bottom:20px;display:block}
+.value-item h4{font-size:18px;font-weight:600;color:var(--accent);margin-bottom:12px}
+.value-item p{color:var(--text-secondary);font-size:14px;line-height:1.8}
+.activities-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;margin-top:40px}
+.activity-card{padding:36px;border:1px solid var(--border);border-radius:12px;background:rgba(20,20,20,.6);backdrop-filter:blur(5px);transition:all .4s ease;position:relative;overflow:hidden}
+.activity-card:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow:0 20px 60px rgba(201,169,110,.1)}
+.activity-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent);opacity:0;transition:opacity .3s}
+.activity-card:hover::before{opacity:1}
+.activity-icon{font-size:36px;margin-bottom:16px;display:block}
+.activity-card h4{font-size:20px;font-weight:600;margin-bottom:12px;transition:color .3s}
+.activity-card:hover h4{color:var(--accent)}
+.activity-card p{color:var(--text-secondary);font-size:14px;line-height:1.8}
+.timeline{position:relative;margin-top:40px;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),var(--border),var(--accent))}
+.timeline-item{position:relative;margin-bottom:50px;padding-left:30px}
+.timeline-item::before{content:'';position:absolute;left:-30px;top:8px;width:10px;height:10px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);transition:all .3s}
+.timeline-item:hover::before{background:var(--accent);box-shadow:0 0 20px rgba(201,169,110,.4)}
+.timeline-year{font-size:14px;color:var(--accent);letter-spacing:3px;font-weight:600;margin-bottom:8px}
+.timeline-content h4{font-size:20px;font-weight:500;margin-bottom:8px}
+.timeline-content p{color:var(--text-secondary);font-size:15px;line-height:1.8}
+.member-table{width:100%;border-collapse:collapse;margin-top:40px}
+.member-table th,.member-table td{padding:16px 20px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
+.member-table th{color:var(--accent);font-weight:600;font-size:13px;letter-spacing:2px;text-transform:uppercase;background:rgba(201,169,110,.05)}
+.member-table td{color:var(--text-secondary)}
+.member-table tr:hover td{background:rgba(201,169,110,.03)}
+.impressum-box{border:1px solid var(--border);border-radius:12px;padding:40px;background:rgba(20,20,20,.6);backdrop-filter:blur(5px);margin-top:40px}
+.impressum-box h4{color:var(--accent);font-size:18px;margin-bottom:20px}
+.impressum-box p{color:var(--text-secondary);font-size:14px;line-height:2}
+.cta-section{text-align:center;padding:120px 40px;position:relative;z-index:1}
+.cta-section h2{font-size:clamp(28px,4vw,48px);font-weight:300;margin-bottom:20px}
+.cta-section h2 span{color:var(--accent)}
+.cta-section p{color:var(--text-secondary);font-size:18px;margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto}
+.cta-btn{display:inline-block;padding:16px 48px;border:1px solid var(--accent);color:var(--accent);font-size:16px;letter-spacing:3px;text-transform:uppercase;border-radius:50px;transition:all .4s ease;cursor:pointer;margin:0 10px}
+.cta-btn:hover{background:var(--accent);color:#000;box-shadow:0 10px 40px rgba(201,169,110,.3);transform:translateY(-3px)}
+footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;position:relative;z-index:1}
+.footer-logo{font-size:24px;font-weight:700;letter-spacing:6px;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:10px}
+.footer-logo img{height:50px}
+.footer-desc{color:var(--text-secondary);font-size:14px;max-width:500px;margin:0 auto 30px}
+.footer-links{display:flex;justify-content:center;gap:24px;margin-bottom:30px}
+.footer-links a{color:var(--text-secondary);font-size:13px;letter-spacing:1px;transition:color .3s}
+.footer-links a:hover{color:var(--accent)}
+.footer-legal{color:#555;font-size:12px}
+@media(max-width:768px){nav{padding:15px 20px}.hero h1{letter-spacing:6px}.section{padding:80px 20px}.mission-grid,.activities-grid{grid-template-columns:1fr;gap:30px}.values-grid{grid-template-columns:1fr;gap:20px}.stats-bar{flex-wrap:wrap;gap:30px;padding:60px 20px}.member-table{font-size:12px}.member-table th,.member-table td{padding:10px 8px}.lang-switch{top:15px;right:60px}.lang-btn{padding:4px 10px;font-size:11px}}
+</style>
+</head>
+<body>
+<div class="bg-overlay"></div>
+<div class="lang-switch">
+  <button class="lang-btn active" onclick="switchLang('ko')">KR</button>
+  <button class="lang-btn" onclick="switchLang('de')">DE</button>
+  <button class="lang-btn" onclick="switchLang('en')">EN</button>
+</div>
+<nav>
+  <div class="logo" onclick="location.href='Kane_HomePage_V8.html'"><img src="kane-logo.png" alt="KANE"><span>KANE</span></div>
+  <div class="nav-links">
+    <a href="Kane_HomePage_V8.html" class="active" data-lang-ko="소개" data-lang-de="&#220;ber uns" data-lang-en="About">소개</a>
+    <a href="Kane_Magazine_V1.html" data-lang-ko="매거진" data-lang-de="Magazin" data-lang-en="Magazine">매거진</a>
+    <a href="Kane_Theater_V1.html" data-lang-ko="제작극장" data-lang-de="Produktionshaus" data-lang-en="Produktionshaus">제작극장</a>
+    <a href="mailto:kane.europe@gmail.com" data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <h1><span>KANE</span></h1>
+  <p class="hero-subtitle" data-lang-ko="Korean Artists Network in Europe e.V. &#8212; 유럽 내 한인 예술가들의 든든한 연대와 성장을 위한 플랫폼" data-lang-de="Korean Artists Network in Europe e.V. &#8212; Plattform f&#252;r Solidarit&#228;t und Wachstum koreanischer K&#252;nstler in Europa" data-lang-en="Korean Artists Network in Europe e.V. &#8212; A platform for solidarity and growth of Korean artists in Europe">Korean Artists Network in Europe e.V. &#8212; 유럽 내 한인 예술가들의 든든한 연대와 성장을 위한 플랫폼</p>
+  <div class="hero-line"></div>
+  <div class="scroll-indicator"><span data-lang-ko="스크롤" data-lang-de="Scrollen" data-lang-en="Scroll">스크롤</span> &#8595;</div>
+</section>
+
+<!-- About -->
+<section class="section">
+  <span class="section-label" data-lang-ko="소개" data-lang-de="&#220;ber uns" data-lang-en="About">소개</span>
+  <h2 class="section-title" data-lang-ko="독일 울름(Ulm)에 거점을 둔 유럽 한인 예술가 협회" data-lang-de="Europ&#228;ischer Verein koreanischer K&#252;nstler mit Sitz in Ulm" data-lang-en="European Korean Artists Association based in Ulm, Germany">독일 울름(Ulm)에 거점을 둔 유럽 한인 예술가 협회</h2>
+  <div class="mission-grid">
+    <div class="mission-card">
+      <h3 data-lang-ko="예술가 권익 보호 및 지원" data-lang-de="Schutz und F&#246;rderung der K&#252;nstlerrechte" data-lang-en="Artist Rights Protection &amp; Support">예술가 권익 보호 및 지원</h3>
+      <p data-lang-ko="유럽에서 활동하는 한인 예술가들의 사회적, 법적, 직업적 권익을 적극적으로 보호하고 향상시킵니다. 안정적인 예술 활동 환경을 조성하는 데 앞장섭니다." data-lang-de="Wir sch&#252;tzen und verbessern aktiv die sozialen, rechtlichen und beruflichen Rechte koreanischer K&#252;nstler in Europa und setzen uns f&#252;r ein stabiles k&#252;nstlerisches Arbeitsumfeld ein." data-lang-en="We actively protect and improve the social, legal, and professional rights of Korean artists in Europe, leading the way in creating a stable artistic working environment.">유럽에서 활동하는 한인 예술가들의 사회적, 법적, 직업적 권익을 적극적으로 보호하고 향상시킵니다. 안정적인 예술 활동 환경을 조성하는 데 앞장섭니다.</p>
+    </div>
+    <div class="mission-card">
+      <h3 data-lang-ko="한국 모델 협력" data-lang-de="Koreanische Modellkooperation" data-lang-en="Korean Model Cooperation">한국 모델 협력</h3>
+      <p data-lang-ko="선진적인 모델인 '&#246;ffentlich getragene Theater'(공공 지원 극장 제도)의 국내 정착과 발전을 적극적으로 지원합니다." data-lang-de="Wir unterst&#252;tzen aktiv die Etablierung und Entwicklung des fortschrittlichen Modells '&#246;ffentlich getragene Theater' in Korea." data-lang-en="We actively support the establishment and development of the progressive '&#246;ffentlich getragene Theater' (publicly supported theater) model in Korea.">선진적인 모델인 '&#246;ffentlich getragene Theater'(공공 지원 극장 제도)의 국내 정착과 발전을 적극적으로 지원합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-number">2022</span><span class="stat-label" data-lang-ko="출범연도" data-lang-de="Gr&#252;ndungsjahr" data-lang-en="Founded">출범연도</span></div>
+  <div class="stat-item"><span class="stat-number">115+</span><span class="stat-label" data-lang-ko="서명 예술가" data-lang-de="Unterzeichnende K&#252;nstler" data-lang-en="Signing Artists">서명 예술가</span></div>
+  <div class="stat-item"><span class="stat-number">11</span><span class="stat-label" data-lang-ko="활동 국가" data-lang-de="Aktive L&#228;nder" data-lang-en="Active Countries">활동 국가</span></div>
+  <div class="stat-item"><span class="stat-number">20+</span><span class="stat-label" data-lang-ko="프로젝트" data-lang-de="Projekte" data-lang-en="Projects">프로젝트</span></div>
+</div>
+
+<!-- Activities -->
+<section class="section">
+  <span class="section-label" data-lang-ko="주요 활동 영역" data-lang-de="Aktivit&#228;ten" data-lang-en="Activities">주요 활동 영역</span>
+  <h2 class="section-title" data-lang-ko="KANE이 하는 일" data-lang-de="Was KANE tut" data-lang-en="What KANE Does">KANE이 하는 일</h2>
+  <div class="activities-grid">    
+	<div class="activity-card"><span class="activity-icon">&#127760;</span><h4 data-lang-ko="네트워크 구축" data-lang-de="Netzwerkaufbau" data-lang-en="Network Building">네트워크 구축</h4><p data-lang-ko="유럽 전역의 한인 예술가들 간 교류와 상호 지원 체계를 마련합니다." data-lang-de="Wir schaffen Austausch- und Unterst&#252;tzungssysteme zwischen koreanischen K&#252;nstlern in ganz Europa." data-lang-en="We establish exchange and mutual support systems among Korean artists across Europe.">유럽 전역의 한인 예술가들 간 교류와 상호 지원 체계를 마련합니다.</p></div>
+    <div class="activity-card"><span class="activity-icon">&#127970;</span><h4 data-lang-ko="기관 협력" data-lang-de="Institutionelle Kooperation" data-lang-en="Institutional Cooperation">기관 협력</h4><p data-lang-ko="유럽 및 한국의 다양한 문화·예술 관련 조직과 긴밀히 협력합니다." data-lang-de="Wir kooperieren eng mit verschiedenen Kultur- und Kunstorganisationen in Europa und Korea." data-lang-en="We closely cooperate with various cultural and arts organizations in Europe and Korea.">유럽 및 한국의 다양한 문화·예술 관련 조직과 긴밀히 협력합니다.</p></div>
+    <div class="activity-card" onclick="window.location.href='Kane_Magazine_V1.html'" style="cursor:pointer"><span class="activity-icon">&#127917;</span><h4 data-lang-ko="문화 프로그램" data-lang-de="Kulturprogramme" data-lang-en="Cultural Programs">문화 프로그램</h4><p data-lang-ko="워크숍, 세미나, 문화 교류 프로그램 및 공연과 행사를 기획·운영합니다." data-lang-de="Wir planen und betreiben Workshops, Seminare, Kulturaustauschprogramme sowie Auff&#252;hrungen und Veranstaltungen." data-lang-en="We plan and operate workshops, seminars, cultural exchange programs, performances, and events.">워크숍, 세미나, 문화 교류 프로그램 및 공연과 행사를 기획·운영합니다.</p></div>
+    <div class="activity-card" onclick="window.location.href='Kane_Theater_V1.html'" style="cursor:pointer"><span class="activity-icon">&#128218;</span><h4 data-lang-ko="한국 모델 협력" data-lang-de="Koreanische Modellkooperation" data-lang-en="Korean Model Cooperation">한국 모델 협력</h4><p data-lang-ko="선진적인 모델인 공공 지원 극장 제도(&#246;ffentlich getragene Theater)의 한국 내 정착과 발전을 지원합니다." data-lang-de="Wir unterst&#252;tzen die Etablierung des &#246;ffentlich getragenen Theatersystems in Korea." data-lang-en="We support the establishment of the publicly supported theater system in Korea.">선진적인 모델인 공공 지원 극장 제도(&#246;ffentlich getragene Theater)의 한국 내 정착과 발전을 지원합니다.</p></div>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section class="section">
+  <span class="section-label" data-lang-ko="연혁" data-lang-de="Chronik" data-lang-en="History">연혁</span>
+  <h2 class="section-title" data-lang-ko="KANE의 발자취" data-lang-de="KANEs Weg" data-lang-en="KANE's Journey">KANE의 발자취</h2>
+  <div class="timeline">
+    <div class="timeline-item"><span class="timeline-year">2022.01</span><div class="timeline-content"><h4 data-lang-ko="예술인연대 독일지부 출범" data-lang-de="Gr&#252;ndung der deutschen Sektion der K&#252;nstlersolidarit&#228;t" data-lang-en="Launch of Artists' Solidarity German Chapter">예술인연대 독일지부 출범</h4><p data-lang-ko="2022년 1월 22일, 예술인연대 독일지부 공식 출범." data-lang-de="22. Januar 2022: Offizielle Gr&#252;ndung der deutschen Sektion." data-lang-en="January 22, 2022: Official launch of the German chapter.">2022년 1월 22일, 예술인연대 독일지부 공식 출범.</p></div></div>
+    <div class="timeline-item"><span class="timeline-year">2023.03</span><div class="timeline-content"><h4 data-lang-ko="제작극장화 촉구 성명서" data-lang-de="Erkl&#228;rung zur Produktionshausreform" data-lang-en="Statement for Production Theater Reform">제작극장화 촉구 성명서</h4><p data-lang-ko="공공문예회관 제작극장화 촉구 성명서 발표. 11개국 115명 서명, 500여 곳 송달." data-lang-de="Ver&#246;ffentlichung der Erkl&#228;rung zur Reform &#246;ffentlicher Kulturzentren. 115 Unterschriften aus 11 L&#228;ndern, zugestellt an &#252;ber 500 Einrichtungen." data-lang-en="Statement calling for production theater reform of public cultural centers. 115 signatures from 11 countries, delivered to over 500 institutions.">공공문예회관 제작극장화 촉구 성명서 발표. 11개국 115명 서명, 500여 곳 송달.</p></div></div>
+    <div class="timeline-item"><span class="timeline-year">2024.12</span><div class="timeline-content"><h4 data-lang-ko="비상계엄 규탄 시국성명서" data-lang-de="Erkl&#228;rung gegen den Ausnahmezustand" data-lang-en="Statement Against Martial Law">비상계엄 규탄 시국성명서</h4><p data-lang-ko="예술인연대유럽, 비상계엄규탄 시국성명서 발표." data-lang-de="Europ&#228;ische K&#252;nstlersolidarit&#228;t ver&#246;ffentlicht Erkl&#228;rung gegen den Ausnahmezustand." data-lang-en="European Artists' Solidarity publishes statement condemning martial law.">예술인연대유럽, 비상계엄규탄 시국성명서 발표.</p></div></div>
+    <div class="timeline-item"><span class="timeline-year">2025.07</span><div class="timeline-content"><h4 data-lang-ko="KANE e.V. 결성" data-lang-de="Gr&#252;ndung KANE e.V." data-lang-en="KANE e.V. Established">KANE e.V. 결성</h4><p data-lang-ko="9명 이사 총회로 Korean Artists Network in Europe e.V. 공식 결성." data-lang-de="Offizielle Gr&#252;ndung von Korean Artists Network in Europe e.V. mit 9 Vorstandsmitgliedern." data-lang-en="Official establishment of Korean Artists Network in Europe e.V. with 9 board members.">9명 이사 총회로 Korean Artists Network in Europe e.V. 공식 결성.</p></div></div>
+    <div class="timeline-item"><span class="timeline-year">2025.11</span><div class="timeline-content"><h4 data-lang-ko="세무서 등록 허가" data-lang-de="Finanzamt-Registrierung" data-lang-en="Tax Office Registration">세무서 등록 허가</h4><p data-lang-ko="루드빅스하펜 세무서 등록 허가 (Steuernummer: 27/659/07769)." data-lang-de="Registrierungsgenehmigung des Finanzamts Ludwigshafen (Steuernummer: 27/659/07769)." data-lang-en="Ludwigshafen Tax Office registration approved (Steuernummer: 27/659/07769).">루드빅스하펜 세무서 등록 허가 (Steuernummer: 27/659/07769).</p></div></div>
+    <div class="timeline-item"><span class="timeline-year">2026.01</span><div class="timeline-content"><h4 data-lang-ko="정책제안서 발표 &amp; 매체 기고" data-lang-de="Politikvorschlag &amp; Medienbeitrag" data-lang-en="Policy Proposal &amp; Media Contribution">정책제안서 발표 &amp; 매체 기고</h4><p data-lang-ko="문화거점 구축 정책제안서 발표. 이중운 부대표 월간 더무브 기고문." data-lang-de="Ver&#246;ffentlichung des Politikvorschlags zum Aufbau kultureller Knotenpunkte. Gastbeitrag im Monatsheft 'The Move'." data-lang-en="Publication of cultural hub policy proposal. Vice President's contribution to monthly magazine 'The Move'.">문화거점 구축 정책제안서 발표. 이중운 부대표 월간 더무브 기고문.</p></div></div>
+    <div class="timeline-item"><span class="timeline-year">2026.02</span><div class="timeline-content"><h4 data-lang-ko="계원예고 독일 극장 연수 &amp; 방송 출연" data-lang-de="Kaewon-Schulung &amp; TV-Auftritt" data-lang-en="Kaewon Arts School Training &amp; Broadcast">계원예고 독일 극장 연수 &amp; 방송 출연</h4><p data-lang-ko="계원예고 독일 극장 연수 주최. 이진옥 이사 YTN/브라보마이라이프 방송 출연." data-lang-de="Ausrichtung der Theaterschulung f&#252;r Kaewon Arts School. Vorstandsmitglied Lee Jin-ok bei YTN/Bravo My Life." data-lang-en="Hosted theater training for Kaewon Arts School. Board member Lee Jin-ok on YTN/Bravo My Life broadcast.">계원예고 독일 극장 연수 주최. 이진옥 이사 YTN/브라보마이라이프 방송 출연.</p></div></div>
+    <div class="timeline-item"><span class="timeline-year">2026.05</span><div class="timeline-content"><h4 data-lang-ko="명예이사 합류 &amp; 주요 매체 보도" data-lang-de="Ehrenvorst&#228;nde &amp; Medienberichterstattung" data-lang-en="Honorary Directors &amp; Major Media Coverage">명예이사 합류 &amp; 주요 매체 보도</h4><p data-lang-ko="명예이사 4인 합류. YTN '입시 대신 꿈 찾아' 방영. 중앙일보 사설 기고." data-lang-de="4 Ehrenvorst&#228;nde schlie&#223;en sich an. YTN-Ausstrahlung. JoongAng Ilbo Gastbeitrag." data-lang-en="4 honorary directors join. YTN broadcast 'Finding Dreams Instead of Exams'. JoongAng Ilbo editorial contribution.">명예이사 4인 합류. YTN '입시 대신 꿈 찾아' 방영. 중앙일보 사설 기고.</p></div></div>
+    <div class="timeline-item"><span class="timeline-year">2026.06</span><div class="timeline-content"><h4 data-lang-ko="울름 법원 정식 등록" data-lang-de="Offizielle Registrierung beim Amtsgericht Ulm" data-lang-en="Official Registration at Ulm Court">울름 법원 정식 등록</h4><p data-lang-ko="산업부 AI 프로젝트 자문단 참여. 울름 법원 정식 등록 (VR 723293)." data-lang-de="Teilnahme am AI-Projekt-Beirat des Industrieministeriums. Offizielle Registrierung beim Amtsgericht Ulm (VR 723293)." data-lang-en="Participation in Ministry of Industry AI Project advisory. Official registration at Ulm Court (VR 723293).">산업부 AI 프로젝트 자문단 참여. 울름 법원 정식 등록 (VR 723293).</p></div></div>
+    <div class="timeline-item"><span class="timeline-year">2026.07</span><div class="timeline-content"><h4 data-lang-ko="독일 레퍼토리 제작극장 세미나" data-lang-de="Seminar zum deutschen Repertoire-Produktionshaus" data-lang-en="German Repertoire Production Theater Seminar">독일 레퍼토리 제작극장 세미나</h4><p data-lang-ko="독일 레퍼토리 제작극장 세미나 개최 (강사: 이진옥 이사)." data-lang-de="Seminar zum deutschen Repertoire-Produktionshaus (Dozentin: Vorstandsmitglied Lee Jin-ok)." data-lang-en="German repertoire production theater seminar held (Instructor: Board Member Lee Jin-ok).">독일 레퍼토리 제작극장 세미나 개최 (강사: 이진옥 이사).</p></div></div>
+    <div class="timeline-item"><span class="timeline-year">2026.11</span><div class="timeline-content"><h4 data-lang-ko="한독 청년음악가 합동 공연" data-lang-de="Gemeinsames Konzert junger Musiker" data-lang-en="Korean-German Young Musicians Joint Concert">한독 청년음악가 합동 공연</h4><p data-lang-ko="충남문화재단 청년음악가 &amp; 독일청년음악가 합동 공연 주최." data-lang-de="Gemeinsames Konzert junger koreanischer und deutscher Musiker in Zusammenarbeit mit der Chungnam-Kulturstiftung." data-lang-en="Joint concert of Korean and German young musicians, hosted with Chungnam Cultural Foundation.">충남문화재단 청년음악가 &amp; 독일청년음악가 합동 공연 주최.</p></div></div>
+    <div class="timeline-item"><span class="timeline-year">2027.02</span><div class="timeline-content"><h4 data-lang-ko="계원예고 제작극장 체험 연수" data-lang-de="Kaewon-Produktionshaus-Erfahrungsprogramm" data-lang-en="Kaewon Arts School Production Theater Experience">계원예고 제작극장 체험 연수</h4><p data-lang-ko="계원예고 1학년 독일제작극장 체험 연수 주최." data-lang-de="Ausrichtung des Produktionshaus-Erfahrungsprogramms f&#252;r Kaewon Arts School." data-lang-en="Hosted German production theater experience program for Kaewon Arts School freshmen.">계원예고 1학년 독일제작극장 체험 연수 주최.</p></div></div>
+    <div class="timeline-item"><span class="timeline-year">2027.03</span><div class="timeline-content"><h4 data-lang-ko="미국 쉐난도 음악원 연수 예정" data-lang-de="Shenandoah-Konservatorium Schulung (geplant)" data-lang-en="Shenandoah Conservatory Training (Planned)">미국 쉐난도 음악원 연수 예정</h4><p data-lang-ko="미국 쉐난도 음악원 학생 독일극장 체험연수 주최 예정." data-lang-de="Geplante Ausrichtung der Theaterschulung f&#252;r Studenten des Shenandoah Conservatory (USA)." data-lang-en="Planned German theater experience training for Shenandoah Conservatory (USA) students.">미국 쉐난도 음악원 학생 독일극장 체험연수 주최 예정.</p></div></div>
+  </div>
+</section>
+
+<!-- Membership -->
+<section class="section">
+  <span class="section-label" data-lang-ko="회원 안내" data-lang-de="Mitgliedschaft" data-lang-en="Membership">회원 안내</span>
+  <h2 class="section-title" data-lang-ko="회원 자격 및 종류" data-lang-de="Mitgliedsarten und Qualifikationen" data-lang-en="Membership Types &amp; Qualifications">회원 자격 및 종류</h2>
+  <table class="member-table">
+    <tr><th data-lang-ko="회원 구분" data-lang-de="Kategorie" data-lang-en="Category">회원 구분</th><th data-lang-ko="자격 요건" data-lang-de="Voraussetzungen" data-lang-en="Requirements">자격 요건</th><th data-lang-ko="연간 회비" data-lang-de="Jahresbeitrag" data-lang-en="Annual Fee">연간 회비</th></tr>
+    <tr><td data-lang-ko="정회원" data-lang-de="Ordentliches Mitglied" data-lang-en="Full Member">정회원</td><td data-lang-ko="유럽 내 1년 이상 예술 활동 또는 예술 전공 졸업자" data-lang-de="Mind. 1 Jahr k&#252;nstlerische T&#228;tigkeit in Europa oder Kunstabschluss" data-lang-en="At least 1 year of artistic activity in Europe or arts degree graduate">유럽 내 1년 이상 예술 활동 또는 예술 전공 졸업자</td><td>&#8364;30</td></tr>
+    <tr><td data-lang-ko="일반회원" data-lang-de="Allgemeines Mitglied" data-lang-en="General Member">일반회원</td><td data-lang-ko="예술가 및 예술에 관심 있는 일반인" data-lang-de="K&#252;nstler und kunstinteressierte Personen" data-lang-en="Artists and individuals interested in arts">예술가 및 예술에 관심 있는 일반인</td><td>&#8364;10</td></tr>
+    <tr><td data-lang-ko="후원회원" data-lang-de="F&#246;rdermitglied" data-lang-en="Supporting Member">후원회원</td><td data-lang-ko="KANE의 활동을 재정적으로 지지하는 개인/단체" data-lang-de="Personen/Organisationen, die KANE finanziell unterst&#252;tzen" data-lang-en="Individuals/organizations financially supporting KANE">KANE의 활동을 재정적으로 지지하는 개인/단체</td><td data-lang-ko="최소 &#8364;100" data-lang-de="Mind. &#8364;100" data-lang-en="Min. &#8364;100">최소 &#8364;100</td></tr>
+    <tr><td data-lang-ko="명예회원" data-lang-de="Ehrenmitglied" data-lang-en="Honorary Member">명예회원</td><td data-lang-ko="예술계 공헌자 및 이사회 승인 인사 (김난희, 연광철, 김희동, 사무엘윤 등)" data-lang-de="Personen mit Verdiensten in der Kunstwelt, vom Vorstand genehmigt" data-lang-en="Contributors to the arts world, approved by the board">예술계 공헌자 및 이사회 승인 인사 (김난희, 연광철, 김희동, 사무엘윤 등)</td><td data-lang-ko="면제" data-lang-de="Befreit" data-lang-en="Exempt">면제</td></tr>
+  </table>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2><span>KANE</span><span data-lang-ko="과 함께하세요" data-lang-de=" &#8212; Werden Sie Mitglied" data-lang-en=" &#8212; Join Us">과 함께하세요</span></h2>
+  <p data-lang-ko="함께 만들어가는 예술의 미래. KANE(Korean Artists Network in Europe e.V.)과 함께하세요." data-lang-de="Die Zukunft der Kunst gemeinsam gestalten. Werden Sie Teil von KANE." data-lang-en="Building the future of art together. Join KANE (Korean Artists Network in Europe e.V.).">함께 만들어가는 예술의 미래. KANE(Korean Artists Network in Europe e.V.)과 함께하세요.</p>
+  <a class="cta-btn" href="mailto:kane.europe@gmail.com" data-lang-ko="회원 가입 문의" data-lang-de="Mitgliedschaft anfragen" data-lang-en="Membership Inquiry">회원 가입 문의</a>
+</section>
+
+<!-- Impressum -->
+<section class="section">
+  <span class="section-label">Impressum</span>
+  <h2 class="section-title" data-lang-ko="공식 단체 정보 &amp; 계좌 안내" data-lang-de="Offizielle Vereinsinformationen &amp; Kontodaten" data-lang-en="Official Organization Info &amp; Account Details">공식 단체 정보 &amp; 계좌 안내</h2>
+  <div class="impressum-box">
+    <h4>Korean Artists Network in Europe e.V.</h4>
+    <p data-lang-ko="&#8226; 본사 소재지: 독일 울름 (Ulm, Baden-W&#252;rttemberg)<br>&#8226; 법원 등록번호: VR 723293<br>&#8226; 세무 번호 (Steuernummer): 27/659/07769<br>&#8226; 계좌 정보 (Sparkasse Ulm)<br>&nbsp;&nbsp;&nbsp;예금주: KANE (Korean Artists Network in Europe e.V.)<br>&nbsp;&nbsp;&nbsp;IBAN: DE61 6305 0000 0021 3814 54" data-lang-de="&#8226; Sitz: Ulm, Baden-W&#252;rttemberg, Deutschland<br>&#8226; Registernummer: VR 723293<br>&#8226; Steuernummer: 27/659/07769<br>&#8226; Bankverbindung (Sparkasse Ulm)<br>&nbsp;&nbsp;&nbsp;Kontoinhaber: KANE (Korean Artists Network in Europe e.V.)<br>&nbsp;&nbsp;&nbsp;IBAN: DE61 6305 0000 0021 3814 54" data-lang-en="&#8226; Headquarters: Ulm, Baden-W&#252;rttemberg, Germany<br>&#8226; Registration Number: VR 723293<br>&#8226; Tax Number (Steuernummer): 27/659/07769<br>&#8226; Bank Details (Sparkasse Ulm)<br>&nbsp;&nbsp;&nbsp;Account Holder: KANE (Korean Artists Network in Europe e.V.)<br>&nbsp;&nbsp;&nbsp;IBAN: DE61 6305 0000 0021 3814 54">&#8226; 본사 소재지: 독일 울름 (Ulm, Baden-W&#252;rttemberg)<br>&#8226; 법원 등록번호: VR 723293<br>&#8226; 세무 번호 (Steuernummer): 27/659/07769<br>&#8226; 계좌 정보 (Sparkasse Ulm)<br>&nbsp;&nbsp;&nbsp;예금주: KANE (Korean Artists Network in Europe e.V.)<br>&nbsp;&nbsp;&nbsp;IBAN: DE61 6305 0000 0021 3814 54</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo" style="cursor:pointer" onclick="location.href='Kane_HomePage_V8.html'"><img src="kane-logo.png" alt="KANE"><span>KANE</span></div>
+  <p class="footer-desc" data-lang-ko="유럽 내 한인 예술가들의 든든한 연대와 성장을 위한 플랫폼" data-lang-de="Plattform f&#252;r Solidarit&#228;t und Wachstum koreanischer K&#252;nstler in Europa" data-lang-en="Platform for solidarity and growth of Korean artists in Europe">유럽 내 한인 예술가들의 든든한 연대와 성장을 위한 플랫폼</p>
+  <div class="footer-links"><a href="#">Instagram</a><a href="#">Facebook</a><a href="mailto:kane.europe@gmail.com" data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</a></div>
+  <p class="footer-legal">&#169; 2026 KANE e.V. | Ulm, Germany | VR 723293 | <a href="#">Datenschutz</a></p>
+</footer>
+
+<script>
+var currentLang='ko';
+function switchLang(lang){
+  currentLang=lang;var map={ko:'KR',de:'DE',en:'EN'};
+  var btns=document.querySelectorAll('.lang-btn');
+  for(var i=0;i<btns.length;i++){if(btns[i].textContent.trim()===map[lang])btns[i].classList.add('active');else btns[i].classList.remove('active');}
+  var els=document.querySelectorAll('[data-lang-'+lang+']');
+  for(var j=0;j<els.length;j++){var v=els[j].getAttribute('data-lang-'+lang);if(v.indexOf('<')!==-1)els[j].innerHTML=v;else els[j].textContent=v;}
+}
+</script>
+</body>
+</html>
