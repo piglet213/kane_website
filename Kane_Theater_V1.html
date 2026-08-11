@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KANE Magazine</title>
+<title>KANE — Produktionshaus &amp; K-Stadttheater</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a0a;--card:#141414;--card-hover:#1c1c1c;--accent:#c9a96e;--text:#f0f0f0;--text-secondary:#888;--border:#2a2a2a}
-body{background:#0a0a0a url('bg.jpg') center center / cover no-repeat fixed;color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.8;overflow-x:hidden}
+:root{--bg:#0a0a0a;--card:#141414;--accent:#c9a96e;--text:#f0f0f0;--text-secondary:#888;--border:#2a2a2a}
+body{background:#0a0a0a url('bg2.jpg') center center / cover no-repeat fixed;color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.8;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 .bg-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background:rgba(0,0,0,0.7)}
 .lang-switch{position:fixed;top:20px;right:20px;z-index:1001;display:flex;gap:6px}
@@ -22,37 +22,91 @@ nav{position:fixed;top:0;left:0;width:100%;padding:20px 40px;display:flex;justif
 .nav-links a:hover,.nav-links a.active{color:var(--accent)}
 .nav-links a.active::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:1px;background:var(--accent)}
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 20px;position:relative;z-index:1}
-.hero h1{font-size:clamp(48px,10vw,120px);font-weight:200;letter-spacing:12px;text-transform:uppercase;line-height:1.1}
+.hero h1{font-size:clamp(36px,8vw,90px);font-weight:200;letter-spacing:8px;text-transform:uppercase;line-height:1.2}
 .hero h1 span{color:var(--accent)}
-.hero-subtitle{margin-top:24px;font-size:18px;color:var(--text-secondary);letter-spacing:3px;max-width:700px;line-height:1.8}
+.hero-subtitle{margin-top:24px;font-size:18px;color:var(--text-secondary);letter-spacing:3px;max-width:800px;line-height:1.8}
 .hero-line{width:1px;height:80px;background:linear-gradient(to bottom,transparent,var(--accent));margin-top:40px;animation:growLine 2s ease infinite}
 @keyframes growLine{0%,100%{opacity:.3;height:60px}50%{opacity:1;height:100px}}
 .scroll-indicator{margin-top:16px;color:var(--text-secondary);font-size:12px;letter-spacing:2px}
-.filter-section{padding:40px 40px 20px;position:sticky;top:70px;z-index:99;background:rgba(10,10,10,.92);backdrop-filter:blur(10px)}
-.filter-bar{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-.filter-btn{background:transparent;border:1px solid var(--border);color:var(--text-secondary);padding:10px 24px;cursor:pointer;font-size:14px;transition:all .3s;border-radius:30px;letter-spacing:1px}
-.filter-btn.active,.filter-btn:hover{color:var(--accent);border-color:var(--accent)}
-.magazine-grid{padding:40px;display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:30px;max-width:1400px;margin:0 auto;position:relative;z-index:1}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;position:relative;transition:transform .4s ease,box-shadow .4s ease,border-color .4s ease,background .4s ease}
-.card:hover{transform:translateY(-14px) scale(1.03);border-color:var(--accent);box-shadow:0 30px 80px rgba(201,169,110,.2),0 0 40px rgba(201,169,110,.08);background:var(--card-hover)}
-.card-image{width:100%;height:240px;position:relative;overflow:hidden}
-.card-image img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,filter .5s ease}
-.card:hover .card-image img{transform:scale(1.2);filter:brightness(1.2)}
-.card-image::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to top,rgba(10,10,10,.7),transparent 60%);opacity:0;transition:opacity .4s ease}
-.card:hover .card-image::after{opacity:1}
-.card-readmore{position:absolute;bottom:20px;right:20px;background:var(--accent);color:#000;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;opacity:0;transform:translateY(15px) scale(.8);transition:opacity .4s ease,transform .4s ease;z-index:2}
-.card:hover .card-readmore{opacity:1;transform:translateY(0) scale(1)}
-.card-content{padding:28px;transition:background .4s ease}
-.card:hover .card-content{background:rgba(201,169,110,.03)}
-.card-category{display:inline-block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid rgba(201,169,110,.4);padding:4px 14px;border-radius:20px;margin-bottom:16px;transition:all .3s ease}
-.card:hover .card-category{background:var(--accent);color:#000;border-color:var(--accent)}
-.card-title{font-size:22px;font-weight:600;margin-bottom:12px;line-height:1.3;transition:color .3s ease}
-.card:hover .card-title{color:var(--accent)}
-.card-meta{display:flex;justify-content:space-between;align-items:center;color:var(--text-secondary);font-size:13px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
-.card-author{font-weight:500}
-.card-publication{font-style:italic;color:var(--accent);opacity:.7}
-.card::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(201,169,110,.06),transparent);transition:left .6s ease;z-index:3;pointer-events:none}
-.card:hover::before{left:150%}
+.section{max-width:1100px;margin:0 auto;padding:120px 40px;position:relative;z-index:1}
+.section-label{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.section-title{font-size:clamp(28px,4vw,48px);font-weight:300;line-height:1.3;margin-bottom:40px}
+.section-text{color:var(--text-secondary);font-size:16px;line-height:2;max-width:800px}
+.section-text p{margin-bottom:24px}
+.quote-box{border-left:3px solid var(--accent);padding:30px 40px;margin:40px 0;background:rgba(201,169,110,.03);border-radius:0 12px 12px 0}
+.quote-box p{font-size:18px;font-style:italic;color:var(--text);line-height:1.8;margin-bottom:12px}
+.quote-box cite{font-size:14px;color:var(--accent);font-style:normal}
+.stats-bar{display:flex;justify-content:center;gap:60px;padding:80px 40px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1}
+.stat-item{text-align:center}
+.stat-number{font-size:clamp(36px,5vw,56px);font-weight:200;color:var(--accent);letter-spacing:2px;display:block}
+.stat-label{font-size:13px;color:var(--text-secondary);letter-spacing:2px;margin-top:8px;text-transform:uppercase}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:40px}
+.feature-card{padding:36px;border:1px solid var(--border);border-radius:12px;background:rgba(20,20,20,.6);backdrop-filter:blur(5px);transition:all .4s ease;position:relative;overflow:hidden}
+.feature-card:hover{border-color:var(--accent);transform:translateY(-8px);box-shadow:0 20px 60px rgba(201,169,110,.1)}
+.feature-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent);opacity:0;transition:opacity .3s}
+.feature-card:hover::before{opacity:1}
+.feature-icon{font-size:36px;margin-bottom:16px;display:block}
+.feature-card h4{font-size:18px;font-weight:600;color:var(--accent);margin-bottom:12px}
+.feature-card p{color:var(--text-secondary);font-size:14px;line-height:1.8}
+.compare-table{width:100%;border-collapse:collapse;margin-top:40px}
+.compare-table th,.compare-table td{padding:20px 24px;text-align:left;border-bottom:1px solid var(--border);font-size:15px}
+.compare-table th{color:var(--accent);font-weight:600;font-size:13px;letter-spacing:2px;text-transform:uppercase;background:rgba(201,169,110,.05)}
+.compare-table td:first-child{color:var(--text);font-weight:500}
+.compare-table td{color:var(--text-secondary)}
+.compare-table tr:hover td{background:rgba(201,169,110,.03)}
+.compare-table .col-de{color:var(--accent)}
+.theater-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:40px}
+.theater-card{background:rgba(20,20,20,.6);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .4s ease;backdrop-filter:blur(5px)}
+.theater-card:hover{border-color:var(--accent);transform:translateY(-8px);box-shadow:0 20px 60px rgba(201,169,110,.15)}
+.theater-banner{height:160px;position:relative;overflow:hidden}
+.theater-banner .tbg{width:100%;height:100%;transition:transform .5s ease}
+.theater-card:hover .tbg{transform:scale(1.1)}
+.theater-info{padding:24px}
+.theater-city{font-size:12px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.theater-name{font-size:18px;font-weight:600;margin-bottom:8px;transition:color .3s}
+.theater-card:hover .theater-name{color:var(--accent)}
+.theater-desc{font-size:13px;color:var(--text-secondary);line-height:1.7}
+.funding-diagram{margin-top:40px;display:flex;flex-direction:column;gap:20px;max-width:700px}
+.fund-level{display:flex;align-items:center;gap:20px}
+.fund-bar{height:50px;border-radius:8px;display:flex;align-items:center;padding:0 20px;font-size:14px;font-weight:600;color:#000;transition:all .4s ease}
+.fund-bar:hover{transform:scaleX(1.02);box-shadow:0 5px 20px rgba(201,169,110,.2)}
+.fund-label{min-width:120px;font-size:14px;color:var(--text-secondary);text-align:right}
+.fund-arrow{text-align:center;color:var(--accent);font-size:20px;padding-left:140px}
+.role-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;margin-top:40px}
+.role-card{padding:36px;border:1px solid var(--border);border-radius:12px;background:rgba(20,20,20,.6);backdrop-filter:blur(5px);transition:all .4s ease}
+.role-card:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow:0 20px 60px rgba(201,169,110,.1)}
+.role-card h4{font-size:20px;font-weight:600;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.role-card p{color:var(--text-secondary);font-size:14px;line-height:1.8}
+.role-card ul{color:var(--text-secondary);font-size:14px;line-height:2;padding-left:20px;margin-top:12px}
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;margin-top:40px}
+.why-card{padding:30px;border:1px solid var(--border);border-radius:12px;background:rgba(20,20,20,.6);backdrop-filter:blur(5px);transition:all .4s ease;text-align:center}
+.why-card:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow:0 20px 60px rgba(201,169,110,.1)}
+.why-icon{font-size:40px;margin-bottom:16px;display:block}
+.why-card h4{font-size:18px;font-weight:600;color:var(--accent);margin-bottom:12px}
+.why-card p{color:var(--text-secondary);font-size:14px;line-height:1.8}
+.org-table{width:100%;border-collapse:collapse;margin-top:30px}
+.org-table th,.org-table td{padding:16px 20px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
+.org-table th{color:var(--accent);font-weight:600;font-size:13px;letter-spacing:2px;text-transform:uppercase;background:rgba(201,169,110,.05)}
+.org-table td{color:var(--text-secondary)}
+.org-table tr:hover td{background:rgba(201,169,110,.03)}
+.qa-item{border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden;background:rgba(20,20,20,.6);backdrop-filter:blur(5px);transition:border-color .3s}
+.qa-item:hover{border-color:var(--accent)}
+.qa-q{padding:24px 30px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:600;color:var(--text);transition:color .3s}
+.qa-q:hover{color:var(--accent)}
+.qa-q span{font-size:13px;color:var(--accent);transition:transform .3s;display:inline-block}
+.qa-q.open span{transform:rotate(180deg)}
+.qa-a{padding:0 30px;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease}
+.qa-a.open{max-height:500px;padding:0 30px 24px}
+.qa-a p{color:var(--text-secondary);font-size:15px;line-height:2}
+.divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);margin:0;position:relative;z-index:1}
+.divider-label{text-align:center;padding:60px 40px 20px;position:relative;z-index:1}
+.divider-label span{background:var(--bg);padding:0 20px;font-size:14px;letter-spacing:6px;color:var(--accent);text-transform:uppercase}
+.cta-section{text-align:center;padding:120px 40px;position:relative;z-index:1}
+.cta-section h2{font-size:clamp(28px,4vw,48px);font-weight:300;margin-bottom:20px}
+.cta-section h2 span{color:var(--accent)}
+.cta-section p{color:var(--text-secondary);font-size:18px;margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto}
+.cta-btn{display:inline-block;padding:16px 48px;border:1px solid var(--accent);color:var(--accent);font-size:16px;letter-spacing:3px;text-transform:uppercase;border-radius:50px;transition:all .4s ease;cursor:pointer;margin:0 10px}
+.cta-btn:hover{background:var(--accent);color:#000;box-shadow:0 10px 40px rgba(201,169,110,.3);transform:translateY(-3px)}
 footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;position:relative;z-index:1}
 .footer-logo{font-size:24px;font-weight:700;letter-spacing:6px;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:10px}
 .footer-logo img{height:50px}
@@ -61,7 +115,7 @@ footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;po
 .footer-links a{color:var(--text-secondary);font-size:13px;letter-spacing:1px;transition:color .3s}
 .footer-links a:hover{color:var(--accent)}
 .footer-legal{color:#555;font-size:12px}
-@media(max-width:768px){nav{padding:15px 20px}.hero h1{letter-spacing:6px}.magazine-grid{padding:20px;grid-template-columns:1fr;gap:20px}.card-image{height:200px}.filter-section{padding:20px}.filter-bar{gap:8px}.filter-btn{padding:8px 16px;font-size:12px}.lang-switch{top:15px;right:60px}.lang-btn{padding:4px 10px;font-size:11px}}
+@media(max-width:768px){nav{padding:15px 20px}.hero h1{letter-spacing:4px}.section{padding:80px 20px}.features-grid,.theater-grid{grid-template-columns:1fr}.role-grid,.why-grid{grid-template-columns:1fr}.stats-bar{flex-wrap:wrap;gap:30px;padding:60px 20px}.compare-table,.org-table{font-size:13px}.compare-table th,.compare-table td,.org-table th,.org-table td{padding:12px 10px}.fund-label{min-width:80px;font-size:12px}.fund-arrow{padding-left:100px}.lang-switch{top:15px;right:60px}.lang-btn{padding:4px 10px;font-size:11px}}
 </style>
 </head>
 <body>
@@ -75,40 +129,221 @@ footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;po
   <div class="logo" onclick="location.href='Kane_HomePage_V8.html'"><img src="kane-logo.png" alt="KANE"><span>KANE</span></div>
   <div class="nav-links">
     <a href="Kane_HomePage_V8.html" data-lang-ko="소개" data-lang-de="&#220;ber uns" data-lang-en="About">소개</a>
-    <a class="active" data-lang-ko="매거진" data-lang-de="Magazin" data-lang-en="Magazine">매거진</a>
-    <a href="Kane_Theater_V2.html" data-lang-ko="제작극장" data-lang-de="Produktionshaus" data-lang-en="Produktionshaus">제작극장</a>
-    <a href="mailto:kartnet.ev@gmail.com" data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</a>
+    <a href="Kane_Magazine_V1.html" data-lang-ko="매거진" data-lang-de="Magazin" data-lang-en="Magazine">매거진</a>
+    <a class="active" data-lang-ko="제작극장" data-lang-de="Produktionshaus" data-lang-en="Produktionshaus">제작극장</a>
+    <a href="mailto:kane.europe@gmail.com" data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</a>
   </div>
 </nav>
+
+<!-- Hero -->
 <section class="hero">
-  <h1><span>KANE</span><br>Magazine</h1>
-  <p class="hero-subtitle" data-lang-ko="독일 제작극장과 한국 문화예술의 미래를 잇는 기록" data-lang-de="Aufzeichnungen, die deutsche Produktionsh&#228;user mit der Zukunft der koreanischen Kultur verbinden" data-lang-en="Records connecting German production theaters with the future of Korean culture and arts">독일 제작극장과 한국 문화예술의 미래를 잇는 기록</p>
+  <h1><span>Produktionshaus</span></h1>
+  <p class="hero-subtitle" data-lang-ko="독일 공공극장 시스템 &#8212; 그리고 한국형 공공제작극장(K-Stadttheater)의 미래" data-lang-de="Das deutsche &#246;ffentliche Theatersystem &#8212; und die Zukunft des K-Stadttheaters" data-lang-en="The German Public Theater System &#8212; and the Future of K-Stadttheater">독일 공공극장 시스템 &#8212; 그리고 한국형 공공제작극장(K-Stadttheater)의 미래</p>
   <div class="hero-line"></div>
   <div class="scroll-indicator"><span data-lang-ko="스크롤" data-lang-de="Scrollen" data-lang-en="Scroll">스크롤</span> &#8595;</div>
 </section>
-<section class="filter-section">
-  <div class="filter-bar">
-    <button class="filter-btn active" data-filter="all" data-lang-ko="전체" data-lang-de="Alle" data-lang-en="All">전체</button>
-    <button class="filter-btn" data-filter="essay" data-lang-ko="기고문" data-lang-de="Beitrag" data-lang-en="Article">기고문</button>
-    <button class="filter-btn" data-filter="interview" data-lang-ko="방송" data-lang-de="Sendung" data-lang-en="Broadcast">방송</button>
-    <button class="filter-btn" data-filter="review" data-lang-ko="연수" data-lang-de="Schulung" data-lang-en="Training">연수</button>
-    <button class="filter-btn" data-filter="criticism" data-lang-ko="사설" data-lang-de="Leitartikel" data-lang-en="Editorial">사설</button>
+
+<!-- ========== PART 1: 독일 시스템 ========== -->
+
+<!-- What is Produktionshaus -->
+<section class="section">
+  <span class="section-label" data-lang-ko="제작극장이란" data-lang-de="Was ist ein Produktionshaus" data-lang-en="What is a Produktionshaus">제작극장이란</span>
+  <h2 class="section-title" data-lang-ko="200년 전통의 공공극장 시스템" data-lang-de="200 Jahre Tradition des &#246;ffentlichen Theatersystems" data-lang-en="200 Years of Public Theater Tradition">200년 전통의 공공극장 시스템</h2>
+  <div class="section-text">
+    <p data-lang-ko="독일의 제작극장(Produktionshaus)은 시(Stadt) 또는 주(Land)가 직접 설립하고 운영하는 공공극장입니다. 단순한 '공연장 대관'이 아니라, 전속 배우, 연출가, 무대미술가, 드라마투르그, 기술진을 정규직으로 고용하여 자체적으로 작품을 기획, 제작, 공연하는 종합 예술 시스템입니다." data-lang-de="Das deutsche Produktionshaus ist ein &#246;ffentliches Theater, das direkt von der Stadt oder dem Land gegr&#252;ndet und betrieben wird." data-lang-en="The German Produktionshaus is a public theater directly established and operated by the city or state.">독일의 제작극장(Produktionshaus)은 시(Stadt) 또는 주(Land)가 직접 설립하고 운영하는 공공극장입니다. 단순한 '공연장 대관'이 아니라, 전속 배우, 연출가, 무대미술가, 드라마투르그, 기술진을 정규직으로 고용하여 자체적으로 작품을 기획, 제작, 공연하는 종합 예술 시스템입니다.</p>
+  </div>
+  <div class="quote-box">
+    <p data-lang-ko="&#8220;극장은 도시의 심장이다. 시민이 모여 사회를 성찰하고, 예술을 통해 미래를 상상하는 공간.&#8221;" data-lang-de="&#8220;Das Theater ist das Herz der Stadt.&#8221;" data-lang-en="&#8220;The theater is the heart of the city.&#8221;">&#8220;극장은 도시의 심장이다. 시민이 모여 사회를 성찰하고, 예술을 통해 미래를 상상하는 공간.&#8221;</p>
+    <cite>&#8212; Theatercharta</cite>
   </div>
 </section>
-<section class="magazine-grid" id="grid"></section>
+
+<!-- German Stats -->
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-number">140+</span><span class="stat-label" data-lang-ko="공공극장" data-lang-de="&#214;ffentliche Theater" data-lang-en="Public Theaters">공공극장</span></div>
+  <div class="stat-item"><span class="stat-number">&#8364;3.8B</span><span class="stat-label" data-lang-ko="연간 공적 지원금" data-lang-de="J&#228;hrliche F&#246;rderung" data-lang-en="Annual Funding">연간 공적 지원금</span></div>
+  <div class="stat-item"><span class="stat-number">40,000+</span><span class="stat-label" data-lang-ko="정규 고용" data-lang-de="Festangestellte" data-lang-en="Full-time Staff">정규 고용</span></div>
+  <div class="stat-item"><span class="stat-number">35M</span><span class="stat-label" data-lang-ko="연간 관객" data-lang-de="Zuschauer/Jahr" data-lang-en="Annual Audience">연간 관객</span></div>
+</div>
+
+<!-- 6 Features -->
+<section class="section">
+  <span class="section-label" data-lang-ko="핵심 특징" data-lang-de="Kernmerkmale" data-lang-en="Key Features">핵심 특징</span>
+  <h2 class="section-title" data-lang-ko="독일 제작극장의 6가지 특징" data-lang-de="6 Merkmale" data-lang-en="6 Key Features">독일 제작극장의 6가지 특징</h2>
+  <div class="features-grid">
+    <div class="feature-card"><span class="feature-icon">&#127975;</span><h4 data-lang-ko="공공 재정" data-lang-de="&#214;ffentliche Finanzierung" data-lang-en="Public Funding">공공 재정</h4><p data-lang-ko="시, 주, 연방정부가 운영비의 80~90%를 지원. 상업성이 아닌 예술성을 추구합니다." data-lang-de="80-90% &#246;ffentlich finanziert." data-lang-en="80-90% publicly funded.">시, 주, 연방정부가 운영비의 80~90%를 지원. 상업성이 아닌 예술성을 추구합니다.</p></div>
+    <div class="feature-card"><span class="feature-icon">&#127917;</span><h4 data-lang-ko="전속 앙상블" data-lang-de="Festes Ensemble" data-lang-en="Permanent Ensemble">전속 앙상블</h4><p data-lang-ko="배우, 무용수, 음악가가 정규직으로 고용. 안정적 급여와 사회보험이 제공됩니다." data-lang-de="Fest angestellte K&#252;nstler." data-lang-en="Full-time employed artists.">배우, 무용수, 음악가가 정규직으로 고용. 안정적 급여와 사회보험이 제공됩니다.</p></div>
+    <div class="feature-card"><span class="feature-icon">&#128218;</span><h4 data-lang-ko="레퍼토리 시스템" data-lang-de="Repertoiresystem" data-lang-en="Repertoire System">레퍼토리 시스템</h4><p data-lang-ko="한 시즌 20~30개 작품을 번갈아 공연. 매일 다른 작품이 무대에 오릅니다." data-lang-de="20-30 Werke pro Saison." data-lang-en="20-30 works per season.">한 시즌 20~30개 작품을 번갈아 공연. 매일 다른 작품이 무대에 오릅니다.</p></div>
+    <div class="feature-card"><span class="feature-icon">&#128081;</span><h4 data-lang-ko="인텐단트 시스템" data-lang-de="Intendantensystem" data-lang-en="Intendant System">인텐단트 시스템</h4><p data-lang-ko="인텐단트가 예술적 방향을 총괄. 정치적 간섭 없이 독립적으로 프로그램을 구성합니다." data-lang-de="Unabh&#228;ngige k&#252;nstlerische Leitung." data-lang-en="Independent artistic direction.">인텐단트가 예술적 방향을 총괄. 정치적 간섭 없이 독립적으로 프로그램을 구성합니다.</p></div>
+    <div class="feature-card"><span class="feature-icon">&#128295;</span><h4 data-lang-ko="자체 제작" data-lang-de="Eigenproduktion" data-lang-en="In-house Production">자체 제작</h4><p data-lang-ko="무대, 의상, 소품을 극장 내 공방(Werkstatt)에서 직접 제작. '제작극장'의 핵심입니다." data-lang-de="Eigene Werkst&#228;tten." data-lang-en="Own workshops.">무대, 의상, 소품을 극장 내 공방(Werkstatt)에서 직접 제작. '제작극장'의 핵심입니다.</p></div>
+    <div class="feature-card"><span class="feature-icon">&#127926;</span><h4 data-lang-ko="종합 예술" data-lang-de="Gesamtkunstwerk" data-lang-en="Total Art">종합 예술</h4><p data-lang-ko="하나의 극장에서 오페라, 발레, 연극, 콘서트가 모두 이루어집니다." data-lang-de="Oper, Ballett, Schauspiel, Konzert." data-lang-en="Opera, ballet, drama, concerts.">하나의 극장에서 오페라, 발레, 연극, 콘서트가 모두 이루어집니다.</p></div>
+  </div>
+</section>
+
+<!-- Korea vs Germany -->
+<section class="section">
+  <span class="section-label" data-lang-ko="비교" data-lang-de="Vergleich" data-lang-en="Comparison">비교</span>
+  <h2 class="section-title" data-lang-ko="한국 vs 독일 &#8212; 무엇이 다른가" data-lang-de="Korea vs Deutschland" data-lang-en="Korea vs Germany">한국 vs 독일 &#8212; 무엇이 다른가</h2>
+  <table class="compare-table">
+    <tr><th data-lang-ko="항목" data-lang-de="Kategorie" data-lang-en="Category">항목</th><th data-lang-ko="&#127472;&#127479; 한국" data-lang-de="&#127472;&#127479; Korea" data-lang-en="&#127472;&#127479; Korea">&#127472;&#127479; 한국</th><th class="col-de" data-lang-ko="&#127465;&#127466; 독일" data-lang-de="&#127465;&#127466; Deutschland" data-lang-en="&#127465;&#127466; Germany">&#127465;&#127466; 독일</th></tr>
+    <tr><td data-lang-ko="극장 운영" data-lang-de="Betrieb" data-lang-en="Operation">극장 운영</td><td data-lang-ko="재단 위탁 / 대관 중심" data-lang-de="Stiftung / Vermietung" data-lang-en="Foundation / Rental">재단 위탁 / 대관 중심</td><td class="col-de" data-lang-ko="시/주 정부 직영" data-lang-de="Stadt-/Landesbetrieb" data-lang-en="City/State operated">시/주 정부 직영</td></tr>
+    <tr><td data-lang-ko="예술가 고용" data-lang-de="K&#252;nstler" data-lang-en="Artists">예술가 고용</td><td data-lang-ko="프리랜서 (작품별)" data-lang-de="Freiberufler" data-lang-en="Freelancer">프리랜서 (작품별)</td><td class="col-de" data-lang-ko="정규직 앙상블" data-lang-de="Festanstellung" data-lang-en="Full-time">정규직 앙상블</td></tr>
+    <tr><td data-lang-ko="공연 방식" data-lang-de="Spielweise" data-lang-en="System">공연 방식</td><td data-lang-ko="기획 공연 (단기)" data-lang-de="Einzelproduktionen" data-lang-en="Short run">기획 공연 (단기)</td><td class="col-de" data-lang-ko="레퍼토리 (매일)" data-lang-de="Repertoire (t&#228;glich)" data-lang-en="Repertoire (daily)">레퍼토리 (매일)</td></tr>
+    <tr><td data-lang-ko="재정" data-lang-de="Finanzierung" data-lang-en="Funding">재정</td><td data-lang-ko="티켓 + 보조금" data-lang-de="Tickets + Zusch&#252;sse" data-lang-en="Tickets + subsidies">티켓 + 보조금</td><td class="col-de" data-lang-ko="공적 자금 80~90%" data-lang-de="80-90% &#246;ffentlich" data-lang-en="80-90% public">공적 자금 80~90%</td></tr>
+    <tr><td data-lang-ko="제작 시설" data-lang-de="Produktion" data-lang-en="Production">제작 시설</td><td data-lang-ko="외부 업체 의뢰" data-lang-de="Extern" data-lang-en="Outsourced">외부 업체 의뢰</td><td class="col-de" data-lang-ko="자체 공방 보유" data-lang-de="Eigene Werkst&#228;tten" data-lang-en="Own workshops">자체 공방 보유</td></tr>
+    <tr><td data-lang-ko="예산 구조" data-lang-de="Budget" data-lang-en="Budget">예산 구조</td><td data-lang-ko="일회성 축제/소모성" data-lang-de="Einmalige Events" data-lang-en="One-time events">일회성 축제/소모성</td><td class="col-de" data-lang-ko="자산 축적형" data-lang-de="Verm&#246;gensaufbau" data-lang-en="Asset accumulation">자산 축적형</td></tr>
+  </table>
+</section>
+
+<!-- Representative Theaters -->
+<section class="section">
+  <span class="section-label" data-lang-ko="대표 극장" data-lang-de="Theater" data-lang-en="Theaters">대표 극장</span>
+  <h2 class="section-title" data-lang-ko="독일의 대표 공공극장" data-lang-de="Repr&#228;sentative Theater" data-lang-en="Representative Theaters">독일의 대표 공공극장</h2>
+  <div class="theater-grid">
+    <div class="theater-card"><div class="theater-banner"><div class="tbg" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)"></div></div><div class="theater-info"><div class="theater-city">Stuttgart</div><div class="theater-name">Staatstheater Stuttgart</div><p class="theater-desc" data-lang-ko="오페라, 발레, 연극 3개 부문. 슈투트가르트 발레단은 세계적 명성." data-lang-de="Oper, Ballett, Schauspiel. Weltber&#252;hmtes Ballett." data-lang-en="Opera, ballet, drama. World-famous ballet.">오페라, 발레, 연극 3개 부문. 슈투트가르트 발레단은 세계적 명성.</p></div></div>
+    <div class="theater-card"><div class="theater-banner"><div class="tbg" style="background:linear-gradient(135deg,#2d1b42,#1a1a2e,#16213e)"></div></div><div class="theater-info"><div class="theater-city">Hamburg</div><div class="theater-name">Deutsches Schauspielhaus</div><p class="theater-desc" data-lang-ko="독일 최대 규모의 연극 전용 극장. 1,200석." data-lang-de="Deutschlands gr&#246;&#223;tes Sprechtheater." data-lang-en="Germany's largest drama theater.">독일 최대 규모의 연극 전용 극장. 1,200석.</p></div></div>
+    <div class="theater-card"><div class="theater-banner"><div class="tbg" style="background:linear-gradient(135deg,#1b2d2a,#1a2e1a,#213e16)"></div></div><div class="theater-info"><div class="theater-city">Berlin</div><div class="theater-name">Berliner Ensemble</div><p class="theater-desc" data-lang-ko="브레히트가 설립한 전설적 극장. 서사극의 본산." data-lang-de="Von Brecht gegr&#252;ndet." data-lang-en="Founded by Brecht.">브레히트가 설립한 전설적 극장. 서사극의 본산.</p></div></div>
+    <div class="theater-card"><div class="theater-banner"><div class="tbg" style="background:linear-gradient(135deg,#2e1a1a,#3e1621,#601a0f)"></div></div><div class="theater-info"><div class="theater-city">M&#252;nchen</div><div class="theater-name">Bayerische Staatsoper</div><p class="theater-desc" data-lang-ko="세계 5대 오페라 하우스 중 하나." data-lang-de="Eines der Top-5-Opernh&#228;user." data-lang-en="One of the world's top 5 opera houses.">세계 5대 오페라 하우스 중 하나.</p></div></div>
+    <div class="theater-card"><div class="theater-banner"><div class="tbg" style="background:linear-gradient(135deg,#1a2e2e,#162e3e,#0f4560)"></div></div><div class="theater-info"><div class="theater-city">Dresden</div><div class="theater-name">Semperoper</div><p class="theater-desc" data-lang-ko="1841년 개관. 독일에서 가장 아름다운 오페라 하우스." data-lang-de="Er&#246;ffnet 1841." data-lang-en="Opened 1841.">1841년 개관. 독일에서 가장 아름다운 오페라 하우스.</p></div></div>
+    <div class="theater-card"><div class="theater-banner"><div class="tbg" style="background:linear-gradient(135deg,#2e2e1a,#3e3216,#60450f)"></div></div><div class="theater-info"><div class="theater-city">D&#252;sseldorf</div><div class="theater-name">D&#252;sseldorfer Schauspielhaus</div><p class="theater-desc" data-lang-ko="그뤼ㄴ트겐스의 전통을 잇는 연극극장." data-lang-de="In der Tradition von Gr&#252;ndgens." data-lang-en="Continuing Gr&#252;ndgens' tradition.">그뤼ㄴ트겐스의 전통을 잇는 연극극장.</p></div></div>
+  </div>
+</section>
+<!-- ========== DIVIDER ========== -->
+<div class="divider"></div>
+<div class="divider-label"><span data-lang-ko="한국형 모델 제안" data-lang-de="Koreanisches Modell" data-lang-en="Korean Model">한국형 모델 제안</span></div>
+
+<!-- ========== PART 2: K-Stadttheater ========== -->
+
+<!-- K-Stadttheater Intro -->
+<section class="section">
+  <span class="section-label">K-Stadttheater</span>
+  <h2 class="section-title" data-lang-ko="한국형 공공제작극장 &#8212; 소비하는 도시에서 생산하는 도시로" data-lang-de="K-Stadttheater &#8212; Von der konsumierenden zur produzierenden Stadt" data-lang-en="K-Stadttheater &#8212; From Consuming City to Producing City">한국형 공공제작극장 &#8212; 소비하는 도시에서 생산하는 도시로</h2>
+  <div class="section-text">
+    <p data-lang-ko="KANE이 제안하는 '한국형 공공제작극장(K-Stadttheater)'은 독일식 제작극장 모델을 한국 실정에 맞게 현지화하여, 인구 50만 명 단위로 콘텐츠를 상시 직접 생산·공급하는 '지역 거점형 종합 문화 생산 기지'입니다." data-lang-de="Das von KANE vorgeschlagene 'K-Stadttheater' ist eine an koreanische Verh&#228;ltnisse angepasste Version des deutschen Modells: ein regionales Kulturproduktionszentrum f&#252;r Einheiten von 500.000 Einwohnern." data-lang-en="KANE's proposed 'K-Stadttheater' adapts the German model to Korean conditions: a regional cultural production hub for population units of 500,000.">KANE이 제안하는 '한국형 공공제작극장(K-Stadttheater)'은 독일식 제작극장 모델을 한국 실정에 맞게 현지화하여, 인구 50만 명 단위로 콘텐츠를 상시 직접 생산·공급하는 '지역 거점형 종합 문화 생산 기지'입니다.</p>
+    <p data-lang-ko="문화 향유를 헌법적 가치에 준하는 국민의 기본권으로 정의합니다. 깨끗한 물을 마시고 전기를 사용하는 것처럼, 수준 높은 문화를 일상에서 누리는 것은 현대 시민이 정주하기 위한 최소한의 인프라입니다." data-lang-de="Kultureller Genuss wird als Grundrecht der B&#252;rger definiert. Wie sauberes Wasser und Strom ist hochwertige Kultur eine Mindestinfrastruktur f&#252;r moderne B&#252;rger." data-lang-en="Cultural enjoyment is defined as a fundamental right. Like clean water and electricity, quality culture is minimum infrastructure for modern citizens.">문화 향유를 헌법적 가치에 준하는 국민의 기본권으로 정의합니다. 깨끗한 물을 마시고 전기를 사용하는 것처럼, 수준 높은 문화를 일상에서 누리는 것은 현대 시민이 정주하기 위한 최소한의 인프라입니다.</p>
+  </div>
+  <div class="quote-box">
+    <p data-lang-ko="&#8220;수도꼭지를 틀면 물이 나오듯, 극장에 가면 항상 공연이 있는 상태. 이것이 바로 문화적 기본사회의 실체입니다.&#8221;" data-lang-de="&#8220;Wie Wasser aus dem Hahn flie&#223;t, soll es im Theater immer Auff&#252;hrungen geben. Das ist die Realit&#228;t einer kulturellen Grundgesellschaft.&#8221;" data-lang-en="&#8220;Just as water flows from the tap, there should always be performances at the theater. This is the reality of a cultural basic society.&#8221;">&#8220;수도꼭지를 틀면 물이 나오듯, 극장에 가면 항상 공연이 있는 상태. 이것이 바로 문화적 기본사회의 실체입니다.&#8221;</p>
+    <cite>&#8212; KANE</cite>
+  </div>
+</section>
+
+<!-- Why 500,000 -->
+<section class="section">
+  <span class="section-label" data-lang-ko="왜 50만인가" data-lang-de="Warum 500.000" data-lang-en="Why 500,000">왜 50만인가</span>
+  <h2 class="section-title" data-lang-ko="인구 50만 &#8212; 한국형 제작극장의 최적 규모" data-lang-de="500.000 Einwohner &#8212; Optimale Gr&#246;&#223;e" data-lang-en="500,000 &#8212; The Optimal Scale">인구 50만 &#8212; 한국형 제작극장의 최적 규모</h2>
+  <div class="features-grid">
+    <div class="feature-card"><span class="feature-icon">&#128176;</span><h4 data-lang-ko="재정적 자생력" data-lang-de="Finanzielle Eigenst&#228;ndigkeit" data-lang-en="Financial Viability">재정적 자생력</h4><p data-lang-ko="인구 50만 도시의 예산 2조 원 중 약 1%(200~250억)만으로 안정적 운영이 가능. 증세 없이 기존 소모성 예산의 구조조정만으로 충분합니다." data-lang-de="Nur ca. 1% (200-250 Mio. Won) des st&#228;dtischen Budgets von 2 Bio. Won reicht f&#252;r stabilen Betrieb." data-lang-en="Only about 1% (200-250B Won) of the city's 2T Won budget enables stable operation.">인구 50만 도시의 예산 2조 원 중 약 1%(200~250억)만으로 안정적 운영이 가능. 증세 없이 기존 소모성 예산의 구조조정만으로 충분합니다.</p></div>
+    <div class="feature-card"><span class="feature-icon">&#128652;</span><h4 data-lang-ko="1시간 문화권" data-lang-de="1-Stunden-Kulturzone" data-lang-en="1-Hour Culture Zone">1시간 문화권</h4><p data-lang-ko="한국의 교통 인프라를 고려할 때, 50만 거점 도시는 주변 중소도시까지 포함한 광역 문화권의 중심. 독일의 '100km 법칙'을 한국에 맞게 압축한 것입니다." data-lang-de="Unter Ber&#252;cksichtigung der koreanischen Verkehrsinfrastruktur bildet eine 500.000-Stadt das Zentrum einer metropolitanen Kulturzone." data-lang-en="Considering Korea's transport infrastructure, a 500,000-population city forms the center of a metropolitan culture zone.">한국의 교통 인프라를 고려할 때, 50만 거점 도시는 주변 중소도시까지 포함한 광역 문화권의 중심. 독일의 '100km 법칙'을 한국에 맞게 압축한 것입니다.</p></div>
+    <div class="feature-card"><span class="feature-icon">&#127891;</span><h4 data-lang-ko="예술적 임계 질량" data-lang-de="K&#252;nstlerische kritische Masse" data-lang-en="Artistic Critical Mass">예술적 임계 질량</h4><p data-lang-ko="400명의 전문직이 유기적으로 협력하려면 교육, 의료, 주거 인프라가 필요. 50만 도시는 이 조건을 이미 갖추고 있어 인재 수급이 가장 원활합니다." data-lang-de="F&#252;r 400 Fachkr&#228;fte braucht man Bildungs-, Gesundheits- und Wohninfrastruktur. St&#228;dte mit 500.000 Einwohnern erf&#252;llen diese Bedingungen." data-lang-en="400 professionals need education, healthcare, and housing infrastructure. Cities of 500,000 already meet these conditions.">400명의 전문직이 유기적으로 협력하려면 교육, 의료, 주거 인프라가 필요. 50만 도시는 이 조건을 이미 갖추고 있어 인재 수급이 가장 원활합니다.</p></div>
+  </div>
+  <div class="quote-box" style="margin-top:40px">
+    <p data-lang-ko="&#8220;10만 명마다 극장을 짓는 것은 방만하고, 100만 명마다 짓는 것은 접근성을 해칩니다. 50만 명은 예산 1%로 운영이 가능하고, 400명이 자생할 수 있으며, 1시간 문화권의 거점이 되는 최적의 규모입니다.&#8221;" data-lang-de="&#8220;Alle 100.000 ein Theater zu bauen ist verschwenderisch, alle 1.000.000 beeintr&#228;chtigt die Zug&#228;nglichkeit. 500.000 ist die optimale Gr&#246;&#223;e.&#8221;" data-lang-en="&#8220;Building a theater every 100,000 is wasteful, every 1,000,000 hurts accessibility. 500,000 is the optimal scale.&#8221;">&#8220;10만 명마다 극장을 짓는 것은 방만하고, 100만 명마다 짓는 것은 접근성을 해칩니다. 50만 명은 예산 1%로 운영이 가능하고, 400명이 자생할 수 있으며, 1시간 문화권의 거점이 되는 최적의 규모입니다.&#8221;</p>
+    <cite>&#8212; KANE</cite>
+  </div>
+</section>
+
+<!-- K-Stadttheater Stats -->
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-number">400</span><span class="stat-label" data-lang-ko="직접 고용 (명)" data-lang-de="Direktanstellung" data-lang-en="Direct Employment">직접 고용 (명)</span></div>
+  <div class="stat-item"><span class="stat-number">25</span><span class="stat-label" data-lang-ko="연간 제작 (편)" data-lang-de="Produktionen/Jahr" data-lang-en="Productions/Year">연간 제작 (편)</span></div>
+  <div class="stat-item"><span class="stat-number">250+</span><span class="stat-label" data-lang-ko="연간 공연 (회)" data-lang-de="Auff&#252;hrungen/Jahr" data-lang-en="Performances/Year">연간 공연 (회)</span></div>
+  <div class="stat-item"><span class="stat-number">200~250</span><span class="stat-label" data-lang-ko="연간 예산 (억원)" data-lang-de="Budget (100M Won)" data-lang-en="Budget (100M Won)">연간 예산 (억원)</span></div>
+</div>
+
+<!-- Organization -->
+<section class="section">
+  <span class="section-label" data-lang-ko="조직 체계" data-lang-de="Organisationsstruktur" data-lang-en="Organization">조직 체계</span>
+  <h2 class="section-title" data-lang-ko="직접 고용 400명 &#8212; 자체 완결형 생산 시스템" data-lang-de="400 Direktangestellte &#8212; Eigenst&#228;ndiges Produktionssystem" data-lang-en="400 Direct Employees &#8212; Self-contained Production System">직접 고용 400명 &#8212; 자체 완결형 생산 시스템</h2>
+  <table class="org-table">
+    <tr><th data-lang-ko="구분" data-lang-de="Bereich" data-lang-en="Division">구분</th><th data-lang-ko="인원" data-lang-de="Personal" data-lang-en="Staff">인원</th><th data-lang-ko="주요 역할" data-lang-de="Aufgaben" data-lang-en="Roles">주요 역할</th><th data-lang-ko="고용 형태" data-lang-de="Anstellung" data-lang-en="Employment">고용 형태</th></tr>
+    <tr><td data-lang-ko="예술 분야" data-lang-de="Kunst" data-lang-en="Arts">예술 분야</td><td>200</td><td data-lang-ko="전속 예술단, 드라마투르기, 기획, 창작, 출연, 교육" data-lang-de="Ensemble, Dramaturgie, Planung, Kreation, Auff&#252;hrung, Bildung" data-lang-en="Ensemble, dramaturgy, planning, creation, performance, education">전속 예술단, 드라마투르기, 기획, 창작, 출연, 교육</td><td data-lang-ko="시즌별/정규직" data-lang-de="Saison/Festanstellung" data-lang-en="Season/Full-time">시즌별/정규직</td></tr>
+    <tr><td data-lang-ko="제작·기술" data-lang-de="Produktion/Technik" data-lang-en="Production/Tech">제작·기술</td><td>140~150</td><td data-lang-ko="무대·의상·소품 직접 제작 (목공실, 의상실 운영), 무대 기술" data-lang-de="B&#252;hne, Kost&#252;me, Requisiten (Werkst&#228;tten), B&#252;hnentechnik" data-lang-en="Stage, costumes, props (workshops), stage technology">무대·의상·소품 직접 제작 (목공실, 의상실 운영), 무대 기술</td><td data-lang-ko="정규직/계약직" data-lang-de="Fest/Vertrag" data-lang-en="Full-time/Contract">정규직/계약직</td></tr>
+    <tr><td data-lang-ko="행정·운영" data-lang-de="Verwaltung" data-lang-en="Administration">행정·운영</td><td>50~60</td><td data-lang-ko="관객 개발, 마케팅, 대외협력, 경영 지원" data-lang-de="Publikumsentwicklung, Marketing, Kooperation, Management" data-lang-en="Audience development, marketing, cooperation, management">관객 개발, 마케팅, 대외협력, 경영 지원</td><td data-lang-ko="정규직/계약직" data-lang-de="Fest/Vertrag" data-lang-en="Full-time/Contract">정규직/계약직</td></tr>
+    <tr style="border-top:2px solid var(--accent)"><td style="color:var(--accent);font-weight:700" data-lang-ko="합계" data-lang-de="Gesamt" data-lang-en="Total">합계</td><td style="color:var(--accent);font-weight:700">400</td><td style="color:var(--accent)" data-lang-ko="평균 연봉 4,000만 원 수준의 전문직 일자리" data-lang-de="Fachkr&#228;fte mit Durchschnittsgehalt von 40 Mio. Won" data-lang-en="Professional jobs averaging 40M Won salary">평균 연봉 4,000만 원 수준의 전문직 일자리</td><td style="color:var(--accent)" data-lang-ko="직접 고용" data-lang-de="Direktanstellung" data-lang-en="Direct employment">직접 고용</td></tr>
+  </table>
+  <div class="quote-box" style="margin-top:40px">
+    <p data-lang-ko="&#8220;이 400명은 '철밥통 공무원'이 아닙니다. 예술가들은 프로야구 선수처럼 시즌 단위로 계약하며, 매 시즌 자신의 가치를 증명해야 합니다. 높은 연봉과 안정적 복지를 제공하는 대신, 최고의 결과물을 내놓아야 하는 '전문 직업인'의 세계입니다.&#8221;" data-lang-de="&#8220;Diese 400 sind keine 'Beamten auf Lebenszeit'. K&#252;nstler haben Saisonvertr&#228;ge wie Profisportler und m&#252;ssen ihren Wert beweisen.&#8221;" data-lang-en="&#8220;These 400 are not 'lifetime bureaucrats.' Artists have season contracts like professional athletes and must prove their value.&#8221;">&#8220;이 400명은 '철밥통 공무원'이 아닙니다. 예술가들은 프로야구 선수처럼 시즌 단위로 계약하며, 매 시즌 자신의 가치를 증명해야 합니다. 높은 연봉과 안정적 복지를 제공하는 대신, 최고의 결과물을 내놓아야 하는 '전문 직업인'의 세계입니다.&#8221;</p>
+    <cite>&#8212; KANE</cite>
+  </div>
+</section>
+
+<!-- Stock System -->
+<section class="section">
+  <span class="section-label" data-lang-ko="스톡 시스템" data-lang-de="Stock-System" data-lang-en="Stock System">스톡 시스템</span>
+  <h2 class="section-title" data-lang-ko="제작비 구조 혁신 &#8212; 세금이 자산으로 축적되는 구조" data-lang-de="Innovation der Produktionskosten &#8212; Steuern werden zu Verm&#246;gen" data-lang-en="Production Cost Innovation &#8212; Taxes Become Assets">제작비 구조 혁신 &#8212; 세금이 자산으로 축적되는 구조</h2>
+  <div class="role-grid">
+    <div class="role-card"><h4>&#128295; <span data-lang-ko="직영 제작 = 비용 절감" data-lang-de="Eigenproduktion = Kostensenkung" data-lang-en="In-house = Cost Reduction">직영 제작 = 비용 절감</span></h4><p data-lang-ko="150명의 정규직 제작·기술진이 직접 제작. 외부 업체의 이윤 마진과 거품 예산이 제거되어, 순수 재료비만으로 최고급 무대 구현이 가능합니다." data-lang-de="150 festangestellte Produktionskr&#228;fte produzieren direkt. Externe Margen entfallen." data-lang-en="150 full-time production staff build directly. External margins are eliminated.">150명의 정규직 제작·기술진이 직접 제작. 외부 업체의 이윤 마진과 거품 예산이 제거되어, 순수 재료비만으로 최고급 무대 구현이 가능합니다.</p></div>
+    <div class="role-card"><h4>&#128230; <span data-lang-ko="재활용의 경제학" data-lang-de="&#214;konomie der Wiederverwendung" data-lang-en="Economics of Reuse">재활용의 경제학</span></h4><p data-lang-ko="의상, 소품, 무대를 데이터베이스화하고 모듈화하여 재활용. 운영 연차가 쌓일수록 제작 단가는 급감하고, 작품 완성도는 비약적으로 향상됩니다." data-lang-de="Kost&#252;me, Requisiten und B&#252;hnenbilder werden katalogisiert und modular wiederverwendet." data-lang-en="Costumes, props, and sets are catalogued and reused in modular fashion.">의상, 소품, 무대를 데이터베이스화하고 모듈화하여 재활용. 운영 연차가 쌓일수록 제작 단가는 급감하고, 작품 완성도는 비약적으로 향상됩니다.</p></div>
+    <div class="role-card"><h4>&#128200; <span data-lang-ko="IP 자산화" data-lang-de="IP-Verm&#246;genswerte" data-lang-en="IP Assets">IP 자산화</span></h4><p data-lang-ko="극장이 모든 제작물의 저작권을 소유. 작품 대여, 교환, 해외 투어 등 수익 다변화 및 글로벌 진출의 기반이 됩니다." data-lang-de="Das Theater besitzt alle Urheberrechte. Verleih, Austausch und internationale Tourneen werden m&#246;glich." data-lang-en="The theater owns all copyrights. Lending, exchange, and international tours become possible.">극장이 모든 제작물의 저작권을 소유. 작품 대여, 교환, 해외 투어 등 수익 다변화 및 글로벌 진출의 기반이 됩니다.</p></div>
+    <div class="role-card"><h4>&#127970; <span data-lang-ko="민간 상생 (20% 쿼터)" data-lang-de="Koexistenz (20% Quote)" data-lang-en="Coexistence (20% Quota)">민간 상생 (20% 쿼터)</span></h4><p data-lang-ko="연간 시즌의 20%를 민간 예술단체에 할당. 극장의 전문 인력과 시설을 무상 지원하고, 수익의 70%를 민간에 배분합니다. 독점이 아닌 상생의 플랫폼입니다." data-lang-de="20% der Saison werden privaten Kunstgruppen zugewiesen. Infrastruktur wird kostenlos bereitgestellt, 70% der Einnahmen gehen an die Privaten." data-lang-en="20% of the season is allocated to private art groups. Infrastructure is provided free, 70% of revenue goes to private groups.">연간 시즌의 20%를 민간 예술단체에 할당. 극장의 전문 인력과 시설을 무상 지원하고, 수익의 70%를 민간에 배분합니다. 독점이 아닌 상생의 플랫폼입니다.</p></div>
+  </div>
+  <div class="quote-box" style="margin-top:40px">
+    <p data-lang-ko="&#8220;기존 축제 행정은 예산 10억을 쓰면 행사 뒤 남는 것이 '0원'이지만, 제작극장의 스톡 시스템은 10억을 쓰면 8억 가치의 유형 자산과 무형 자산이 창고에 남습니다. 10년이 반복되면 지자체는 수백억 규모의 문화 자산을 보유한 부자 도시가 됩니다.&#8221;" data-lang-de="&#8220;Bisherige Festivalverwaltung: 1 Mrd. Won ausgegeben = 0 Won &#252;brig. Stock-System: 1 Mrd. = 800 Mio. an Verm&#246;genswerten bleiben.&#8221;" data-lang-en="&#8220;Traditional festivals: spend 1B Won = 0 left. Stock system: spend 1B = 800M in assets remain.&#8221;">&#8220;기존 축제 행정은 예산 10억을 쓰면 행사 뒤 남는 것이 '0원'이지만, 제작극장의 스톡 시스템은 10억을 쓰면 8억 가치의 유형 자산과 무형 자산이 창고에 남습니다. 10년이 반복되면 지자체는 수백억 규모의 문화 자산을 보유한 부자 도시가 됩니다.&#8221;</p>
+    <cite>&#8212; KANE</cite>
+  </div>
+</section>
+
+<!-- Expected Effects -->
+<section class="section">
+  <span class="section-label" data-lang-ko="기대 효과" data-lang-de="Erwartete Effekte" data-lang-en="Expected Effects">기대 효과</span>
+  <h2 class="section-title" data-lang-ko="K-Stadttheater가 만드는 변화" data-lang-de="Ver&#228;nderungen durch K-Stadttheater" data-lang-en="Changes Created by K-Stadttheater">K-Stadttheater가 만드는 변화</h2>
+  <div class="why-grid">
+    <div class="why-card"><span class="why-icon">&#128188;</span><h4 data-lang-ko="고용 혁명" data-lang-de="Besch&#228;ftigungsrevolution" data-lang-en="Employment Revolution">고용 혁명</h4><p data-lang-ko="직접 고용 400명, 간접 고용 1,200명 유발. 연간 160억 원의 가계 소득이 지역 소비로 이어지는 경제 선순환." data-lang-de="400 direkte + 1.200 indirekte Arbeitspl&#228;tze. 16 Mrd. Won j&#228;hrliches Haushaltseinkommen." data-lang-en="400 direct + 1,200 indirect jobs. 16B Won annual household income flowing into local economy.">직접 고용 400명, 간접 고용 1,200명 유발. 연간 160억 원의 가계 소득이 지역 소비로 이어지는 경제 선순환.</p></div>
+    <div class="why-card"><span class="why-icon">&#127968;</span><h4 data-lang-ko="청년 정주" data-lang-de="Jugend-Ansiedlung" data-lang-en="Youth Settlement">청년 정주</h4><p data-lang-ko="'지역 대학에서 배우고 지역 극장에서 급여 받는' 선순환. 연봉 4,000만 원의 전문직이 청년 인구 유출을 막는 정주형 댐(Dam) 역할." data-lang-de="'In der Region studieren, im regionalen Theater verdienen.' Fachkr&#228;fte mit 40 Mio. Won Gehalt verhindern Jugendabwanderung." data-lang-en="'Study locally, earn at the local theater.' 40M Won professional jobs prevent youth exodus.">&#8216;지역 대학에서 배우고 지역 극장에서 급여 받는&#8217; 선순환. 연봉 4,000만 원의 전문직이 청년 인구 유출을 막는 정주형 댐(Dam) 역할.</p></div>
+    <div class="why-card"><span class="why-icon">&#127760;</span><h4 data-lang-ko="문화 주권" data-lang-de="Kulturelle Souver&#228;nit&#228;t" data-lang-en="Cultural Sovereignty">문화 주권</h4><p data-lang-ko="서울발 콘텐츠의 단순 소비자에서 벗어나, 지역의 역사와 정서를 담은 콘텐츠를 직접 생산·유통하는 주체적 문화 역량 확보." data-lang-de="Von passivem Konsum zu eigenst&#228;ndiger Produktion regionaler Inhalte." data-lang-en="From passive consumption to independent production of regional content.">서울발 콘텐츠의 단순 소비자에서 벗어나, 지역의 역사와 정서를 담은 콘텐츠를 직접 생산·유통하는 주체적 문화 역량 확보.</p></div>
+    <div class="why-card"><span class="why-icon">&#9878;</span><h4 data-lang-ko="균형 발전" data-lang-de="Ausgewogene Entwicklung" data-lang-en="Balanced Development">균형 발전</h4><p data-lang-ko="독일 140개 제작극장이 전국 균형 성장을 지탱하듯, 한국형 모델은 문화적 상향 평준화의 핵심 동력이 됩니다." data-lang-de="Wie 140 deutsche Theater die nationale Balance tragen, wird das koreanische Modell zum Motor kultureller Angleichung." data-lang-en="As 140 German theaters support national balance, the Korean model becomes the engine of cultural equalization.">독일 140개 제작극장이 전국 균형 성장을 지탱하듯, 한국형 모델은 문화적 상향 평준화의 핵심 동력이 됩니다.</p></div>
+  </div>
+</section>
+
+<!-- Q&A -->
+<section class="section">
+  <span class="section-label" data-lang-ko="자주 묻는 질문" data-lang-de="H&#228;ufige Fragen" data-lang-en="FAQ">자주 묻는 질문</span>
+  <h2 class="section-title" data-lang-ko="K-Stadttheater Q&amp;A" data-lang-de="K-Stadttheater Q&amp;A" data-lang-en="K-Stadttheater Q&amp;A">K-Stadttheater Q&amp;A</h2>
+
+  <div class="qa-item"><div class="qa-q" onclick="toggleQA(this)" data-lang-ko="Q. 매년 200~250억 원, 지자체가 감당할 수 있습니까?" data-lang-de="Q. Kann die Kommune 200-250 Mrd. Won j&#228;hrlich tragen?" data-lang-en="Q. Can local government afford 200-250B Won annually?">Q. 매년 200~250억 원, 지자체가 감당할 수 있습니까?<span>&#9660;</span></div><div class="qa-a"><p data-lang-ko="인구 50만 도시의 연 예산 2조 원 중 단 1.25%에 불과합니다. 일회성 축제, 외주 용역에 휘발되던 예산을 통합하는 '행정적 구조조정'만으로 충분합니다. 200억을 들여 10회 공연하고 끝나는 '보여주기 쇼'를 멈추고, 같은 돈으로 400명의 정규직과 250회 공연을 만드는 시스템으로 전환해야 합니다." data-lang-de="Nur 1,25% des st&#228;dtischen Jahresbudgets von 2 Bio. Won." data-lang-en="Only 1.25% of the city's annual budget of 2 trillion Won.">인구 50만 도시의 연 예산 2조 원 중 단 1.25%에 불과합니다. 일회성 축제, 외주 용역에 휘발되던 예산을 통합하는 '행정적 구조조정'만으로 충분합니다.</p></div></div>
+
+  <div class="qa-item"><div class="qa-q" onclick="toggleQA(this)" data-lang-ko="Q. 400명 조직이 매너리즘에 빠지지 않을까요?" data-lang-de="Q. Verf&#228;llt eine 400-Personen-Organisation nicht in Routine?" data-lang-en="Q. Won't a 400-person organization fall into complacency?">Q. 400명 조직이 매너리즘에 빠지지 않을까요?<span>&#9660;</span></div><div class="qa-a"><p data-lang-ko="예술가는 프로야구 선수와 같은 시즌 계약제를 도입합니다. 매번 새로운 작품을 만드는 창조적 행위 자체가 매너리즘을 허용하지 않으며, 수시 오디션을 통한 유연한 구조를 갖습니다. 높은 연봉 대신 최고의 결과물을 요구하는 '전문 직업인'의 세계입니다." data-lang-de="K&#252;nstler erhalten Saisonvertr&#228;ge wie Profisportler." data-lang-en="Artists receive season contracts like professional athletes.">예술가는 프로야구 선수와 같은 시즌 계약제를 도입합니다. 매번 새로운 작품을 만드는 창조적 행위 자체가 매너리즘을 허용하지 않습니다.</p></div></div>
+
+  <div class="qa-item"><div class="qa-q" onclick="toggleQA(this)" data-lang-ko="Q. 인건비가 80%인데, 제작비는 어디서 나옵니까?" data-lang-de="Q. 80% Personalkosten &#8212; woher kommen die Produktionskosten?" data-lang-en="Q. 80% goes to personnel &#8212; where do production costs come from?">Q. 인건비가 80%인데, 제작비는 어디서 나옵니까?<span>&#9660;</span></div><div class="qa-a"><p data-lang-ko="마케팅, 홍보, 무대 제작, 의상을 담당하는 전문가들이 이미 정규직으로 포진해 있기 때문에, 실제 제작비는 순수 재료비 수준으로 떨어집니다. 외주 마진을 떼어주던 기존 방식보다 훨씬 경제적이며, 스톡 시스템이 정착되면 편당 제작 원가는 계속 낮아집니다." data-lang-de="Fachkr&#228;fte sind bereits festangestellt, daher fallen nur reine Materialkosten an." data-lang-en="Specialists are already on staff, so actual costs drop to pure materials.">마케팅, 홍보, 무대 제작, 의상 전문가들이 이미 정규직이므로, 실제 제작비는 순수 재료비 수준입니다. 스톡 시스템이 정착되면 원가는 계속 낮아집니다.</p></div></div>
+
+  <div class="qa-item"><div class="qa-q" onclick="toggleQA(this)" data-lang-ko="Q. 공공이 인프라를 독점하여 민간이 고사하지 않나요?" data-lang-de="Q. Monopolisiert die &#246;ffentliche Hand die Infrastruktur?" data-lang-en="Q. Won't public monopoly kill private arts groups?">Q. 공공이 인프라를 독점하여 민간이 고사하지 않나요?<span>&#9660;</span></div><div class="qa-a"><p data-lang-ko="오히려 민간의 생존을 돕는 '공생 플랫폼'입니다. 현재 민간은 대관료와 용역비 부담으로 1년에 한두 번 공연하기도 벅찹니다. 제작극장은 민간에게 전문 인력과 무대를 무상 지원하고, 수익의 70%를 배분합니다. 공공이 '고비용 인프라'를 책임짐으로써 민간의 예술적 체급을 키워주는 상생 모델입니다." data-lang-de="Im Gegenteil: eine Koexistenz-Plattform. Private Gruppen erhalten kostenlose Infrastruktur und 70% der Einnahmen." data-lang-en="On the contrary: a coexistence platform. Private groups get free infrastructure and 70% of revenue.">오히려 민간의 생존을 돕는 '공생 플랫폼'입니다. 제작극장은 민간에게 전문 인력과 무대를 무상 지원하고, 수익의 70%를 배분합니다.</p></div></div>
+
+  <div class="qa-item"><div class="qa-q" onclick="toggleQA(this)" data-lang-ko="Q. 지방 도시에서 연간 250회 공연을 채울 관객이 있을까요?" data-lang-de="Q. Gibt es genug Publikum f&#252;r 250 Auff&#252;hrungen pro Jahr?" data-lang-en="Q. Are there enough audiences for 250 performances per year?">Q. 지방 도시에서 연간 250회 공연을 채울 관객이 있을까요?<span>&#9660;</span></div><div class="qa-a"><p data-lang-ko="시민을 단순한 관객이 아닌 '협력적 파트너'로 전환해야 합니다. 영유아 교육부터 노인 프로그램, 학교 연계 수업, 기업 네트워크까지 극장이 지역 사회의 '일상적 공론장'이 되면 관객은 저절로 형성됩니다. 4년만 경험하면 시민들은 이를 '문화 기본권'으로 인식하게 됩니다." data-lang-de="B&#252;rger werden nicht als Zuschauer, sondern als 'kooperative Partner' gesehen." data-lang-en="Citizens are viewed not as audiences but as 'cooperative partners.'">시민을 '협력적 파트너'로 전환합니다. 극장이 지역 사회의 '일상적 공론장'이 되면 관객은 저절로 형성됩니다.</p></div></div>
+
+  <div class="qa-item"><div class="qa-q" onclick="toggleQA(this)" data-lang-ko="Q. 지자체장이 바뀌면 극장이 폐쇄될 위험은?" data-lang-de="Q. Wird das Theater bei Regierungswechsel geschlossen?" data-lang-en="Q. Risk of closure when mayor changes?">Q. 지자체장이 바뀌면 극장이 폐쇄될 위험은?<span>&#9660;</span></div><div class="qa-a"><p data-lang-ko="'시민의 효능감'이 가장 강력한 방패입니다. 4년의 시범 사업을 통해 청년들이 번듯한 직장을 갖고, 시민들이 매일 고품격 공연을 누리는 일상이 정착되면 어떤 정치 권력도 이를 함부로 없앨 수 없습니다. 정치는 사라져도 시민의 삶 속에 뿌리내린 극장은 살아남습니다." data-lang-de="'B&#252;rgerliche Wirksamkeit' ist der st&#228;rkste Schutz. Nach 4 Jahren kann keine politische Macht dies abschaffen." data-lang-en="'Citizen efficacy' is the strongest shield. After 4 years, no political power can abolish it.">&#8216;시민의 효능감&#8217;이 가장 강력한 방패입니다. 정치는 사라져도 시민의 삶 속에 뿌리내린 극장은 살아남습니다.</p></div></div>
+</section>
+
+<!-- KANE's Role -->
+<section class="section">
+  <span class="section-label" data-lang-ko="KANE의 역할" data-lang-de="KANEs Rolle" data-lang-en="KANE's Role">KANE의 역할</span>
+  <h2 class="section-title" data-lang-ko="유럽의 경험을 한국의 미래로" data-lang-de="Europ&#228;ische Erfahrung f&#252;r Koreas Zukunft" data-lang-en="European Experience for Korea's Future">유럽의 경험을 한국의 미래로</h2>
+  <div class="section-text">
+    <p data-lang-ko="유럽 현지에서 독일 극장 시스템을 직접 경험하고 체득한 KANE의 제안은 단순한 이론이 아닙니다. 검증된 성공 모델을 한국의 토양에 맞게 필터링한 최적화된 수입 모델입니다. 대한민국은 '돈을 써서 문화를 사오는 나라'에서 '시스템을 구축해 문화를 생산하는 나라'로 진화해야 합니다." data-lang-de="KANEs Vorschlag basiert auf direkter Erfahrung mit dem deutschen Theatersystem. Korea muss sich von einem Land, das Kultur kauft, zu einem Land entwickeln, das Kultur produziert." data-lang-en="KANE's proposal is based on direct experience with the German theater system. Korea must evolve from a country that buys culture to one that produces culture.">유럽 현지에서 독일 극장 시스템을 직접 경험하고 체득한 KANE의 제안은 단순한 이론이 아닙니다. 검증된 성공 모델을 한국의 토양에 맞게 필터링한 최적화된 수입 모델입니다.</p>
+  </div>
+  <div class="quote-box">
+    <p data-lang-ko="&#8220;설계도는 예술가가 그렸습니다. 이제 정치와 행정이 그 문을 여십시오.&#8221;" data-lang-de="&#8220;Den Bauplan haben die K&#252;nstler gezeichnet. Jetzt m&#252;ssen Politik und Verwaltung die T&#252;r &#246;ffnen.&#8221;" data-lang-en="&#8220;Artists drew the blueprint. Now politics and administration must open the door.&#8221;">&#8220;설계도는 예술가가 그렸습니다. 이제 정치와 행정이 그 문을 여십시오.&#8221;</p>
+    <cite>&#8212; KANE</cite>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2><span data-lang-ko="K-Stadttheater" data-lang-de="K-Stadttheater" data-lang-en="K-Stadttheater">K-Stadttheater</span><span data-lang-ko="에 대해 더 알고 싶으신가요?" data-lang-de=" &#8212; Mehr erfahren?" data-lang-en=" &#8212; Want to learn more?">에 대해 더 알고 싶으신가요?</span></h2>
+  <p data-lang-ko="KANE은 독일 제작극장 시스템에 대한 상담, 연구, 교류 프로그램을 운영하고 있습니다." data-lang-de="KANE betreibt Beratungs-, Forschungs- und Austauschprogramme." data-lang-en="KANE operates consulting, research, and exchange programs.">KANE은 독일 제작극장 시스템에 대한 상담, 연구, 교류 프로그램을 운영하고 있습니다.</p>
+  <a class="cta-btn" href="mailto:kane.europe@gmail.com" data-lang-ko="상담 문의" data-lang-de="Beratung anfragen" data-lang-en="Request Consultation">상담 문의</a>
+  <a class="cta-btn" href="Kane_HomePage_V8.html" data-lang-ko="KANE 소개" data-lang-de="&#220;ber KANE" data-lang-en="About KANE">KANE 소개</a>
+</section>
+
+<!-- Footer -->
 <footer>
   <div class="footer-logo" style="cursor:pointer" onclick="location.href='Kane_HomePage_V8.html'"><img src="kane-logo.png" alt="KANE"><span>KANE</span></div>
   <p class="footer-desc" data-lang-ko="유럽 내 한인 예술가들의 든든한 연대와 성장을 위한 플랫폼" data-lang-de="Plattform f&#252;r Solidarit&#228;t und Wachstum koreanischer K&#252;nstler in Europa" data-lang-en="Platform for solidarity and growth of Korean artists in Europe">유럽 내 한인 예술가들의 든든한 연대와 성장을 위한 플랫폼</p>
-  <div class="footer-links"><a href="mailto:kartnet.ev@gmail.com">&#9993; kartnet.ev@gmail.com</a><a href="https://www.facebook.com/groups/1299952331800917/" target="_blank">Facebook</a><a href="mailto:kartnet.ev@gmail.com" data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</a></div>
+  <div class="footer-links"><a href="#">Instagram</a><a href="#">Facebook</a><a href="mailto:kane.europe@gmail.com" data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</a></div>
   <p class="footer-legal">&#169; 2026 KANE e.V. | Ulm, Germany | VR 723293 | <a href="#">Datenschutz</a></p>
 </footer>
+
 <script>
-var articles=[
-{id:1,category:"essay",url:"https://shorturl.at/jIPFw",thumb:"thumnail_pic/themove_thumnail.png",title:{ko:"\uBB38\uD654\uAE30\uBCF8\uAD8C\uACFC \uADF9\uC7A5\uC758 \uC9C4\uD654",de:"Kulturelles Grundrecht und die Evolution des Theaters",en:"Cultural Basic Rights and the Evolution of Theater"},author:{ko:"\uC774\uC911\uC6B4",de:"Joongwoon Lee",en:"Joongwoon Lee"},publication:{ko:"\uC6D4\uAC04 \uB354\uBB34\uBE0C",de:"The Move Monthly",en:"The Move Monthly"},date:"2026.01"},
-{id:2,category:"interview",url:"https://youtu.be/8hqJqxu-YUM?si=h_dM4TJSfo25G0H5",thumb:"thumnail_pic/YTN_thumnail.png",title:{ko:"\uBE0C\uB77C\uBCF4 \uB9C8\uC774\uB77C\uC774\uD504 \u2014 \uB3C5\uC77C \uC81C\uC791\uADF9\uC7A5\uC758 \uD604\uC7A5",de:"Bravo My Life \u2014 Deutsche Produktionsh\u00E4user",en:"Bravo My Life \u2014 Inside German Production Theaters"},author:{ko:"\uC774\uC9C4\uC625",de:"Jinok Lee",en:"Jinok Lee"},publication:{ko:"YTN",de:"YTN",en:"YTN"},date:"2026.02"},
-{id:3,category:"review",url:"https://youtu.be/ZpaOEDYAmLo?si=XYth52e0Tba-BKEJ",thumb:"thumnail_pic/YTN_thumnail2.png",title:{ko:"\uC785\uC2DC \uB300\uC2E0 \uAFC8 \uCC3E\uC544 \u2014 \uACC4\uC6D0\uC608\uACE0 \uB3C5\uC77C \uADF9\uC7A5 \uC5F0\uC218",de:"Tr\u00E4ume statt Pr\u00FCfungen \u2014 Kaewon in Deutschland",en:"Finding Dreams \u2014 Kaewon Arts School in Germany"},author:{ko:"KANE",de:"KANE",en:"KANE"},publication:{ko:"YTN",de:"YTN",en:"YTN"},date:"2026.05"},
-{id:4,category:"criticism",url:"https://shorturl.at/PiRGZ",thumb:"thumnail_pic/Lee_thumnail.png",title:{ko:"\uBB38\uD654 \uBB38\uD131 \uB0AE\uCD98 \uB3C5\uC77C\uC758 \uC81C\uC791\uADF9\uC7A5 \uC2DC\uC2A4\uD15C",de:"Deutschlands Produktionstheater senken die Kulturschwelle",en:"Germany's Production Theaters Lowering the Cultural Threshold"},author:{ko:"KANE",de:"KANE",en:"KANE"},publication:{ko:"\uC911\uC559\uC77C\uBCF4",de:"JoongAng Ilbo",en:"JoongAng Ilbo"},date:"2026.05"}
-];
 var currentLang='ko';
 function switchLang(lang){
   currentLang=lang;var map={ko:'KR',de:'DE',en:'EN'};
@@ -116,26 +351,17 @@ function switchLang(lang){
   for(var i=0;i<btns.length;i++){if(btns[i].textContent.trim()===map[lang])btns[i].classList.add('active');else btns[i].classList.remove('active');}
   var els=document.querySelectorAll('[data-lang-'+lang+']');
   for(var j=0;j<els.length;j++){var v=els[j].getAttribute('data-lang-'+lang);if(v.indexOf('<')!==-1)els[j].innerHTML=v;else els[j].textContent=v;}
-  var af=document.querySelector('.filter-btn.active');if(af)renderCards(af.dataset.filter);
 }
-function getCategoryLabel(cat){
-  var l={criticism:{ko:'\uC0AC\uC124',de:'Leitartikel',en:'Editorial'},review:{ko:'\uC5F0\uC218',de:'Schulung',en:'Training'},essay:{ko:'\uAE30\uACE0\uBB38',de:'Beitrag',en:'Article'},interview:{ko:'\uBC29\uC1A1',de:'Sendung',en:'Broadcast'}};
-  return l[cat][currentLang];
+function toggleQA(el){
+  var a=el.nextElementSibling;
+  var isOpen=a.classList.contains('open');
+  // Close all
+  var allA=document.querySelectorAll('.qa-a');
+  var allQ=document.querySelectorAll('.qa-q');
+  for(var i=0;i<allA.length;i++){allA[i].classList.remove('open');allQ[i].classList.remove('open');}
+  // Toggle clicked
+  if(!isOpen){a.classList.add('open');el.classList.add('open');}
 }
-function renderCards(filter){
-  var grid=document.getElementById('grid');if(!grid)return;
-  var filtered=filter==='all'?articles:articles.filter(function(a){return a.category===filter;});
-  var html='';
-  for(var i=0;i<filtered.length;i++){var a=filtered[i];
-    html+='<div class="card" data-url="'+a.url+'"><div class="card-image"><img src="'+a.thumb+'" alt="'+a.title[currentLang]+'"><div class="card-readmore">\u2192</div></div><div class="card-content"><span class="card-category">'+getCategoryLabel(a.category)+'</span><h3 class="card-title">'+a.title[currentLang]+'</h3><div class="card-meta"><span class="card-author">'+a.author[currentLang]+'</span><span class="card-publication">'+a.publication[currentLang]+'</span><span>'+a.date+'</span></div></div></div>';
-  }
-  grid.innerHTML=html;
-  var cards=grid.querySelectorAll('.card');
-  for(var j=0;j<cards.length;j++){cards[j].addEventListener('click',function(){window.open(this.getAttribute('data-url'),'_blank');});}
-}
-var fbs=document.querySelectorAll('.filter-btn');
-for(var fi=0;fi<fbs.length;fi++){fbs[fi].addEventListener('click',function(){var a=document.querySelectorAll('.filter-btn');for(var k=0;k<a.length;k++)a[k].classList.remove('active');this.classList.add('active');renderCards(this.dataset.filter);});}
-renderCards('all');
 </script>
 </body>
 </html>
