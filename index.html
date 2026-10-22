@@ -86,6 +86,38 @@ footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;po
 .footer-links a:hover{color:var(--accent)}
 .footer-legal{color:#555;font-size:12px}
 @media(max-width:768px){nav{padding:15px 20px}.hero h1{letter-spacing:6px}.section{padding:80px 20px}.mission-grid,.activities-grid{grid-template-columns:1fr;gap:30px}.values-grid{grid-template-columns:1fr;gap:20px}.stats-bar{flex-wrap:wrap;gap:30px;padding:60px 20px}.member-table{font-size:12px}.member-table th,.member-table td{padding:10px 8px}.lang-switch{top:15px;right:60px}.lang-btn{padding:4px 10px;font-size:11px}}
+/* ── Event Banner ── */
+.event-banner{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:60px 40px}
+.event-banner-inner{border:1px solid var(--accent);border-radius:16px;background:rgba(10,10,10,.85);backdrop-filter:blur(10px);overflow:hidden}
+.event-badge{display:inline-block;background:var(--accent);color:#000;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:6px 18px;border-radius:0 0 8px 0}
+.event-countdown{float:right;background:rgba(201,169,110,.12);border-left:1px solid var(--accent);color:var(--accent);font-size:13px;font-weight:600;letter-spacing:2px;padding:6px 20px;border-radius:0 0 0 8px}
+.event-content{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;min-height:380px}
+.event-poster{position:relative;overflow:hidden;cursor:pointer}
+.event-poster img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.event-poster:hover img{transform:scale(1.04)}
+.event-info{padding:36px 32px;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border)}
+.event-info h3{font-size:14px;font-weight:400;color:var(--accent);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+.event-info h2{font-size:26px;font-weight:600;line-height:1.4;margin-bottom:24px}
+.event-meta{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.event-meta-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text-secondary);line-height:1.5}
+.event-meta-item .icon{color:var(--accent);font-size:15px;min-width:20px;margin-top:1px}
+.event-rsvp-note{font-size:12px;color:var(--text-secondary);padding-top:16px;border-top:1px solid var(--border)}
+.event-rsvp-note strong{color:var(--accent)}
+.event-program{padding:28px 24px;border-left:1px solid var(--border);display:flex;flex-direction:column;cursor:pointer;overflow:hidden}
+.event-program-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.event-program img{width:100%;border-radius:8px;object-fit:cover;flex:1;transition:transform .4s ease;max-height:290px}
+.event-program:hover img{transform:scale(1.03)}
+.event-program-caption{font-size:12px;color:var(--text-secondary);margin-top:10px;text-align:center;letter-spacing:1px}
+.event-actions{display:flex;gap:12px;flex-wrap:wrap}
+.event-btn{display:inline-block;padding:11px 28px;border:1px solid var(--accent);color:var(--accent);font-size:13px;letter-spacing:2px;text-transform:uppercase;border-radius:50px;transition:all .3s ease;cursor:pointer;text-decoration:none}
+.event-btn:hover,.event-btn.primary{background:var(--accent);color:#000}
+/* 이미지 모달 */
+.img-modal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);justify-content:center;align-items:center;padding:20px}
+.img-modal.open{display:flex}
+.img-modal img{max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 0 80px rgba(0,0,0,.8);cursor:default}
+.img-modal-close{position:fixed;top:20px;right:28px;color:#fff;font-size:40px;cursor:pointer;z-index:10000;opacity:.7;transition:opacity .2s;line-height:1}
+.img-modal-close:hover{opacity:1}
+@media(max-width:900px){.event-content{grid-template-columns:1fr}.event-program{display:none}.event-banner{padding:40px 20px}}
 </style>
 </head>
 <body>
@@ -113,6 +145,66 @@ footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;po
   <div class="scroll-indicator"><span data-lang-ko="스크롤" data-lang-de="Scrollen" data-lang-en="Scroll">스크롤</span> &#8595;</div>
 </section>
 
+
+<!-- Event Banner -->
+<section class="event-banner">
+  <div class="event-banner-inner">
+    <div>
+      <span class="event-badge" data-lang-ko="다가오는 행사" data-lang-de="Bevorstehende Veranstaltung" data-lang-en="Upcoming Event">다가오는 행사</span>
+      <span class="event-countdown" id="countdown"></span>
+    </div>
+    <div class="event-content">
+      <!-- 포스터 -->
+      <div class="event-poster" onclick="openModal('images/2026_ChungNamJaeDan/Title.jpg')">
+        <img src="images/2026_ChungNamJaeDan/Title.jpg" alt="Zwei Atemzüge, eine Resonanz">
+      </div>
+      <!-- 행사 정보 -->
+      <div class="event-info">
+        <h3>Ensemble Atemklang</h3>
+        <h2 data-lang-ko="두 숨결, 하나의 울림" data-lang-de="Zwei Atemzüge, eine Resonanz" data-lang-en="Two Breaths, One Resonance">두 숨결, 하나의 울림</h2>
+        <div class="event-meta">
+          <div class="event-meta-item">
+            <span class="icon">📅</span>
+            <span data-lang-ko="2026년 11월 14일 (토) 오후 5시" data-lang-de="Samstag, 14. November 2026, 17:00 Uhr" data-lang-en="Saturday, 14 November 2026, 5:00 PM">2026년 11월 14일 (토) 오후 5시</span>
+          </div>
+          <div class="event-meta-item">
+            <span class="icon">📍</span>
+            <span>St. Michael zu den Wengen<br>Wengengasse 6, 89073 Ulm</span>
+          </div>
+          <div class="event-meta-item">
+            <span class="icon">🎟</span>
+            <span data-lang-ko="입장 무료 · 자유 기부" data-lang-de="Eintritt frei, Spenden erbeten" data-lang-en="Free admission · Donations welcome">입장 무료 · 자유 기부</span>
+          </div>
+          <div class="event-meta-item">
+            <span class="icon">🤝</span>
+            <span data-lang-ko="충남문화관광재단 × KANE e.V. 공동 주최" data-lang-de="CNCTF × KANE e.V." data-lang-en="CNCTF × KANE e.V.">충남문화관광재단 × KANE e.V. 공동 주최</span>
+          </div>
+        </div>
+        <div class="event-actions">
+          <a class="event-btn primary" href="mailto:kartnet.ev@gmail.com?subject=RSVP Atemklang Konzert" data-lang-ko="참가 신청" data-lang-de="Anmelden" data-lang-en="RSVP">참가 신청</a>
+          <a class="event-btn" onclick="openModal('images/2026_ChungNamJaeDan/einladung.png')" data-lang-ko="초대장 보기" data-lang-de="Einladung" data-lang-en="Invitation">초대장 보기</a>
+        </div>
+        <div class="event-rsvp-note" style="margin-top:14px">
+          <strong data-lang-ko="RSVP 마감" data-lang-de="Anmeldeschluss" data-lang-en="RSVP Deadline">RSVP 마감</strong>:
+          <span data-lang-ko="2026년 11월 6일까지 " data-lang-de="bis 6. November 2026 — " data-lang-en="by 6 November 2026 — ">2026년 11월 6일까지 </span>
+          kartnet.ev@gmail.com
+        </div>
+      </div>
+      <!-- 프로그램 -->
+      <div class="event-program" onclick="openModal('images/2026_ChungNamJaeDan/program1.jpg')">
+        <div class="event-program-label" data-lang-ko="연주 프로그램" data-lang-de="Programm" data-lang-en="Program">연주 프로그램</div>
+        <img src="images/2026_ChungNamJaeDan/program1.jpg" alt="Program">
+        <div class="event-program-caption" data-lang-ko="클릭하여 크게 보기" data-lang-de="Klicken zum Vergrößern" data-lang-en="Click to enlarge">클릭하여 크게 보기</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 이미지 모달 -->
+<div class="img-modal" id="imgModal" onclick="closeModal()">
+  <span class="img-modal-close" onclick="closeModal()">&times;</span>
+  <img id="modalImg" src="" alt="">
+</div>
 <!-- About -->
 <section class="section">
   <span class="section-label" data-lang-ko="소개" data-lang-de="&#220;ber uns" data-lang-en="About">소개</span>
@@ -209,6 +301,35 @@ footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;po
 </footer>
 
 <script>
+// 카운트다운
+(function(){
+  var target = new Date('2026-11-14T17:00:00');
+  function update(){
+    var now = new Date();
+    var diff = Math.floor((target - now) / 86400000);
+    var el = document.getElementById('countdown');
+    if(!el) return;
+    if(diff > 0){
+      var label = {ko:'일 남음', de:'Tage', en:'Days left'};
+      el.textContent = 'D-' + diff;
+    } else if(diff === 0){
+      el.textContent = 'TODAY';
+    } else {
+      el.parentElement.style.display='none';
+    }
+  }
+  update();
+})();
+// 이미지 모달
+function openModal(src){
+  document.getElementById('modalImg').src = src;
+  document.getElementById('imgModal').classList.add('open');
+}
+function closeModal(){
+  document.getElementById('imgModal').classList.remove('open');
+  document.getElementById('modalImg').src='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
 var currentLang='ko';
 function switchLang(lang){
   currentLang=lang;var map={ko:'KR',de:'DE',en:'EN'};
