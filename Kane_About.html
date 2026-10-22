@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KANE — About</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0a;--card:#141414;--accent:#c9a96e;--text:#f0f0f0;--text-secondary:#888;--border:#2a2a2a}
+body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.8;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none;transition:opacity .3s}
+a:hover{opacity:.7}
+
+/* ===== ARTISTIC BACKGROUND ===== */
+.art-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden}
+.art-bg svg{position:absolute;opacity:.04;fill:none;stroke:var(--accent);stroke-width:.5}
+.art-bg .violin{top:5%;left:3%;width:280px;animation:floatA 25s ease-in-out infinite}
+.art-bg .palette{top:15%;right:5%;width:220px;animation:floatB 30s ease-in-out infinite}
+.art-bg .mask{bottom:20%;left:8%;width:200px;animation:floatC 28s ease-in-out infinite}
+.art-bg .brush{bottom:10%;right:10%;width:260px;animation:floatA 22s ease-in-out infinite reverse}
+.art-bg .piano{top:50%;left:50%;transform:translate(-50%,-50%);width:400px;animation:floatB 35s ease-in-out infinite}
+.art-bg .figure1{top:60%;right:20%;width:180px;animation:floatC 20s ease-in-out infinite}
+.art-bg .figure2{top:30%;left:25%;width:150px;animation:floatA 32s ease-in-out infinite}
+@keyframes floatA{0%,100%{transform:translate(0,0) rotate(0deg)}25%{transform:translate(15px,-20px) rotate(2deg)}50%{transform:translate(-10px,15px) rotate(-1deg)}75%{transform:translate(20px,10px) rotate(1.5deg)}}
+@keyframes floatB{0%,100%{transform:translate(0,0) rotate(0deg)}33%{transform:translate(-20px,15px) rotate(-2deg)}66%{transform:translate(15px,-10px) rotate(1.5deg)}}
+@keyframes floatC{0%,100%{transform:translate(0,0)}50%{transform:translate(10px,-15px) rotate(3deg)}}
+.glow{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.glow1{top:-10%;left:-10%;width:500px;height:500px;background:rgba(201,169,110,.06)}
+.glow2{bottom:-10%;right:-10%;width:600px;height:600px;background:rgba(110,140,201,.04)}
+.glow3{top:40%;left:60%;width:400px;height:400px;background:rgba(201,110,140,.03)}
+
+/* All content above background */
+nav,.lang-switch,.hero-about,.section,footer{position:relative;z-index:1}
+
+/* Language Switcher */
+.lang-switch{position:fixed;top:20px;right:20px;z-index:1000;display:flex;gap:6px}
+.lang-btn{background:rgba(20,20,20,.8);border:1px solid var(--border);color:var(--text-secondary);padding:6px 14px;cursor:pointer;font-size:13px;transition:all .3s;border-radius:4px;backdrop-filter:blur(10px)}
+.lang-btn.active{color:var(--accent);border-color:var(--accent)}
+.lang-btn:hover{color:var(--accent)}
+
+/* Navigation */
+nav{position:fixed;top:0;left:0;width:100%;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;z-index:999;background:rgba(10,10,10,.85);backdrop-filter:blur(10px)}
+.logo{font-size:18px;font-weight:700;letter-spacing:4px;color:var(--accent)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{color:var(--text-secondary);font-size:14px;letter-spacing:1px;transition:color .3s;text-decoration:none}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);opacity:1}
+
+/* Hero */
+.hero-about{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 20px;position:relative}
+.hero-about h1{font-size:clamp(48px,10vw,120px);font-weight:200;letter-spacing:12px;text-transform:uppercase;line-height:1.1}
+.hero-about h1 span{color:var(--accent)}
+.hero-subtitle{margin-top:30px;font-size:20px;color:var(--text-secondary);letter-spacing:2px;max-width:700px;line-height:1.8}
+.hero-line{width:1px;height:80px;background:linear-gradient(to bottom,transparent,var(--accent));margin-top:40px;animation:growLine 2s ease infinite}
+@keyframes growLine{0%,100%{opacity:.3;height:60px}50%{opacity:1;height:100px}}
+.scroll-indicator{margin-top:16px;color:var(--text-secondary);font-size:12px;letter-spacing:2px}
+
+/* Section Common */
+.section{max-width:1100px;margin:0 auto;padding:120px 40px}
+.section-label{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.section-title{font-size:clamp(28px,4vw,48px);font-weight:300;line-height:1.3;margin-bottom:40px}
+.section-divider{width:60px;height:1px;background:var(--accent);margin:80px 0;opacity:.4}
+
+/* Mission / Vision */
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:40px}
+.mission-card{padding:40px;border:1px solid var(--border);border-radius:12px;background:rgba(20,20,20,.6);backdrop-filter:blur(5px);transition:all .4s ease}
+.mission-card:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow:0 20px 60px rgba(201,169,110,.1)}
+.mission-card h3{font-size:24px;font-weight:600;color:var(--accent);margin-bottom:20px;letter-spacing:2px}
+.mission-card p{color:var(--text-secondary);font-size:16px;line-height:2}
+
+/* Values */
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:40px}
+.value-item{text-align:center;padding:40px 24px;border:1px solid var(--border);border-radius:12px;background:rgba(20,20,20,.6);transition:all .4s ease}
+.value-item:hover{border-color:var(--accent);transform:translateY(-8px);box-shadow:0 20px 60px rgba(201,169,110,.1)}
+.value-icon{font-size:48px;margin-bottom:20px;display:block}
+.value-item h4{font-size:18px;font-weight:600;color:var(--accent);margin-bottom:12px;letter-spacing:1px}
+.value-item p{color:var(--text-secondary);font-size:14px;line-height:1.8}
+
+/* Timeline */
+.timeline{position:relative;margin-top:40px;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),var(--border),var(--accent))}
+.timeline-item{position:relative;margin-bottom:50px;padding-left:30px}
+.timeline-item::before{content:'';position:absolute;left:-30px;top:8px;width:10px;height:10px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);transition:all .3s}
+.timeline-item:hover::before{background:var(--accent);box-shadow:0 0 20px rgba(201,169,110,.4)}
+.timeline-year{font-size:14px;color:var(--accent);letter-spacing:3px;font-weight:600;margin-bottom:8px}
+.timeline-content h4{font-size:20px;font-weight:500;margin-bottom:8px}
+.timeline-content p{color:var(--text-secondary);font-size:15px;line-height:1.8}
+
+/* Team */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:30px;margin-top:40px}
+.team-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all .4s ease}
+.team-card:hover{border-color:var(--accent);transform:translateY(-8px);box-shadow:0 20px 60px rgba(201,169,110,.15)}
+.team-photo{width:100%;height:280px;overflow:hidden}
+.team-photo .photo-bg{width:100%;height:100%;transition:transform .5s ease,filter .5s ease}
+.team-card:hover .photo-bg{transform:scale(1.1);filter:brightness(1.2)}
+.team-info{padding:24px}
+.team-name{font-size:20px;font-weight:600;margin-bottom:4px;transition:color .3s}
+.team-card:hover .team-name{color:var(--accent)}
+.team-role{font-size:13px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.team-bio{font-size:14px;color:var(--text-secondary);line-height:1.7}
+
+/* Activities */
+.activities-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;margin-top:40px}
+.activity-card{padding:36px;border:1px solid var(--border);border-radius:12px;background:rgba(20,20,20,.6);transition:all .4s ease;position:relative;overflow:hidden}
+.activity-card:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow:0 20px 60px rgba(201,169,110,.1)}
+.activity-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent);opacity:0;transition:opacity .3s}
+.activity-card:hover::before{opacity:1}
+.activity-icon{font-size:36px;margin-bottom:16px;display:block}
+.activity-card h4{font-size:20px;font-weight:600;margin-bottom:12px;color:var(--text);transition:color .3s}
+.activity-card:hover h4{color:var(--accent)}
+.activity-card p{color:var(--text-secondary);font-size:14px;line-height:1.8}
+
+/* Stats */
+.stats-bar{display:flex;justify-content:center;gap:60px;padding:80px 40px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:80px 0}
+.stat-item{text-align:center}
+.stat-number{font-size:clamp(36px,5vw,56px);font-weight:200;color:var(--accent);letter-spacing:2px;display:block}
+.stat-label{font-size:13px;color:var(--text-secondary);letter-spacing:2px;margin-top:8px;text-transform:uppercase}
+
+/* CTA */
+.cta-section{text-align:center;padding:120px 40px;position:relative;z-index:1}
+.cta-section h2{font-size:clamp(28px,4vw,48px);font-weight:300;margin-bottom:20px}
+.cta-section h2 span{color:var(--accent)}
+.cta-section p{color:var(--text-secondary);font-size:18px;margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto}
+.cta-btn{display:inline-block;padding:16px 48px;border:1px solid var(--accent);color:var(--accent);font-size:16px;letter-spacing:3px;text-transform:uppercase;border-radius:50px;transition:all .4s ease;text-decoration:none;cursor:pointer}
+.cta-btn:hover{background:var(--accent);color:#000;opacity:1;box-shadow:0 10px 40px rgba(201,169,110,.3);transform:translateY(-3px)}
+
+/* Footer */
+footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center}
+.footer-logo{font-size:24px;font-weight:700;letter-spacing:6px;color:var(--accent);margin-bottom:16px}
+.footer-desc{color:var(--text-secondary);font-size:14px;max-width:500px;margin:0 auto 30px}
+.footer-links{display:flex;justify-content:center;gap:24px;margin-bottom:30px}
+.footer-links a{color:var(--text-secondary);font-size:13px;letter-spacing:1px;transition:color .3s;text-decoration:none}
+.footer-links a:hover{color:var(--accent)}
+.footer-legal{color:#555;font-size:12px}
+
+/* Responsive */
+@media(max-width:768px){
+  nav{padding:15px 20px}
+  .nav-links{gap:16px}
+  .nav-links a{font-size:12px}
+  .hero-about h1{letter-spacing:6px}
+  .section{padding:80px 20px}
+  .mission-grid{grid-template-columns:1fr;gap:30px}
+  .values-grid{grid-template-columns:1fr;gap:20px}
+  .activities-grid{grid-template-columns:1fr;gap:20px}
+  .team-grid{grid-template-columns:1fr}
+  .stats-bar{flex-wrap:wrap;gap:30px;padding:60px 20px}
+  .timeline{padding-left:30px}
+  .timeline-item{padding-left:20px}
+  .lang-switch{top:15px;right:15px}
+  .lang-btn{padding:4px 10px;font-size:11px}
+  .art-bg svg{opacity:.02}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ARTISTIC BACKGROUND ===== -->
+<div class="art-bg">
+  <svg class="violin" viewBox="0 0 120 300" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 10 L60 50 M45 50 Q30 80 35 110 Q25 130 30 160 Q20 180 35 210 Q30 240 45 260 L75 260 Q90 240 85 210 Q100 180 90 160 Q95 130 85 110 Q90 80 75 50 L45 50 M50 260 L50 290 M70 260 L70 290 M40 290 L80 290 M55 110 Q60 130 65 110 M55 160 Q60 180 65 160 M30 80 L25 65 M90 80 L95 65"/>
+    <circle cx="55" cy="135" r="3"/><circle cx="65" cy="135" r="3"/>
+  </svg>
+  <svg class="palette" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 20 Q160 10 180 60 Q200 110 160 150 Q120 180 70 170 Q20 160 10 110 Q0 60 40 30 Q60 15 100 20Z"/>
+    <circle cx="70" cy="60" r="12"/><circle cx="120" cy="45" r="10"/><circle cx="150" cy="80" r="11"/>
+    <circle cx="140" cy="125" r="9"/><circle cx="90" cy="140" r="13"/><circle cx="50" cy="110" r="10"/>
+  </svg>
+  <svg class="mask" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+    <path d="M40 60 Q40 20 100 20 Q160 20 160 60 L160 140 Q160 200 100 200 Q40 200 40 140Z"/>
+    <ellipse cx="75" cy="90" rx="18" ry="22"/><ellipse cx="125" cy="90" rx="18" ry="22"/>
+    <path d="M70 145 Q100 180 130 145"/>
+  </svg>
+  <svg class="brush" viewBox="0 0 40 300" xmlns="http://www.w3.org/2000/svg">
+    <rect x="15" y="100" width="10" height="180" rx="3"/>
+    <path d="M10 100 L10 40 Q10 20 20 10 Q30 20 30 40 L30 100Z"/>
+  </svg>
+  <svg class="piano" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="20" width="380" height="80" rx="4"/>
+    <line x1="65" y1="20" x2="65" y2="100"/><line x1="120" y1="20" x2="120" y2="100"/>
+    <line x1="175" y1="20" x2="175" y2="100"/><line x1="230" y1="20" x2="230" y2="100"/>
+    <line x1="285" y1="20" x2="285" y2="100"/><line x1="340" y1="20" x2="340" y2="100"/>
+    <rect x="48" y="20" width="22" height="50" rx="2"/><rect x="95" y="20" width="22" height="50" rx="2"/>
+    <rect x="158" y="20" width="22" height="50" rx="2"/><rect x="213" y="20" width="22" height="50" rx="2"/>
+    <rect x="268" y="20" width="22" height="50" rx="2"/><rect x="323" y="20" width="22" height="50" rx="2"/>
+  </svg>
+  <svg class="figure1" viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="30" r="15"/>
+    <path d="M60 45 L60 110 M60 70 L30 95 M60 70 L95 55 M60 110 L35 170 M60 110 L80 175"/>
+    <circle cx="35" cy="170" r="5"/><circle cx="80" cy="175" r="5"/>
+  </svg>
+  <svg class="figure2" viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="25" r="15"/>
+    <path d="M60 40 L55 105 M60 65 L90 50 M60 65 L25 80 M55 105 L30 165 M55 105 L75 170"/>
+    <circle cx="30" cy="165" r="5"/><circle cx="75" cy="170" r="5"/>
+  </svg>
+</div>
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+<div class="glow glow3"></div>
+
+<!-- Language Switcher -->
+<div class="lang-switch">
+  <button class="lang-btn active" onclick="switchLang('ko')">KR</button>
+  <button class="lang-btn" onclick="switchLang('de')">DE</button>
+  <button class="lang-btn" onclick="switchLang('en')">EN</button>
+</div>
+
+<!-- Navigation -->
+<nav>
+  <div class="logo">KANE</div>
+  <div class="nav-links">
+    <a href="#" class="active" data-lang-ko="소개" data-lang-de="Über uns" data-lang-en="About">소개</a>
+    <a href="#" data-lang-ko="매거진" data-lang-de="Magazin" data-lang-en="Magazine">매거진</a>
+    <a href="#" data-lang-ko="제작극장" data-lang-de="Theater" data-lang-en="Theater">제작극장</a>
+    <a href="#" data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero-about">
+  <h1><span>KANE</span></h1>
+  <p class="hero-subtitle" data-lang-ko="Korean Artists Network in Europe — 독일에서 활동하는 한국인 예술가들의 연대를 위한 비영리단체" data-lang-de="Korean Artists Network in Europe — Gemeinnütziger Verein für die Solidarität koreanischer Künstler in Deutschland" data-lang-en="Korean Artists Network in Europe — A non-profit organization for solidarity among Korean artists in Germany">Korean Artists Network in Europe — 독일에서 활동하는 한국인 예술가들의 연대를 위한 비영리단체</p>
+  <div class="hero-line"></div>
+  <div class="scroll-indicator"><span data-lang-ko="스크롤" data-lang-de="Scrollen" data-lang-en="Scroll">스크롤</span> ↓</div>
+</section>
+
+<!-- Mission & Vision -->
+<section class="section">
+  <span class="section-label">Mission & Vision</span>
+  <h2 class="section-title" data-lang-ko="우리가 존재하는 이유" data-lang-de="Warum wir existieren" data-lang-en="Why We Exist">우리가 존재하는 이유</h2>
+  <div class="mission-grid">
+    <div class="mission-card">
+      <h3 data-lang-ko="미션" data-lang-de="Mission" data-lang-en="Mission">미션</h3>
+      <p data-lang-ko="독일에서 활동하는 한국인 예술가들이 서로의 존재를 확인하고, 협력과 교류를 통해 예술적 성장을 이루어가는 연대의 공간을 만듭니다. 우리는 이주와 디아스포라의 경험을 예술로 승화하며, 한국과 독일, 그리고 유럽 사이의 문화적 다리가 되고자 합니다." data-lang-de="Wir schaffen einen solidarischen Raum, in dem koreanische Künstler in Deutschland sich gegenseitig bestärken und durch Zusammenarbeit und Austausch künstlerisch wachsen. Wir sublimieren die Erfahrungen von Migration und Diaspora in Kunst und streben danach, eine kulturelle Brücke zwischen Korea, Deutschland und Europa zu sein." data-lang-en="We create a space of solidarity where Korean artists in Germany can affirm each other's presence and achieve artistic growth through collaboration and exchange. We sublimate the experiences of migration and diaspora into art, aspiring to be a cultural bridge between Korea, Germany, and Europe.">독일에서 활동하는 한국인 예술가들이 서로의 존재를 확인하고, 협력과 교류를 통해 예술적 성장을 이루어가는 연대의 공간을 만듭니다. 우리는 이주와 디아스포라의 경험을 예술로 승화하며, 한국과 독일, 그리고 유럽 사이의 문화적 다리가 되고자 합니다.</p>
+    </div>
+    <div class="mission-card">
+      <h3 data-lang-ko="비전" data-lang-de="Vision" data-lang-en="Vision">비전</h3>
+      <p data-lang-ko="경계를 넘어 연결되는 예술. KANE은 국적과 장르의 경계를 넘어, 독일과 유럽 무대에서 한국 예술가들의 목소리가 울려퍼지는 세상을 꿈꿉니다. 우리의 다양성이 곧 우리의 힘이며, 함께할 때 더 큰 예술이 탄생합니다." data-lang-de="Kunst, die über Grenzen hinweg verbindet. KANE träumt von einer Welt, in der die Stimmen koreanischer Künstler auf den deutschen und europäischen Bühnen widerhallen — jenseits von Nationalität und Genre. Unsere Vielfalt ist unsere Stärke, und gemeinsam entsteht größere Kunst." data-lang-en="Art that connects beyond borders. KANE dreams of a world where Korean artists' voices resound on German and European stages — beyond nationality and genre. Our diversity is our strength, and together, greater art is born.">경계를 넘어 연결되는 예술. KANE은 국적과 장르의 경계를 넘어, 독일과 유럽 무대에서 한국 예술가들의 목소리가 울려퍼지는 세상을 꿈꿉니다. 우리의 다양성이 곧 우리의 힘이며, 함께할 때 더 큰 예술이 탄생합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar" style="position:relative;z-index:1">
+  <div class="stat-item">
+    <span class="stat-number" data-lang-ko="2024" data-lang-de="2024" data-lang-en="2024">2024</span>
+    <span class="stat-label" data-lang-ko="설립연도" data-lang-de="Gründungsjahr" data-lang-en="Founded">설립연도</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">30+</span>
+    <span class="stat-label" data-lang-ko="소속 예술가" data-lang-de="Mitgliedskünstler" data-lang-en="Member Artists">소속 예술가</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">5</span>
+    <span class="stat-label" data-lang-ko="활동 도시" data-lang-de="Aktive Städte" data-lang-en="Active Cities">활동 도시</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">12+</span>
+    <span class="stat-label" data-lang-ko="프로젝트" data-lang-de="Projekte" data-lang-en="Projects">프로젝트</span>
+  </div>
+</div>
+
+<!-- Core Values -->
+<section class="section">
+  <span class="section-label" data-lang-ko="핵심 가치" data-lang-de="Kernwerte" data-lang-en="Core Values">핵심 가치</span>
+  <h2 class="section-title" data-lang-ko="KANE이 믿는 것들" data-lang-de="Woran KANE glaubt" data-lang-en="What KANE Believes In">KANE이 믿는 것들</h2>
+  <div class="values-grid">
+    <div class="value-item">
+      <span class="value-icon">🤝</span>
+      <h4 data-lang-ko="연대" data-lang-de="Solidarität" data-lang-en="Solidarity">연대</h4>
+      <p data-lang-ko="혼자가 아닌 함께. 서로의 작업을 지지하고, 어려움을 나누며, 성장을 축하합니다." data-lang-de="Nicht allein, sondern zusammen. Wir unterstützen die Arbeit der anderen, teilen Schwierigkeiten und feiern Wachstum." data-lang-en="Not alone, but together. We support each other's work, share difficulties, and celebrate growth.">혼자가 아닌 함께. 서로의 작업을 지지하고, 어려움을 나누며, 성장을 축하합니다.</p>
+    </div>
+    <div class="value-item">
+      <span class="value-icon">🌍</span>
+      <h4 data-lang-ko="다양성" data-lang-de="Vielfalt" data-lang-en="Diversity">다양성</h4>
+      <p data-lang-ko="장르와 세대를 넘어. 시각예술, 공연, 음악, 문학 등 모든 분야의 예술가가 함께합니다." data-lang-de="Über Genres und Generationen hinweg. Künstler aller Bereiche — bildende Kunst, Performance, Musik, Literatur — kommen zusammen." data-lang-en="Beyond genres and generations. Artists from all fields — visual arts, performance, music, literature — come together.">장르와 세대를 넘어. 시각예술, 공연, 음악, 문학 등 모든 분야의 예술가가 함께합니다.</p>
+    </div>
+    <div class="value-item">
+      <span class="value-icon">🔗</span>
+      <h4 data-lang-ko="연결" data-lang-de="Verbindung" data-lang-en="Connection">연결</h4>
+      <p data-lang-ko="한국과 독일, 그 사이. 두 문화를 잇는 다리로서, 새로운 예술적 언어를 만들어갑니다." data-lang-de="Zwischen Korea und Deutschland. Als Brücke zwischen zwei Kulturen schaffen wir eine neue künstlerische Sprache." data-lang-en="Between Korea and Germany. As a bridge between two cultures, we create a new artistic language.">한국과 독일, 그 사이. 두 문화를 잇는 다리로서, 새로운 예술적 언어를 만들어갑니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Activities -->
+<section class="section">
+  <span class="section-label" data-lang-ko="주요 활동" data-lang-de="Aktivitäten" data-lang-en="Activities">주요 활동</span>
+  <h2 class="section-title" data-lang-ko="KANE이 하는 일" data-lang-de="Was KANE tut" data-lang-en="What KANE Does">KANE이 하는 일</h2>
+  <div class="activities-grid">
+    <div class="activity-card">
+      <span class="activity-icon">🎭</span>
+      <h4 data-lang-ko="제작극장 운영" data-lang-de="Theaterbetrieb" data-lang-en="Theater Operations">제작극장 운영</h4>
+      <p data-lang-ko="한국인 예술가들의 실험과 창작을 위한 전용 공간을 운영합니다. 공연, 전시, 워크숍 등 다양한 프로그램을 기획하고 제작합니다." data-lang-de="Wir betreiben einen eigenen Raum für Experimente und kreatives Schaffen koreanischer Künstler. Wir planen und produzieren diverse Programme wie Aufführungen, Ausstellungen und Workshops." data-lang-en="We operate a dedicated space for Korean artists' experimentation and creation. We plan and produce diverse programs including performances, exhibitions, and workshops.">한국인 예술가들의 실험과 창작을 위한 전용 공간을 운영합니다. 공연, 전시, 워크숍 등 다양한 프로그램을 기획하고 제작합니다.</p>
+    </div>
+    <div class="activity-card">
+      <span class="activity-icon">📰</span>
+      <h4 data-lang-ko="매거진 발행" data-lang-de="Magazin-Veröffentlichung" data-lang-en="Magazine Publication">매거진 발행</h4>
+      <p data-lang-ko="미술비평, 공연리뷰, 에세이, 인터뷰 등 회원들의 기고글을 온라인 매거진으로 발행합니다. 한국어, 독일어, 영어로 다국어 지원합니다." data-lang-de="Wir veröffentlichen Beiträge unserer Mitglieder als Online-Magazin: Kunstkritiken, Aufführungsrezensionen, Essays und Interviews — auf Koreanisch, Deutsch und Englisch." data-lang-en="We publish members' contributions as an online magazine: art criticism, performance reviews, essays, and interviews — in Korean, German, and English.">미술비평, 공연리뷰, 에세이, 인터뷰 등 회원들의 기고글을 온라인 매거진으로 발행합니다. 한국어, 독일어, 영어로 다국어 지원합니다.</p>
+    </div>
+    <div class="activity-card">
+      <span class="activity-icon">🤝</span>
+      <h4 data-lang-ko="네트워킹" data-lang-de="Networking" data-lang-en="Networking">네트워킹</h4>
+      <p data-lang-ko="정기 모임, 스튜디오 방문, 공동 프로젝트 등을 통해 회원들 간의 교류를 촉진합니다. 독일 현지 기관 및 국제 네트워크와의 연결도 지원합니다." data-lang-de="Durch regelmäßige Treffen, Studiobesuche und gemeinsame Projekte fördern wir den Austausch zwischen den Mitgliedern. Wir unterstützen auch die Vernetzung mit deutschen Institutionen und internationalen Netzwerken." data-lang-en="Through regular meetups, studio visits, and joint projects, we facilitate exchange among members. We also support connections with German institutions and international networks.">정기 모임, 스튜디오 방문, 공동 프로젝트 등을 통해 회원들 간의 교류를 촉진합니다. 독일 현지 기관 및 국제 네트워크와의 연결도 지원합니다.</p>
+    </div>
+    <div class="activity-card">
+      <span class="activity-icon">🎓</span>
+      <h4 data-lang-ko="교육 & 멘토링" data-lang-de="Bildung & Mentoring" data-lang-en="Education & Mentoring">교육 & 멘토링</h4>
+      <p data-lang-ko="독일에서의 예술 활동에 필요한 실질적 정보와 경험을 공유합니다. 비자, 펀딩, 전시 지원 등 현지 정착에 도움이 되는 멘토링 프로그램을 운영합니다." data-lang-de="Wir teilen praktische Informationen und Erfahrungen für künstlerische Tätigkeiten in Deutschland. Wir betreiben Mentoring-Programme zu Themen wie Visa, Förderung und Ausstellungsunterstützung." data-lang-en="We share practical information and experiences needed for artistic activities in Germany. We run mentoring programs covering visa, funding, exhibition support, and other settlement topics.">독일에서의 예술 활동에 필요한 실질적 정보와 경험을 공유합니다. 비자, 펀딩, 전시 지원 등 현지 정착에 도움이 되는 멘토링 프로그램을 운영합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section class="section">
+  <span class="section-label" data-lang-ko="연혁" data-lang-de="Chronik" data-lang-en="History">연혁</span>
+  <h2 class="section-title" data-lang-ko="KANE의 발자취" data-lang-de="KANEs Weg" data-lang-en="KANE's Journey">KANE의 발자취</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <span class="timeline-year">2024</span>
+      <div class="timeline-content">
+        <h4 data-lang-ko="KANE 설립" data-lang-de="Gründung von KANE" data-lang-en="KANE Founded">KANE 설립</h4>
+        <p data-lang-ko="독일 거주 한국인 예술가 10명이 모여 비영리단체 KANE을 설립. 베를린에서 첫 번째 네트워킹 모임 개최." data-lang-de="10 koreanische Künstler in Deutschland gründen den gemeinnützigen Verein KANE. Erstes Networking-Treffen in Berlin." data-lang-en="10 Korean artists in Germany come together to establish the non-profit KANE. First networking meetup held in Berlin.">독일 거주 한국인 예술가 10명이 모여 비영리단체 KANE을 설립. 베를린에서 첫 번째 네트워킹 모임 개최.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-year">2025</span>
+      <div class="timeline-content">
+        <h4 data-lang-ko="첫 공동 전시 & 매거진 창간" data-lang-de="Erste gemeinsame Ausstellung & Magazin-Start" data-lang-en="First Joint Exhibition & Magazine Launch">첫 공동 전시 & 매거진 창간</h4>
+        <p data-lang-ko="KANE 회원들의 첫 공동 전시 'Zwischen — 사이에서' 개최. 온라인 매거진 KANE Magazine 창간." data-lang-de="Erste gemeinsame Ausstellung der KANE-Mitglieder 'Zwischen'. Start des Online-Magazins KANE Magazine." data-lang-en="First joint exhibition of KANE members 'Zwischen — In Between'. Launch of online KANE Magazine.">KANE 회원들의 첫 공동 전시 'Zwischen — 사이에서' 개최. 온라인 매거진 KANE Magazine 창간.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <span class="timeline-year">2026</span>
+      <div class="timeline-content">
+        <h4 data-lang-ko="제작극장 오픈 & 회원 확대" data-lang-de="Eröffnung des Produktionstheaters & Mitgliedererweiterung" data-lang-en="Production Theater Opens & Membership Expansion">제작극장 오픈 & 회원 확대</h4>
+        <p data-lang-ko="KANE 제작극장 정식 오픈. 회원 30명 돌파. 독일 5개 도시에서 활동하는 네트워크로 성장." data-lang-de="Offizielle Eröffnung des KANE-Produktionstheaters. Über 30 Mitglieder. Wachstum zum Netzwerk in 5 deutschen Städten." data-lang-en="Official opening of KANE Production Theater. Over 30 members. Growth into a network active in 5 German cities.">KANE 제작극장 정식 오픈. 회원 30명 돌파. 독일 5개 도시에서 활동하는 네트워크로 성장.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="section">
+  <span class="section-label" data-lang-ko="운영진" data-lang-de="Team" data-lang-en="Team">운영진</span>
+  <h2 class="section-title" data-lang-ko="KANE을 이끄는 사람들" data-lang-de="Die Menschen hinter KANE" data-lang-en="The People Behind KANE">KANE을 이끄는 사람들</h2>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-photo"><div class="photo-bg" style="background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)"></div></div>
+      <div class="team-info">
+        <div class="team-role" data-lang-ko="대표" data-lang-de="Vorsitzende/r" data-lang-en="Director">대표</div>
+        <div class="team-name" data-lang-ko="홍길동" data-lang-de="Gildong Hong" data-lang-en="Gildong Hong">홍길동</div>
+        <p class="team-bio" data-lang-ko="연출가. 베를린 거주. 한독 간 공연예술 교류 프로젝트를 다수 기획하였으며, 디아스포라 예술의 새로운 가능성을 탐구하고 있습니다." data-lang-de="Regisseur/in. Wohnhaft in Berlin. Hat zahlreiche deutsch-koreanische Performing-Arts-Austauschprojekte initiiert und erforscht neue Möglichkeiten der Diaspora-Kunst." data-lang-en="Director. Based in Berlin. Has initiated numerous Korean-German performing arts exchange projects and explores new possibilities in diaspora art.">연출가. 베를린 거주. 한독 간 공연예술 교류 프로젝트를 다수 기획하였으며, 디아스포라 예술의 새로운 가능성을 탐구하고 있습니다.</p>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo"><div class="photo-bg" style="background:linear-gradient(135deg,#2d1b42,#1a1a2e,#16213e)"></div></div>
+      <div class="team-info">
+        <div class="team-role" data-lang-ko="부대표" data-lang-de="Stellv. Vorsitzende/r" data-lang-en="Vice Director">부대표</div>
+        <div class="team-name" data-lang-ko="김예술" data-lang-de="Yesul Kim" data-lang-en="Yesul Kim">김예술</div>
+        <p class="team-bio" data-lang-ko="시각예술가. 뮌헨 거주. 설치미술과 미디어아트를 통해 이주의 경험과 기억을 시각화하는 작업을 하고 있습니다." data-lang-de="Bildende Künstlerin. Wohnhaft in München. Visualisiert Migrationserfahrungen und Erinnerungen durch Installationen und Medienkunst." data-lang-en="Visual artist. Based in Munich. Visualizes migration experiences and memories through installation and media art.">시각예술가. 뮌헨 거주. 설치미술과 미디어아트를 통해 이주의 경험과 기억을 시각화하는 작업을 하고 있습니다.</p>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-photo"><div class="photo-bg" style="background:linear-gradient(135deg,#1b2d2a,#1a2e1a,#213e16)"></div></div>
+      <div class="team-info">
+        <div class="team-role" data-lang-ko="사무국장" data-lang-de="Geschäftsführer/in" data-lang-en="Secretary General">사무국장</div>
+        <div class="team-name" data-lang-ko="박문화" data-lang-de="Munhwa Park" data-lang-en="Munhwa Park">박문화</div>
+        <p class="team-bio" data-lang-ko="문화기획자. 함부르크 거주. 독일 문화재단 및 한국문화원과의 협력 프로젝트를 총괄하며, KANE의 행정과 운영을 담당합니다." data-lang-de="Kulturmanager/in. Wohnhaft in Hamburg. Koordiniert Kooperationsprojekte mit deutschen Kulturstiftungen und dem Koreanischen Kulturzentrum." data-lang-en="Cultural manager. Based in Hamburg. Coordinates cooperation projects with German cultural foundations and the Korean Cultural Center.">문화기획자. 함부르크 거주. 독일 문화재단 및 한국문화원과의 협력 프로젝트를 총괄하며, KANE의 행정과 운영을 담당합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 data-lang-ko="<span>KANE</span>과 함께하세요" data-lang-de="Werden Sie Teil von <span>KANE</span>" data-lang-en="Join <span>KANE</span>"><span>KANE</span>과 함께하세요</h2>
+  <p data-lang-ko="독일에서 활동하는 한국인 예술가라면 누구나 환영합니다. 장르, 경력, 도시에 관계없이 함께 연대하고 성장해요." data-lang-de="Alle koreanischen Künstler in Deutschland sind willkommen. Unabhängig von Genre, Karriere oder Stadt — lassen Sie uns gemeinsam wachsen." data-lang-en="All Korean artists in Germany are welcome. Regardless of genre, career, or city — let's grow together.">독일에서 활동하는 한국인 예술가라면 누구나 환영합니다. 장르, 경력, 도시에 관계없이 함께 연대하고 성장해요.</p>
+  <a href="#" class="cta-btn" data-lang-ko="회원 가입 신청" data-lang-de="Mitglied werden" data-lang-en="Become a Member">회원 가입 신청</a>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">KANE</div>
+  <p class="footer-desc" data-lang-ko="독일에서 활동하는 한국인 예술가들의 연대를 위한 비영리단체" data-lang-de="Gemeinnütziger Verein für die Solidarität koreanischer Künstler in Deutschland" data-lang-en="Non-profit organization for solidarity among Korean artists in Germany">독일에서 활동하는 한국인 예술가들의 연대를 위한 비영리단체</p>
+  <div class="footer-links">
+    <a href="#">Instagram</a><a href="#">Facebook</a>
+    <a href="#" data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</a>
+  </div>
+  <p class="footer-legal">© 2026 KANE e.V. All rights reserved. | <a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
+</footer>
+
+<script>
+var currentLang='ko';
+function switchLang(lang){
+  currentLang=lang;
+  var map={ko:'KR',de:'DE',en:'EN'};
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    b.classList.toggle('active',b.textContent.trim()===map[lang]);
+  });
+  document.querySelectorAll('[data-lang-'+lang+']').forEach(function(el){
+    var val=el.getAttribute('data-lang-'+lang);
+    if(val.indexOf('<')!==-1){el.innerHTML=val;}
+    else{el.textContent=val;}
+  });
+}
+</script>
+</body>
+</html>

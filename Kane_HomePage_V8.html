@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0a0a0a;--card:#141414;--card-hover:#1c1c1c;--accent:#c9a96e;--text:#f0f0f0;--text-secondary:#888;--border:#2a2a2a}
-body{background:#0a0a0a url('bg1.jpg') center center / cover no-repeat fixed;color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.8;overflow-x:hidden}
+body{background:#0a0a0a url('images/backgrounds/bg1.jpg') center center / cover no-repeat fixed;color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.8;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 .bg-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background:rgba(0,0,0,0.7)}
 .lang-switch{position:fixed;top:20px;right:20px;z-index:1001;display:flex;gap:6px}
@@ -96,10 +96,10 @@ footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;po
   <button class="lang-btn" onclick="switchLang('en')">EN</button>
 </div>
 <nav>
-  <div class="logo" onclick="location.href='Kane_HomePage_V8.html'"><img src="kane-logo.png" alt="KANE"><span>KANE</span></div>
+  <div class="logo" onclick="location.href='Kane_HomePage_V8.html'"><img src="images/logos/kane-logo.png" alt="KANE"><span>KANE</span></div>
   <div class="nav-links">
     <a href="Kane_HomePage_V8.html" class="active" data-lang-ko="소개" data-lang-de="&#220;ber uns" data-lang-en="About">소개</a>
-    <a href="Kane_Magazine_V1.html" data-lang-ko="매거진" data-lang-de="Magazin" data-lang-en="Magazine">매거진</a>
+    <a href="Kane_Magazine_V3.html" data-lang-ko="매거진" data-lang-de="Magazin" data-lang-en="Magazine">매거진</a>
     <a href="Kane_Theater_V1.html" data-lang-ko="제작극장" data-lang-de="Produktionshaus" data-lang-en="Produktionshaus">제작극장</a>
     <a href="mailto:kartnet.ev@gmail.com" data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</a>
   </div>
@@ -144,7 +144,7 @@ footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;po
   <div class="activities-grid">    
 	<div class="activity-card"><span class="activity-icon">&#127760;</span><h4 data-lang-ko="네트워크 구축" data-lang-de="Netzwerkaufbau" data-lang-en="Network Building">네트워크 구축</h4><p data-lang-ko="유럽 전역의 한인 예술가들 간 교류와 상호 지원 체계를 마련합니다." data-lang-de="Wir schaffen Austausch- und Unterst&#252;tzungssysteme zwischen koreanischen K&#252;nstlern in ganz Europa." data-lang-en="We establish exchange and mutual support systems among Korean artists across Europe.">유럽 전역의 한인 예술가들 간 교류와 상호 지원 체계를 마련합니다.</p></div>
     <div class="activity-card"><span class="activity-icon">&#127970;</span><h4 data-lang-ko="기관 협력" data-lang-de="Institutionelle Kooperation" data-lang-en="Institutional Cooperation">기관 협력</h4><p data-lang-ko="유럽 및 한국의 다양한 문화·예술 관련 조직과 긴밀히 협력합니다." data-lang-de="Wir kooperieren eng mit verschiedenen Kultur- und Kunstorganisationen in Europa und Korea." data-lang-en="We closely cooperate with various cultural and arts organizations in Europe and Korea.">유럽 및 한국의 다양한 문화·예술 관련 조직과 긴밀히 협력합니다.</p></div>
-    <div class="activity-card" onclick="window.location.href='Kane_Magazine_V1.html'" style="cursor:pointer"><span class="activity-icon">&#127917;</span><h4 data-lang-ko="문화 프로그램" data-lang-de="Kulturprogramme" data-lang-en="Cultural Programs">문화 프로그램</h4><p data-lang-ko="워크숍, 세미나, 문화 교류 프로그램 및 공연과 행사를 기획·운영합니다." data-lang-de="Wir planen und betreiben Workshops, Seminare, Kulturaustauschprogramme sowie Auff&#252;hrungen und Veranstaltungen." data-lang-en="We plan and operate workshops, seminars, cultural exchange programs, performances, and events.">워크숍, 세미나, 문화 교류 프로그램 및 공연과 행사를 기획·운영합니다.</p></div>
+    <div class="activity-card" onclick="window.location.href='Kane_Magazine_V3.html'" style="cursor:pointer"><span class="activity-icon">&#127917;</span><h4 data-lang-ko="문화 프로그램" data-lang-de="Kulturprogramme" data-lang-en="Cultural Programs">문화 프로그램</h4><p data-lang-ko="워크숍, 세미나, 문화 교류 프로그램 및 공연과 행사를 기획·운영합니다." data-lang-de="Wir planen und betreiben Workshops, Seminare, Kulturaustauschprogramme sowie Auff&#252;hrungen und Veranstaltungen." data-lang-en="We plan and operate workshops, seminars, cultural exchange programs, performances, and events.">워크숍, 세미나, 문화 교류 프로그램 및 공연과 행사를 기획·운영합니다.</p></div>
     <div class="activity-card" onclick="window.location.href='Kane_Theater_V1.html'" style="cursor:pointer"><span class="activity-icon">&#128218;</span><h4 data-lang-ko="한국 모델 협력" data-lang-de="Koreanische Modellkooperation" data-lang-en="Korean Model Cooperation">한국 모델 협력</h4><p data-lang-ko="선진적인 모델인 공공 지원 극장 제도(&#246;ffentlich getragene Theater)의 한국 내 정착과 발전을 지원합니다." data-lang-de="Wir unterst&#252;tzen die Etablierung des &#246;ffentlich getragenen Theatersystems in Korea." data-lang-en="We support the establishment of the publicly supported theater system in Korea.">선진적인 모델인 공공 지원 극장 제도(&#246;ffentlich getragene Theater)의 한국 내 정착과 발전을 지원합니다.</p></div>
   </div>
 </section>
@@ -202,7 +202,7 @@ footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;po
 
 <!-- Footer -->
 <footer>
-  <div class="footer-logo" style="cursor:pointer" onclick="location.href='Kane_HomePage_V8.html'"><img src="kane-logo.png" alt="KANE"><span>KANE</span></div>
+  <div class="footer-logo" style="cursor:pointer" onclick="location.href='Kane_HomePage_V8.html'"><img src="images/logos/kane-logo.png" alt="KANE"><span>KANE</span></div>
   <p class="footer-desc" data-lang-ko="유럽 내 한인 예술가들의 든든한 연대와 성장을 위한 플랫폼" data-lang-de="Plattform f&#252;r Solidarit&#228;t und Wachstum koreanischer K&#252;nstler in Europa" data-lang-en="Platform for solidarity and growth of Korean artists in Europe">유럽 내 한인 예술가들의 든든한 연대와 성장을 위한 플랫폼</p>
   <div class="footer-links"><a href="mailto:kartnet.ev@gmail.com">&#9993; kartnet.ev@gmail.com</a><a href="https://www.facebook.com/groups/1299952331800917/" target="_blank">Facebook</a><a href="mailto:kartnet.ev@gmail.com" data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</a></div>
   <p class="footer-legal">&#169; 2026 KANE e.V. | Ulm, Germany | VR 723293 | <a href="#">Datenschutz</a></p>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0a0a0a;--card:#141414;--card-hover:#1c1c1c;--accent:#c9a96e;--text:#f0f0f0;--text-secondary:#888;--border:#2a2a2a}
-body{background:#0a0a0a url('bg1.jpg') center center / cover no-repeat fixed;color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.8;overflow-x:hidden}
+body{background:#0a0a0a url('images/backgrounds/bg1.jpg') center center / cover no-repeat fixed;color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.8;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 
 .bg-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background:rgba(0,0,0,0.65)}
@@ -163,7 +163,7 @@ footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;po
 </div>
 
 <nav>
-  <div class="logo" onclick="showPage('about')">KANE</div>
+  <div class="logo" onclick="location.href='Kane_HomePage_V7.html'"><img src="images/logos/kane-logo.png" alt="KANE" style="height:60px"></div>
   <button class="menu-toggle" onclick="toggleMenu()">&#9776;</button>
   <div class="nav-links" id="navLinks">
     <a onclick="showPage('about')" class="active" data-nav="about" data-lang-ko="소개" data-lang-de="&#220;ber uns" data-lang-en="About">소개</a>
@@ -187,7 +187,7 @@ footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;po
     <div class="mission-grid">
       <div class="mission-card">
         <h3 data-lang-ko="미션" data-lang-de="Mission" data-lang-en="Mission">미션</h3>
-        <p data-lang-ko="독일에서 활동하는 한국인 예술가들이 서로의 존재를 확인하고, 협력과 교류를 통해 예술적 성장을 이루어가는 연대의 공간을 만듭니다." data-lang-de="Wir schaffen einen solidarischen Raum, in dem koreanische K&#252;nstler in Deutschland sich gegenseitig best&#228;rken und durch Zusammenarbeit k&#252;nstlerisch wachsen." data-lang-en="We create a space of solidarity where Korean artists in Germany can affirm each other and achieve artistic growth through collaboration.">독일에서 활동하는 한국인 예술가들이 서로의 존재를 확인하고, 협력과 교류를 통해 예술적 성장을 이루어가는 연대의 공간을 만듭니다.</p>
+        <p data-lang-ko="독일과 유럽에서 활동하는 한국인 예술가들이 서로의 존재를 확인하고, 협력과 교류를 통해 예술적 성장을 이루어가는 연대의 공간을 만듭니다." data-lang-de="Wir schaffen einen solidarischen Raum, in dem koreanische K&#252;nstler in Deutschland sich gegenseitig best&#228;rken und durch Zusammenarbeit k&#252;nstlerisch wachsen." data-lang-en="We create a space of solidarity where Korean artists in Germany can affirm each other and achieve artistic growth through collaboration.">독일과 유럽에서 활동하는 한국인 예술가들이 서로의 존재를 확인하고, 협력과 교류를 통해 예술적 성장을 이루어가는 연대의 공간을 만듭니다.</p>
       </div>
       <div class="mission-card">
         <h3 data-lang-ko="비전" data-lang-de="Vision" data-lang-en="Vision">비전</h3>
@@ -197,7 +197,7 @@ footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;po
   </section>
 
   <div class="stats-bar">
-    <div class="stat-item"><span class="stat-number">2024</span><span class="stat-label" data-lang-ko="설립연도" data-lang-de="Gr&#252;ndungsjahr" data-lang-en="Founded">설립연도</span></div>
+    <div class="stat-item"><span class="stat-number">2025</span><span class="stat-label" data-lang-ko="설립연도" data-lang-de="Gr&#252;ndungsjahr" data-lang-en="Founded">설립연도</span></div>
     <div class="stat-item"><span class="stat-number">30+</span><span class="stat-label" data-lang-ko="소속 예술가" data-lang-de="Mitgliedsk&#252;nstler" data-lang-en="Member Artists">소속 예술가</span></div>
     <div class="stat-item"><span class="stat-number">5</span><span class="stat-label" data-lang-ko="활동 도시" data-lang-de="Aktive St&#228;dte" data-lang-en="Active Cities">활동 도시</span></div>
     <div class="stat-item"><span class="stat-number">12+</span><span class="stat-label" data-lang-ko="프로젝트" data-lang-de="Projekte" data-lang-en="Projects">프로젝트</span></div>
@@ -296,7 +296,7 @@ footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;po
 </div>
 
 <footer>
-  <div class="footer-logo" style="cursor:pointer" onclick="showPage('about')">KANE</div>
+  <div class="footer-logo" style="cursor:pointer" onclick="showPage('about')"><img src="images/logos/kane-logo.png" alt="KANE" style="height:50px;vertical-align:middle;margin-right:10px"></div>
   <p class="footer-desc" data-lang-ko="독일에서 활동하는 한국인 예술가들의 연대를 위한 비영리단체" data-lang-de="Gemeinn&#252;tziger Verein f&#252;r die Solidarit&#228;t koreanischer K&#252;nstler in Deutschland" data-lang-en="Non-profit for solidarity among Korean artists in Germany">독일에서 활동하는 한국인 예술가들의 연대를 위한 비영리단체</p>
   <div class="footer-links"><a href="#">Instagram</a><a href="#">Facebook</a><a onclick="showPage('contact')" style="cursor:pointer" data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</a></div>
   <p class="footer-legal">&#169; 2026 KANE e.V. All rights reserved. | <a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>

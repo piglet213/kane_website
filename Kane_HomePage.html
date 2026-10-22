@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KANE Magazine</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0a;--card:#1a1a1a;--accent:#c9a96e;--text:#f0f0f0;--text-secondary:#888;--border:#2a2a2a}
+body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,sans-serif;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+/* Language Switcher */
+.lang-switch{position:fixed;top:20px;right:20px;z-index:1000;display:flex;gap:6px}
+.lang-btn{background:var(--card);border:1px solid var(--border);color:var(--text-secondary);padding:6px 14px;cursor:pointer;font-size:13px;transition:all .3s;border-radius:4px}
+.lang-btn.active{color:var(--accent);border-color:var(--accent)}
+.lang-btn:hover{color:var(--accent)}
+
+/* Navigation */
+nav{position:fixed;top:0;left:0;width:100%;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;z-index:999;background:rgba(10,10,10,.9);backdrop-filter:blur(10px)}
+.logo{font-size:18px;font-weight:700;letter-spacing:4px;color:var(--accent)}
+
+/* Hero */
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 20px}
+.hero h1{font-size:clamp(48px,10vw,120px);font-weight:200;letter-spacing:12px;text-transform:uppercase;line-height:1.1}
+.hero h1 span{color:var(--accent)}
+.hero p{margin-top:24px;font-size:18px;color:var(--text-secondary);letter-spacing:3px;max-width:600px}
+.scroll-indicator{position:absolute;bottom:40px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text-secondary);font-size:12px;letter-spacing:2px;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+
+/* Filter */
+.filter-section{padding:40px 40px 20px;position:sticky;top:70px;z-index:99;background:rgba(10,10,10,.95);backdrop-filter:blur(10px)}
+.filter-bar{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.filter-btn{background:transparent;border:1px solid var(--border);color:var(--text-secondary);padding:10px 24px;cursor:pointer;font-size:14px;transition:all .3s;border-radius:30px;letter-spacing:1px}
+.filter-btn.active,.filter-btn:hover{color:var(--accent);border-color:var(--accent)}
+
+/* Cards Grid */
+.magazine-grid{padding:40px;display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:30px;max-width:1400px;margin:0 auto}
+.card{background:var(--card);border-radius:8px;overflow:hidden;cursor:pointer;transition:all .5s cubic-bezier(.25,.46,.45,.94);opacity:0;transform:translateY(40px)}
+.card.visible{opacity:1;transform:translateY(0)}
+.card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(201,169,110,.1)}
+.card-image{width:100%;height:240px;overflow:hidden}
+.card-image img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.card:hover .card-image img{transform:scale(1.08)}
+.card-content{padding:28px}
+.card-category{display:inline-block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:4px 12px;border-radius:20px;margin-bottom:16px}
+.card-title{font-size:22px;font-weight:600;margin-bottom:12px;line-height:1.3}
+.card-meta{display:flex;justify-content:space-between;align-items:center;color:var(--text-secondary);font-size:13px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.card-author{font-weight:500}
+.card-publication{font-style:italic;color:var(--accent);opacity:.7}
+
+/* Modal */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.95);z-index:2000;display:none;overflow-y:auto;opacity:0;transition:opacity .4s}
+.modal-overlay.active{display:block;opacity:1}
+.modal-close{position:fixed;top:30px;right:30px;background:none;border:1px solid var(--border);color:var(--text);width:50px;height:50px;font-size:24px;cursor:pointer;z-index:2001;border-radius:50%;transition:all .3s;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{border-color:var(--accent);color:var(--accent);transform:rotate(90deg)}
+.modal-content{max-width:800px;margin:80px auto;padding:60px 40px;animation:modalSlide .5s ease}
+@keyframes modalSlide{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.modal-category{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.modal-title{font-size:clamp(32px,5vw,48px);font-weight:300;line-height:1.2;margin-bottom:30px}
+.modal-info{display:flex;gap:30px;color:var(--text-secondary);font-size:14px;margin-bottom:40px;padding-bottom:30px;border-bottom:1px solid var(--border)}
+.modal-body{font-size:17px;line-height:2;color:#ccc}
+.modal-body p{margin-bottom:24px}
+
+/* Footer */
+footer{border-top:1px solid var(--border);padding:60px 40px;text-align:center;margin-top:80px}
+.footer-logo{font-size:24px;font-weight:700;letter-spacing:6px;color:var(--accent);margin-bottom:16px}
+.footer-desc{color:var(--text-secondary);font-size:14px;max-width:500px;margin:0 auto 30px}
+.footer-links{display:flex;justify-content:center;gap:24px;margin-bottom:30px}
+.footer-links a{color:var(--text-secondary);font-size:13px;letter-spacing:1px;transition:color .3s}
+.footer-links a:hover{color:var(--accent)}
+.footer-legal{color:#555;font-size:12px}
+
+@media(max-width:768px){
+  nav{padding:15px 20px}
+  .hero h1{letter-spacing:6px}
+  .magazine-grid{padding:20px;grid-template-columns:1fr;gap:20px}
+  .filter-section{padding:20px}
+  .filter-bar{gap:8px}
+  .filter-btn{padding:8px 16px;font-size:12px}
+  .modal-content{padding:40px 20px;margin:60px auto}
+  .modal-info{flex-direction:column;gap:10px}
+  .lang-switch{top:15px;right:15px}
+  .lang-btn{padding:4px 10px;font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<!-- Language Switcher -->
+<div class="lang-switch">
+  <button class="lang-btn active" onclick="switchLang('ko')">KR</button>
+  <button class="lang-btn" onclick="switchLang('de')">DE</button>
+  <button class="lang-btn" onclick="switchLang('en')">EN</button>
+</div>
+
+<!-- Navigation -->
+<nav>
+  <div class="logo">KANE</div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <h1><span>KANE</span><br>Magazine</h1>
+  <p data-lang-ko="독일 한국인 예술가들의 목소리"
+     data-lang-de="Stimmen koreanischer Künstler in Deutschland"
+     data-lang-en="Voices of Korean Artists in Germany">독일 한국인 예술가들의 목소리</p>
+  <div class="scroll-indicator">
+    <span data-lang-ko="스크롤" data-lang-de="Scrollen" data-lang-en="Scroll">스크롤</span>
+    <span>↓</span>
+  </div>
+</section>
+
+<!-- Filter -->
+<section class="filter-section">
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all"
+      data-lang-ko="전체" data-lang-de="Alle" data-lang-en="All">전체</button>
+    <button class="filter-btn" data-filter="criticism"
+      data-lang-ko="미술비평" data-lang-de="Kunstkritik" data-lang-en="Art Criticism">미술비평</button>
+    <button class="filter-btn" data-filter="review"
+      data-lang-ko="공연리뷰" data-lang-de="Aufführungskritik" data-lang-en="Performance Review">공연리뷰</button>
+    <button class="filter-btn" data-filter="essay"
+      data-lang-ko="에세이" data-lang-de="Essay" data-lang-en="Essay">에세이</button>
+    <button class="filter-btn" data-filter="interview"
+      data-lang-ko="인터뷰" data-lang-de="Interview" data-lang-en="Interview">인터뷰</button>
+  </div>
+</section>
+
+<!-- Magazine Grid -->
+<section class="magazine-grid" id="grid"></section>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal">
+  <button class="modal-close" onclick="closeModal()">×</button>
+  <div class="modal-content">
+    <div class="modal-category" id="modal-category"></div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-info">
+      <span id="modal-author"></span>
+      <span id="modal-publication"></span>
+      <span id="modal-date"></span>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">KANE</div>
+  <p class="footer-desc"
+     data-lang-ko="독일에서 활동하는 한국인 예술가들의 연대를 위한 비영리단체"
+     data-lang-de="Gemeinnütziger Verein für die Solidarität koreanischer Künstler in Deutschland"
+     data-lang-en="Non-profit organization for solidarity among Korean artists in Germany">
+    독일에서 활동하는 한국인 예술가들의 연대를 위한 비영리단체</p>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">Facebook</a>
+    <a href="#" data-lang-ko="문의" data-lang-de="Kontakt" data-lang-en="Contact">문의</a>
+  </div>
+  <p class="footer-legal">© 2026 KANE. All rights reserved. |
+    <a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
+</footer>
+
+<script>
+const articles = [
+  {
+    id:1, category:"criticism",
+    image:"https://picsum.photos/600/400?random=1",
+    title:{
+      ko:"베를린 비엔날레에서 만난 디아스포라의 시선",
+      de:"Der Blick der Diaspora auf der Berlin Biennale",
+      en:"Diaspora Perspectives at the Berlin Biennale"
+    },
+    author:{ko:"김서연",de:"Seoyeon Kim",en:"Seoyeon Kim"},
+    publication:{ko:"아트인컬처",de:"Art in Culture",en:"Art in Culture"},
+    date:"2026.05",
+    body:{
+      ko:"<p>제12회 베를린 비엔날레는 디아스포라 예술가들의 목소리를 전면에 내세웠다. 이번 전시에서 특히 주목할 만한 것은 한국계 작가들의 참여였다.</p><p>전시장에 들어서면 가장 먼저 만나게 되는 것은 거대한 설치 작품이다. 천장에서 바닥까지 이어지는 한지 조각들이 바람에 흔들리며, 관객은 마치 기억의 터널을 걷는 듯한 경험을 하게 된다.</p><p>이 작품은 이주와 정착, 그리고 그 사이의 공백에 대한 이야기를 담고 있다. 작가는 한국에서 가져온 흙과 독일의 산업 재료를 결합하여 두 문화 사이의 긴장과 조화를 표현했다.</p>",
+      de:"<p>Die 12. Berlin Biennale stellte die Stimmen der Diaspora-Künstler in den Vordergrund. Besonders bemerkenswert war die Beteiligung koreanischer Künstler.</p><p>Beim Betreten des Ausstellungsraums begegnet man zunächst einer großen Installation. Hanji-Fragmente erstrecken sich von der Decke bis zum Boden und wiegen sich im Wind.</p>",
+      en:"<p>The 12th Berlin Biennale brought diaspora artists' voices to the forefront. The participation of Korean artists was particularly noteworthy.</p><p>Upon entering the exhibition space, visitors first encounter a massive installation. Hanji fragments stretch from ceiling to floor, swaying in the wind.</p>"
+    }
+  },
+  {
+    id:2, category:"review",
+    image:"https://picsum.photos/600/400?random=2",
+    title:{
+      ko:"함부르크 탈리아 극장, 새로운 한독 협업의 서막",
+      de:"Thalia Theater Hamburg: Auftakt einer deutsch-koreanischen Zusammenarbeit",
+      en:"Thalia Theater Hamburg: Dawn of a Korean-German Collaboration"
+    },
+    author:{ko:"이준혁",de:"Junhyeok Lee",en:"Junhyeok Lee"},
+    publication:{ko:"공연과 리뷰",de:"Performance & Review",en:"Performance & Review"},
+    date:"2026.04",
+    body:{
+      ko:"<p>함부르크 탈리아 극장에서 펼쳐진 한독 협업 공연은 양국 연극의 새로운 가능성을 열었다. 한국 전통 판소리와 독일 표현주의 연극이 만나 전혀 새로운 무대 언어를 창조했다.</p><p>연출가는 두 문화의 충돌이 아닌 대화를 시도했다. 판소리의 '아니리'와 브레히트의 '소외 효과'가 놀라울 정도로 자연스럽게 어우러졌다.</p><p>특히 조명 디자인이 인상적이었다. 한국의 달빛을 연상시키는 부드러운 조명이 독일 표현주의의 강렬한 그림자와 교차하며 제3의 공간을 만들어냈다.</p>",
+      de:"<p>Die koreanisch-deutsche Koproduktion am Thalia Theater eröffnete neue Möglichkeiten für das Theater beider Länder.</p>",
+      en:"<p>The Korean-German collaboration at Thalia Theater opened new possibilities for both nations' theatrical traditions.</p>"
+    }
+  },
+  {
+    id:3, category:"essay",
+    image:"https://picsum.photos/600/400?random=3",
+    title:{
+      ko:"경계에 선 예술가 — 독일에서 한국인으로 창작한다는 것",
+      de:"Künstler an der Grenze — Als Koreaner in Deutschland schaffen",
+      en:"Artists on the Border — Creating as a Korean in Germany"
+    },
+    author:{ko:"박지은",de:"Jieun Park",en:"Jieun Park"},
+    publication:{ko:"문학동네",de:"Munhak Dongne",en:"Munhak Dongne"},
+    date:"2026.03",
+    body:{
+      ko:"<p>독일에 온 지 8년이 지났다. 처음에는 이방인의 시선으로 모든 것이 새로웠고, 그 새로움이 창작의 원동력이었다.</p><p>한국에서는 '독일 사는 작가'로, 독일에서는 '한국에서 온 작가'로 불린다. 어디에도 완전히 속하지 못하는 이 감각이 때로는 외로움을, 때로는 자유를 준다.</p><p>경계에 선다는 것은 양쪽을 모두 볼 수 있다는 뜻이기도 하다. 나의 작품은 바로 그 경계의 시선에서 태어난다.</p>",
+      de:"<p>Acht Jahre sind vergangen, seit ich nach Deutschland gekommen bin. Anfangs war alles neu durch die Augen eines Fremden.</p>",
+      en:"<p>Eight years have passed since I came to Germany. At first, everything was new through the eyes of a stranger.</p>"
+    }
+  },
+  {
+    id:4, category:"interview",
+    image:"https://picsum.photos/600/400?random=4",
+    title:{
+      ko:"인터뷰: 뮌헨을 빛낸 한국인 무대미술가 최윤서",
+      de:"Interview: Yunseo Choi, koreanische Bühnenbildnerin in München",
+      en:"Interview: Yunseo Choi, Korean Stage Designer in Munich"
+    },
+    author:{ko:"정하늘",de:"Haneul Jeong",en:"Haneul Jeong"},
+    publication:{ko:"스테이지 매거진",de:"Stage Magazin",en:"Stage Magazine"},
+    date:"2026.02",
+    body:{
+      ko:"<p><strong>Q: 독일 무대미술의 매력은 무엇인가요?</strong></p><p>A: 독일 극장은 무대미술가에게 정말 많은 자유를 줍니다. 한국에서는 연출가의 비전을 실현하는 역할에 가까웠다면, 여기서는 무대미술가도 하나의 독립적인 예술가로 인정받아요.</p><p><strong>Q: 가장 기억에 남는 작업은?</strong></p><p>A: 작년 뮌헨 캄머슈필레에서 한 작업이요. 한국의 전통 병풍을 현대적으로 재해석해서 무대 전체를 감싸는 구조물을 만들었는데, 독일 관객들의 반응이 뜨거웠습니다.</p>",
+      de:"<p><strong>Q: Was macht das deutsche Bühnenbild so attraktiv?</strong></p><p>A: Deutsche Theater geben Bühnenbildnern sehr viel Freiheit.</p>",
+      en:"<p><strong>Q: What makes German stage design attractive?</strong></p><p>A: German theaters give stage designers a lot of freedom.</p>"
+    }
+  },
+  {
+    id:5, category:"criticism",
+    image:"https://picsum.photos/600/400?random=5",
+    title:{
+      ko:"카셀 도큐멘타와 아시아 현대미술의 재조명",
+      de:"Documenta Kassel und die Neubewertung asiatischer Gegenwartskunst",
+      en:"Documenta Kassel and the Reassessment of Asian Contemporary Art"
+    },
+    author:{ko:"한도윤",de:"Doyun Han",en:"Doyun Han"},
+    publication:{ko:"월간미술",de:"Monatliche Kunst",en:"Monthly Art"},
+    date:"2026.01",
+    body:{
+      ko:"<p>카셀 도큐멘타는 오랫동안 서구 중심의 예술 담론을 이끌어왔다. 그러나 최근 몇 회에 걸쳐 아시아 현대미술에 대한 관심이 눈에 띄게 증가했다.</p><p>특히 한국 작가들의 존재감이 두드러진다. 미디어 아트, 설치 미술, 퍼포먼스 등 다양한 장르에서 한국적 미학과 글로벌 담론을 결합한 작품들이 주목받고 있다.</p>",
+      de:"<p>Die Documenta in Kassel hat lange den westlich zentrierten Kunstdiskurs geprägt.</p>",
+      en:"<p>Documenta in Kassel has long led the Western-centered art discourse.</p>"
+    }
+  },
+  {
+    id:6, category:"essay",
+    image:"https://picsum.photos/600/400?random=6",
+    title:{
+      ko:"언어 너머의 예술 — 말이 통하지 않을 때 시작되는 것들",
+      de:"Kunst jenseits der Sprache — Was beginnt, wenn Worte versagen",
+      en:"Art Beyond Language — What Begins When Words Fail"
+    },
+    author:{ko:"윤서아",de:"Seoa Yun",en:"Seoa Yun"},
+    publication:{ko:"에세이스트",de:"Der Essayist",en:"The Essayist"},
+    date:"2025.12",
+    body:{
+      ko:"<p>독일어를 완벽하게 구사하지 못하던 시절, 나는 오히려 더 많은 것을 표현할 수 있었다. 언어의 벽 앞에서 몸짓, 색채, 소리가 나의 새로운 언어가 되었기 때문이다.</p><p>아이러니하게도, 독일어가 유창해질수록 작품은 점점 말이 없어졌다. 언어를 얻은 만큼 무언가를 잃은 것일까.</p><p>지금의 나는 두 언어 사이, 아니 모든 언어 너머에서 작업한다. 그곳에서 예술은 번역이 필요 없는 유일한 언어가 된다.</p>",
+      de:"<p>Als ich noch kein perfektes Deutsch sprach, konnte ich paradoxerweise mehr ausdrücken.</p>",
+      en:"<p>When I couldn't speak German perfectly, I could paradoxically express more.</p>"
+    }
+  }
+];
+
+let currentLang = 'ko';
+
+function switchLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    const map = {ko:'KR', de:'DE', en:'EN'};
+    b.classList.toggle('active', b.textContent.trim() === map[lang]);
+  });
+  document.querySelectorAll('[data-lang-' + lang + ']').forEach(el => {
+    el.textContent = el.getAttribute('data-lang-' + lang);
+  });
+  renderCards(document.querySelector('.filter-btn.active').dataset.filter);
+}
+
+function renderCards(filter) {
+  const grid = document.getElementById('grid');
+  const filtered = filter === 'all' ? articles : articles.filter(a => a.category === filter);
+  grid.innerHTML = filtered.map(a => `
+    <div class="card" data-category="${a.category}" onclick="openModal(${a.id})">
+      <div class="card-image">
+        <img src="${a.image}" alt="${a.title[currentLang]}" loading="lazy">
+      </div>
+      <div class="card-content">
+        <span class="card-category">${getCategoryLabel(a.category)}</span>
+        <h3 class="card-title">${a.title[currentLang]}</h3>
+        <div class="card-meta">
+          <span class="card-author">${a.author[currentLang]}</span>
+          <span class="card-publication">${a.publication[currentLang]}</span>
+          <span>${a.date}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  observeCards();
+}
+
+function getCategoryLabel(cat) {
+  const labels = {
+    criticism: {ko:'미술비평', de:'Kunstkritik', en:'Art Criticism'},
+    review:    {ko:'공연리뷰', de:'Aufführungskritik', en:'Performance Review'},
+    essay:     {ko:'에세이', de:'Essay', en:'Essay'},
+    interview: {ko:'인터뷰', de:'Interview', en:'Interview'}
+  };
+  return labels[cat][currentLang];
+}
+
+function observeCards() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 100);
+        observer.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.1});
+  document.querySelectorAll('.card').forEach(c => observer.observe(c));
+}
+
+function openModal(id) {
+  const a = articles.find(x => x.id === id);
+  document.getElementById('modal-category').textContent = getCategoryLabel(a.category);
+  document.getElementById('modal-title').textContent = a.title[currentLang];
+  document.getElementById('modal-author').textContent = a.author[currentLang];
+  document.getElementById('modal-publication').textContent = a.publication[currentLang];
+  document.getElementById('modal-date').textContent = a.date;
+  document.getElementById('modal-body').innerHTML = a.body[currentLang];
+  const modal = document.getElementById('modal');
+  modal.style.display = 'block';
+  setTimeout(() => modal.classList.add('active'), 10);
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  const modal = document.getElementById('modal');
+  modal.classList.remove('active');
+  setTimeout(() => { modal.style.display = 'none'; }, 400);
+  document.body.style.overflow = 'auto';
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderCards(btn.dataset.filter);
+  });
+});
+
+document.getElementById('modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+renderCards('all');
+</script>
+</body>
+</html>
